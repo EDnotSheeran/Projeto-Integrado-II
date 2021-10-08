@@ -1,0 +1,28 @@
+{
+  "name": "boilerplate-laravel",
+  "version": "1.0.0",
+  "description": "Laravel dockerized boilerplate",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "docker-compose up",
+    "build": "docker-compose up -d --build app",
+    "stop": "docker-compose down",
+    "clean": "docker system prune -af",
+    "clean-volumes": "docker system prune -f",
+    "scan": "docker scan",
+    "terminal": "docker exec -it /bin/sh",
+    "create": "docker-compose run --rm composer create-project laravel/laravel ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EDnotSheeran/Boilerplate-Laravel.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/EDnotSheeran/Boilerplate-Laravel/issues"
+  },
+  "homepage": "https://github.com/EDnotSheeran/Boilerplate-Laravel#readme"
+}
