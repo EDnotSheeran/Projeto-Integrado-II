@@ -12,7 +12,11 @@
     "clean-volumes": "docker system prune -f",
     "scan": "docker scan",
     "terminal": "docker exec -it /bin/sh",
-    "create": "docker-compose run --rm composer create-project laravel/laravel ."
+    "create": "docker-compose run --rm composer create-project laravel/laravel .",
+    "artisan": "docker-compose run --rm artisan",
+    "controller": "docker-compose run --rm artisan make:controller",
+    "model": "docker-compose run --rm artisan make:model",
+    "migrate": "docker-compose run --rm artisan migrate"
   },
   "repository": {
     "type": "git",
