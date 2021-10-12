@@ -1,0 +1,5 @@
+header
+
+@yield('content')
+
+footer

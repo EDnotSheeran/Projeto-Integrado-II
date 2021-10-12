@@ -1,0 +1,39 @@
+@import url("https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;1,600;1,700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    #admin-page #navbar {
+        @apply fixed top-0 -left-full h-screen px-4 pt-4 pb-12 bg-white z-50 duration-500;
+        @apply lg:left-0 lg:w-20 lg:px-7 lg:pt-4 lg:pb-12;
+        box-shadow: 1px 0 0 rgba(22, 8, 43, 0.1);
+
+        &.active {
+            @apply left-0;
+        }
+
+        .navbar-fade {
+            @apply duration-300;
+            @apply lg:opacity-0;
+        }
+
+        &:hover {
+            @apply lg:w-56;
+            .navbar-fade {
+                @apply opacity-100;
+            }
+        }
+
+        > nav {
+            @apply overflow-auto;
+            scrollbar-width: none; /* Para Mozilla*/
+
+            &::-webkit-scrollbar {
+                display: none; /* Para Google Chrome*/
+            }
+        }
+    }
+}

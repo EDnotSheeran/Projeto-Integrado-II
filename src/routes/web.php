@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Site;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,22 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::namespace('App\Http\Controllers\Blog')->group(function () {
-    Route::get(uri: '/posts', action: 'PostController');
-    Route::get(uri: '/admin/posts', action: 'PostController@new');
+Route::namespace(Blog::class)->group(function () {
+    Route::view(uri: '/admin', view: 'admin.index');
 });
 
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-Route::namespace('App\Http\Controllers\Site')->group(function () {
+Route::namespace(Site::class)->group(function () {
     Route::get(uri: '/', action: 'HomeController');
 });
-
-// Route::get('/', HomeController::class);
-
-
-
-Route::get(uri: '/teste', action: 'App\Http\Controllers\TesteController');
