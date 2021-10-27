@@ -1,18 +1,23 @@
 {
-  "name": "boilerplate-laravel",
+  "name": "projeto-integrado-ii",
   "version": "1.0.0",
-  "description": "Laravel dockerized boilerplate",
+  "description": "projeto integrado ii",
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "docker-compose up",
+    "start": "docker-compose up -d --build app",
     "build": "docker-compose up -d --build app",
     "stop": "docker-compose down",
     "clean": "docker system prune -af",
     "clean-volumes": "docker system prune -f",
     "scan": "docker scan",
-    "terminal": "docker exec -it /bin/sh",
-    "create": "docker-compose run --rm composer create-project laravel/laravel ."
+    "create": "docker-compose run --rm composer create-project laravel/laravel .",
+    "artisan": "docker-compose run --rm artisan",
+    "composer": "docker-compose run --rm composer",
+    "npm": "docker-compose run --rm npm",
+    "controller": "docker-compose run --rm artisan make:controller",
+    "model": "docker-compose run --rm artisan make:model",
+    "migrate": "docker-compose run --rm artisan migrate"
   },
   "repository": {
     "type": "git",

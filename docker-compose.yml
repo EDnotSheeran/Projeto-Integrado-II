@@ -1,4 +1,4 @@
-version: "3.7"
+version: '3.7'
 
 networks:
   laravel:
@@ -7,7 +7,7 @@ services:
   app:
     build:
       context: .
-      dockerfile: nginx.dockerfile
+      dockerfile: '.docker/nginx.dockerfile'
       args:
         - NGINXUSER=${NGINXUSER}
         - NGINXGROUP=${NGINXGROUP}
@@ -38,7 +38,7 @@ services:
   php:
     build:
       context: .
-      dockerfile: php.dockerfile
+      dockerfile: '.docker/php.dockerfile'
       args:
         - PHPUSER=${PHPUSER}
         - PHPGROUP=${PHPGROUP}
@@ -51,7 +51,7 @@ services:
   composer:
     build:
       context: .
-      dockerfile: composer.dockerfile
+      dockerfile: '.docker/composer.dockerfile'
       args:
         - PHPUSER=${PHPUSER}
         - PHPGROUP=${PHPGROUP}
@@ -62,7 +62,7 @@ services:
     depends_on:
       - php
     user: ${PHPUSER}
-    entrypoint: ["composer", "--ignore-platform-reqs"]
+    entrypoint: ['composer', '--ignore-platform-reqs']
     networks:
       - laravel
 
@@ -75,14 +75,14 @@ services:
       - 3000:3000
       - 3001:3001
     working_dir: /var/www/html
-    entrypoint: ["npm"]
+    entrypoint: ['npm']
     networks:
       - laravel
 
   artisan:
     build:
       context: .
-      dockerfile: php.dockerfile
+      dockerfile: '.docker/php.dockerfile'
       args:
         - PHPUSER=${PHPUSER}
         - PHPGROUP=${PHPGROUP}
@@ -92,6 +92,6 @@ services:
     depends_on:
       - postgres
     working_dir: /var/www/html
-    entrypoint: ["php", "/var/www/html/artisan"]
+    entrypoint: ['php', '/var/www/html/artisan']
     networks:
       - laravel
