@@ -1,65 +1,57 @@
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+<h2 align="center">
+Login Usando Laravel UI
+</h2>
 
-## About Laravel
+## 1 - Instalação
+###  Configurar Composer e clonar o projeto 
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Antes de clonar verifique se o Laravel e o composer e o node.js estão instalados, senão:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- Instalação do Laravel: https://laravel.com/docs/8.x/installation  
+- Baixar composer e instalar na pasta do php: https://getcomposer.org/Composer-Setup.exe  
+- Instalação do node.js: https://nodejs.org/en/
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Para clonar o projeto sempre dentro da pasta htdocs no xampp, ou www no caso do wamp (se preferir).
+Criar um arquivo .env na raiz do projeto de acordo com o .env.example (só copiar o conteudo do arquivo).
 
-## Learning Laravel
+Abrir o cmd dentro do projeto para baixar/atualizar as dependências do projeto e gerar sua 'key'
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Executar:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+	composer update
+	php artisan key:generate
 
-## Laravel Sponsors
+### 2 - Instalar dependências do node.js
+A biblioteca do composer [laravel/ui](https://github.com/laravel/ui) usa algumas dependências no front-end para gerar os arquivos dos estilos das páginas. Para Instalar, basta rodar o comandos abaixo:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+	npm install
+Se a instalação for bem sucedida, rode o seguinte comando:
 
-### Premium Partners
+	npm run dev
+		
+Os arquivos serão gerados e estarão prontos para serem utilizados.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[CMS Max](https://www.cmsmax.com/)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+### 3 - Configurar o banco de dados e rodar os Migrations
+Acesse seu banco de dados (use o phpMyAdmin, MySQL Workbench, Linha de comando, etc...) e crie um banco de dados
+vazio com o nome que você quiser .
 
-## Contributing
+Vá até seu arquivo .env. Debaixo da linha com o texto "DB_CONNECTION=mysql", configure essas linhas de acordo com seu banco de dados
+Exemplo:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+	DB_HOST=127.0.0.1
+	DB_PORT=3306
+	DB_DATABASE=meubanco
+	DB_USERNAME=root
+	DB_PASSWORD=
 
-## Code of Conduct
+Após isso, rode o comando:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+    php artisan migrate
 
-## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+A partir desse ponto, você já deve ter o projeto configurado e já pode iniciar o  desenvolvimento usando o seguinte comando:
 
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+    php artisan serve

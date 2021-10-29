@@ -13,3 +13,7 @@
 - Havera um erro pois a pasta `vendor` nao existe, execute o comando `docker-compose run --rm composer install`
 
 - Pronto!!!
+
+# Patch node: Autenticação
+
+Agora com o sistema de autenticação funcionando, caso você não tenha uma chave privada, execute o comando `docker-compose run --rm artisan key:generate` para gerar uma no seu `.env`
