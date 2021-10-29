@@ -2,7 +2,7 @@
 
 ## Preparando ambiente
 
-- Copie o aquivo `.env.example` para `.env`
+- Copie o aquivo `src/.env.example` para `src/.env`
 
 - Altere as variáveis de ambiente conforme necessário
 
