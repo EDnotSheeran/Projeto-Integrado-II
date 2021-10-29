@@ -17,7 +17,10 @@
     "npm": "docker-compose run --rm npm",
     "controller": "docker-compose run --rm artisan make:controller",
     "model": "docker-compose run --rm artisan make:model",
-    "migrate": "docker-compose run --rm artisan migrate"
+    "migration": "docker-compose run --rm artisan make:migration",
+    "request": "docker-compose run --rm artisan make:request",
+    "migrate": "docker-compose run --rm artisan migrate",
+    "watch": "docker-compose run --rm --service-ports npm run watch"
   },
   "repository": {
     "type": "git",
