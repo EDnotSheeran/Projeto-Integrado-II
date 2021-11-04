@@ -17,5 +17,5 @@ mix.js("resources/js/app.js", "public/js")
     .browserSync({
         proxy: "nginx",
         open: false,
-        port: 3000,
+        port: 3000
     });
