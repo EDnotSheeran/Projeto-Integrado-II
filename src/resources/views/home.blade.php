@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
 <div class="container">
@@ -21,3 +21,12 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+    <script type="module">
+    // Call the dataTables jQuery plugin
+    $(document).ready(function() {
+    $('#dataTable').DataTable();
+    });
+    </script>
+@endpush

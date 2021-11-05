@@ -18,6 +18,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
 </head>
 <body class="bg-gradient-primary">
     <div id="app">
@@ -78,6 +79,8 @@
             @yield('content')
         </main>
     </div>
+
+    <!-- Bootstrap core JavaScript-->
     <script href="{{ asset('js/app.js') }}"></script>
     @stack('scripts')
 </body>

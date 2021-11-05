@@ -112,7 +112,6 @@
                                                 <input type="text" class="form-control form-control-user @error('matricula') is-invalid @enderror"
                                                     id="matricula"
                                                     name="matricula"
-                                                    required
                                                     value="{{ old('matricula') }}"
                                                     placeholder="{{ __('Registration') }}">
                                                 @error('matricula')
@@ -125,7 +124,6 @@
                                                 <input type="text" class="form-control form-control-user @error('cargo') is-invalid @enderror"
                                                     id="cargo"
                                                     name="cargo"
-                                                    required
                                                     value="{{ old('cargo') }}"
                                                     placeholder="{{ __('Office') }}">
                                                 @error('cargo')
@@ -139,7 +137,6 @@
                                             <input type="text" class="form-control form-control-user @error('sede') is-invalid @enderror"
                                                 id="sede"
                                                 name="sede"
-                                                required
                                                 value="{{ old('sede') }}"
                                                 placeholder="{{ __('Head Office') }}">
                                             @error('sede')
@@ -169,27 +166,16 @@
             const campos = [$('#matricula'), $('#cargo'), $('#sede')];
 
             if (tipo.checked) {
-                habilitaCampos(campos);
                 $('#dadosAdicionais').show();
             } else {
-                desHabilitaCampos(campos);
+                limpaCampos(campos);
                 $('#dadosAdicionais').hide();
             }
         }
 
-        function desHabilitaCampos(fields) {
+        function limpaCampos(fields) {
             fields.map(field => {
                 field.val('');
-                field.attr('required');
-                field.attr('disabled');
-            });
-        }
-
-
-        function habilitaCampos(fields = []) {
-            fields.map(field => {
-                field.removeAttr('required');
-                field.removeAttr('disabled');
             });
         }
 

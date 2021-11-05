@@ -61,7 +61,7 @@ class RegisterController extends Controller
             'sede' => ['string', 'nullable'],
             'matricula' => ['integer', 'nullable'],
             'cpf' => ['required', 'integer'],
-            'tipo' => ['string', 'nullable'],
+            'tipo' => ['string', 'nullable']
         ]);
     }
 
@@ -82,7 +82,7 @@ class RegisterController extends Controller
             'sede' => $data['sede'] ?? null,
             'matricula' => $data['matricula'] ?? null,
             'cpf' => $data['cpf'],
-            'tipo' => $data['tipo'] === 'on' ? 'administrador' : 'comum',
+            'tipo' => $data['tipo'] ?? null === 'on' ? 'administrador' : 'comum',
         ]);
     }
 }
