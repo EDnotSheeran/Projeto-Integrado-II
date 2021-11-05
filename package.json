@@ -20,6 +20,7 @@
     "migration": "docker-compose run --rm artisan make:migration",
     "request": "docker-compose run --rm artisan make:request",
     "migrate": "docker-compose run --rm artisan migrate",
+    "refresh": "docker-compose run --rm artisan migrate:refresh",
     "watch": "docker-compose run --rm --service-ports npm run watch"
   },
   "repository": {

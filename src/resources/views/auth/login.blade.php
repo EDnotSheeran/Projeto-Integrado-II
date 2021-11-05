@@ -1,15 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-<body class="bg-gradient-primary">
-
     <div class="container">
-
         <!-- Outer Row -->
         <div class="row justify-content-center">
-
             <div class="col-xl-6 col-lg-6 col-md-9">
-
                 <div class="card o-hidden border-0 shadow-lg my-5">
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
@@ -19,10 +14,12 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">{{ __('Login') }}</h1>
                                     </div>
-                                    <form method="POST" action="{{ route('login') }}">
+                                    <form class="user" method="POST" action="{{ route('login') }}">
                                         @csrf
                                         <div class="form-group">
-                                            <input id="username" type="text" class="form-control form-control-user  @error('username') is-invalid @enderror"
+                                            <input type="text" class="form-control form-control-user  @error('username') is-invalid @enderror"
+                                                id="username"
+                                                name="username"
                                                 aria-describedby="usernameHelp"
                                                 value="{{ old('username') }}"
                                                 required autocomplete="username" autofocus
@@ -61,7 +58,6 @@
                                         </button>
                                         <hr>
                                     </form>
-                                    <hr>
                                     <div class="text-center">
                                         @if (Route::has('password.request'))
                                             <a class="small" href="{{ route('password.request') }}">
@@ -74,11 +70,7 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-
         </div>
-
     </div>
-</body>
 @endsection
