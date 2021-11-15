@@ -109,13 +109,13 @@ class EventoController extends Controller
         return redirect()->route('eventos.editar', ['id' => $evento->id])->with('success', 'Evento atualizado com sucesso!');
     }
 
-    public function delete(Request $request, $id)
+    public function delete(Request $request)
     {
-        $evento = Evento::findOrFail($id);
+        $evento = Evento::findOrFail($request->all()['id']);
         $certificado = Certificado::findOrFail($evento->certificado_id);
 
-        $certificado->delete();
         $evento->delete();
+        $certificado->delete();
 
         return redirect()->route('eventos')->with('success', 'Evento deletado com sucesso!');
     }

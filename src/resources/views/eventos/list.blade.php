@@ -56,7 +56,8 @@
                                 <a href="{{ route('eventos.editar', ['id' => $evento->id]) }}">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <a href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a href="{{ route('eventos.deletar') }}" data-toggle="modal" data-target="#deleteModal"
+                                    onclick="document.getElementById('event-id').value = {{ $evento->id }}">
                                     <i class="fas fa-trash"></i>
                                 </a>
                             </td>
@@ -67,27 +68,28 @@
         </div>
     </div>
      <!-- delete Modal-->
-     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
      <div class="modal-dialog" role="document">
          <div class="modal-content">
              <div class="modal-header">
-                 <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                 <h5 class="modal-title" id="exampleModalLabel">Tem certeza?</h5>
                  <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                      <span aria-hidden="true">×</span>
                  </button>
              </div>
-             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+             <div class="modal-body">Confirme abaixo se deseja excluir este evento.</div>
              <div class="modal-footer">
                  <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                  <a class="btn btn-primary"
                      aria-labelledby="navbarDropdown"
-                     href="{{ route('logout') }}"
-                     onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                     {{ __('Logout') }}
+                     href="{{ route('eventos.deletar') }}"
+                     onclick="event.preventDefault();document.getElementById('delete-form').submit();">
+                     {{ __('Delete') }}
                  </a>
-                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                 <form id="delete-form" action="{{ route('eventos.deletar') }}" method="POST" class="d-none">
                      @csrf
+                        <input id="event-id" type="hidden" name="id" value="">
                  </form>
              </div>
          </div>
