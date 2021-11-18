@@ -11,16 +11,9 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.11.2/jquery.mask.min.js" integrity="sha512-Y/GIYsd+LaQm6bGysIClyez2HGCIN1yrs94wUrHoRAD5RSURkqqVQEU6mM51O90hqS80ABFTGtiDpSXd2O05nw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    
-    <script>
-            function Format_Cpf (valor, filtro) {
-        var i = 0,
-            v = valor.toString();
-        return filtro.replace(/#/g, _ => v[i++]);
-    }
-    </script>
+    <script type="text/javascript" src="src\resources\js\jquery-3.6.0.js"></script> 
+    <script type="text/javascript" src="src\resources\js\jquery.mask.min.js"></script>  
+     
        
 
     <!-- Fonts -->

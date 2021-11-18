@@ -212,4 +212,10 @@
 
        
     </script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#cpf").mask('000.000.000-00');
+        })        
+       
+    </script>
 @endpush
