@@ -8,7 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-
+use App\Rules\Cpf;
 class RegisterController extends Controller
 {
     /*
@@ -60,7 +60,7 @@ class RegisterController extends Controller
             'cargo' => ['string', 'nullable'],
             'sede' => ['string', 'nullable'],
             'matricula' => ['integer', 'nullable'],
-            'cpf' => ['required', 'integer'],
+            'cpf' => ['required', new Cpf,'size:11', 'unique:users,cpf'],
             'tipo' => ['string', 'nullable']
         ]);
     }

@@ -48,7 +48,9 @@
                                                 name="cpf"
                                                 required
                                                 value="{{ old('cpf') }}"
-                                                placeholder="{{__('CPF')}}">
+                                                placeholder="{{__('CPF')}}"
+                                                
+                                                >
                                             @error('cpf')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -101,7 +103,7 @@
                                                 id="tipo" {{ old('tipo') ? 'checked' : '' }}>
 
                                             <label class="custom-control-label" for="tipo" style="line-height: 26px;">
-                                                {{ __('I\'m an employee of the City Hall') }}
+                                                {{ __('Sou funcionário da prefeitura') }}
                                             </label>
                                         </div>
                                     </div>
@@ -185,5 +187,7 @@
                 toogleDadosAdicionais();
             });
         }
+
+       
     </script>
 @endpush

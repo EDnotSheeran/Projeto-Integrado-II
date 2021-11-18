@@ -17,7 +17,7 @@ class AddFieldsToUsersTable extends Migration
             $table->string('cargo')->nullable();
             $table->string('sede')->nullable();
             $table->integer('matricula')->nullable();
-            $table->integer('cpf');
+            $table->bigInteger('cpf');
             $table->integer('tipo')->default(1);
         });
     }

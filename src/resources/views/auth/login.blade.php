@@ -49,7 +49,7 @@
                                                     id="remember" {{ old('remember') ? 'checked' : '' }}>
 
                                                 <label class="custom-control-label" for="remember" style="line-height: 26px;">
-                                                    {{ __('Remember Me') }}
+                                                    {{ __('Lembre de mim') }}
                                                 </label>
                                             </div>
                                         </div>
@@ -61,7 +61,7 @@
                                     <div class="text-center">
                                         @if (Route::has('password.request'))
                                             <a class="small" href="{{ route('password.request') }}">
-                                                {{ __('Forgot Your Password?') }}
+                                                {{ __('Esqueceu sua senha?') }}
                                             </a>
                                         @endif
                                     </div>
