@@ -1,2 +1,99 @@
 @import url("../vendor/fontawesome-free/css/all.min.css");
 @import url("../vendor/datatables/dataTables.bootstrap4.min.css");
+/* @import url("./darkmode.css"); */
+
+img.placeholder {
+    width: 100%;
+    height: 270px;
+    object-fit: cover;
+    background-color: #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.file-field {
+    position: relative;
+}
+
+.file-input {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.file-input input[type="file" i] {
+    width: 1px;
+    height: 1px;
+}
+
+.btn-icon {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+}
+
+.btn-icon i {
+    margin-right: 10px;
+}
+
+/*===============================
+SB-ADMIN CSS
+===============================*/
+ul#accordionSidebar {
+    transition: all 0.08s ease-in-out;
+}
+
+form.user textarea.form-control-user {
+    font-size: 0.8rem;
+    border-radius: 1rem;
+    padding: 1rem 1rem;
+}
+
+form.user select.form-control-user {
+    padding: 0 1rem;
+    height: calc(1.5rem * 2);
+    appearance: none;
+    background: url(../vendor/fontawesome-free/svgs/solid/chevron-down.svg)
+        no-repeat right 0.5rem center / 1.5rem 0.8rem;
+}
+
+/*===============================
+            Animations
+  ===============================*/
+
+.animate-grow {
+    animation: grow 400ms ease-in-out;
+    overflow: hidden;
+}
+
+.animate-shrink {
+    animation: shrink 400ms;
+    overflow: hidden;
+}
+
+/*===============================
+            Keyframes
+  ===============================*/
+
+@keyframes grow {
+    from {
+        transform: scale(0);
+        height: 0px;
+    }
+    to {
+        transform: scale(1);
+        height: 165px;
+    }
+}
+
+@keyframes shrink {
+    from {
+        transform: scale(1);
+        height: 165px;
+    }
+    to {
+        transform: scale(0);
+        height: 0px;
+    }
+}
