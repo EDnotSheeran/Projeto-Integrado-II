@@ -1,6 +1,3 @@
-@extends('layouts.admin')
-
-@section('content')
 <!-- Page Heading -->
 <h1 class="h3 mb-2 text-gray-800">Eventos</h1>
 <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
@@ -58,7 +55,7 @@
                                 <a href="{{ route('usuarios.editar', ['id' => $usuario->id]) }}">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <a href="{{ route('usuarios.deletar') }}" data-toggle="modal" data-target="#deleteModal"
+                                <a href="{}" data-toggle="modal" data-target="#deleteModal"
                                     onclick="document.getElementById('usuario-id').value = {{ $usuario->id }}">
                                     <i class="fas fa-trash"></i>
                                 </a>
@@ -85,11 +82,11 @@
                  <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                  <a class="btn btn-primary"
                      aria-labelledby="navbarDropdown"
-                     href="{{ route('usuarios.deletar') }}"
+                     href=""
                      onclick="event.preventDefault();document.getElementById('delete-form').submit();">
                      {{ __('Delete') }}
                  </a>
-                 <form id="delete-form" action="{{ route('usuarios.deletar') }}" method="POST" class="d-none">
+                 <form id="delete-form" action="" method="POST" class="d-none">
                      @csrf
                         <input id="usuario-id" type="hidden" name="id" value="">
                  </form>
@@ -98,13 +95,3 @@
      </div>
  </div>
 </div>
-@endsection
-
-@push('scripts')
-    <script type="module">
-    // Call the dataTables jQuery plugin
-    $(document).ready(function() {
-    $('#dataTable').DataTable();
-    });
-    </script>
-@endpush
