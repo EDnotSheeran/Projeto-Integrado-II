@@ -164,24 +164,14 @@
     <script type="module">
         const $ = window.$;
 
-        function toogleDadosAdicionais({ animate } = { animate: true }) {
+        function toogleDadosAdicionais() {
             const campos = [$('#matricula'), $('#cargo'), $('#sede')];
 
             if (tipo.checked) {
-                limpaCampos(campos);
-                setCamposObrigatorios(campos);
-                animate && $('#dadosAdicionais').addClass('animate-grow');
-                animate && $('#dadosAdicionais').removeClass('animate-shrink');
                 $('#dadosAdicionais').show();
             } else {
                 limpaCampos(campos);
-                removeCamposObrigatorios(campos);
-                animate && $('#dadosAdicionais').removeClass('animate-grow');
-                animate && $('#dadosAdicionais').addClass('animate-shrink');
-                animate &&$('#dadosAdicionais').one("animationend", function(){
-                    $(this).hide();
-                });
-                !animate && $('#dadosAdicionais').hide();
+                $('#dadosAdicionais').hide();
             }
         }
 
@@ -191,20 +181,8 @@
             });
         }
 
-        function setCamposObrigatorios(fields) {
-            fields.map(field => {
-                field.attr('required',true);
-            });
-        }
-
-        function removeCamposObrigatorios(fields) {
-            fields.map(field => {
-                field.removeAttr('required');
-            });
-        }
-
         if(tipo){
-            toogleDadosAdicionais({animate: false});
+            toogleDadosAdicionais()
             tipo.addEventListener('change', function() {
                 toogleDadosAdicionais();
             });
@@ -212,4 +190,17 @@
 
        
     </script>
+
+
+    <script>
+        (function( $ ) {
+            $(function() {
+                $("#cpf").mask("000.000.000-00");
+             });
+        })(jQuery);
+
+              
+
+    </script>
+
 @endpush
