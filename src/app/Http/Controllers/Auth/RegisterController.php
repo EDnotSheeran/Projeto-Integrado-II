@@ -49,12 +49,16 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        #$fields = $data->all();
+        #$fields['cpf'] = str_replace(['.',''],['-',''],$fields['cpf']);
+
+
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255', 'regex:/^([^0-9]*)$/'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'username' => ['required', 'string', 'min:8', 'unique:users,username'],
-            'cpf' => ['required', new Cpf,'size:11', 'unique:users,cpf'],
+            'cpf' => ['required', new Cpf,'regex:/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/', 'unique:users,cpf'],
             'tipo' => ['string', 'nullable'],
             'cargo' => ['required_if:tipo,on','string','max:255','regex:/^([^0-9]*)$/','nullable'],
             'sede' => ['required_if:tipo,on','string','max:255','regex:/^([^0-9]*)$/','nullable'],
@@ -70,7 +74,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        dd($data);
+        $data['cpf'] = str_replace(['.','-'],['',''],$data['cpf']);
       
         return User::create([
             'name' => $data['name'],

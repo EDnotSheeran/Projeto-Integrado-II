@@ -198,14 +198,9 @@
                 $("#cpf").mask("000.000.000-00");
              });
         })(jQuery);
-        
 
-        document.querySelector("#form").addEventListener('submit',e=>{
-            e.preventDefault()
-            let cpf = document.querySelector("#cpf");
-            cpf.value = cpf.value.replace("-","").replace(".","");
-            e.target.submit();
-        })
+              
+
     </script>
 
 @endpush

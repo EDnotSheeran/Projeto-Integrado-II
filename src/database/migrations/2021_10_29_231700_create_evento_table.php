@@ -21,7 +21,7 @@ class CreateEventoTable extends Migration
             $table->string('nome_palestrante');
             $table->integer('vagas_disponiveis');
             $table->time('duracao');
-            $table->integer('certificado_id');
+            $table->unsignedBigInteger('certificado_id');
             $table->string('descricao');
             $table->string('endereco');
             $table->string('bairro');
