@@ -57,7 +57,7 @@ class RegisterController extends Controller
             'cargo' => ['string', 'nullable'],
             'sede' => ['string', 'nullable'],
             'matricula' => ['integer', 'nullable'],
-            'cpf' => ['required', new Cpf,'size:11', 'unique:users,cpf'],
+            'cpf' => ['required', new Cpf, 'unique:users,cpf'],
             'tipo' => ['string', 'nullable']
         ]);
     }
@@ -70,6 +70,8 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        dd($data);
+      
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
