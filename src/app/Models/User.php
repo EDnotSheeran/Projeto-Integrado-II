@@ -21,7 +21,12 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'username'
+        'username',
+        'cargo',
+        'sede',
+        'matricula',
+        'cpf',
+        'tipo'
     ];
 
     /**
@@ -42,4 +47,27 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public const TIPOS = [
+        1 => 'comum',
+        2 => 'administrador'
+    ];
+
+    public static function getTipoID($tipo)
+    {
+        return array_search($tipo, self::TIPOS);
+    }
+
+    public function getRoleAttribute()
+    {
+        return self::TIPOS[$this->attributes['tipo']];
+    }
+
+    public function setTipoAttribute($value)
+    {
+        $tipoID = self::getTipoID($value);
+        if ($tipoID) {
+            $this->attributes['tipo'] = $tipoID;
+        }
+    }
 }

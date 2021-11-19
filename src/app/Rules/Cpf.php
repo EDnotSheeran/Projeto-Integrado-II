@@ -16,7 +16,7 @@ class Cpf implements Rule
      * @return bool
      */
     public function passes($attribute, $value)
-    {
+    {   
         // Extrai somente os números
         $cpf = preg_replace('/[^0-9]/is', '', $value);
 

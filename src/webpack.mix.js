@@ -14,8 +14,9 @@ const mix = require("laravel-mix");
 mix.js("resources/js/app.js", "public/js")
     .vue()
     .sass("resources/sass/app.scss", "public/css")
+    .css("resources/css/app.css", "public/css")
     .browserSync({
         proxy: "nginx",
         open: false,
-        port: 3000,
+        port: 3000
     });

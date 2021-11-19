@@ -8,7 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-
+use App\Rules\Cpf;
 class RegisterController extends Controller
 {
     /*
@@ -50,10 +50,15 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255', 'regex:/^([^0-9]*)$/'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'username' => ['required', 'string', 'min:8', 'unique:users,username']
+            'username' => ['required', 'string', 'min:8', 'unique:users,username'],
+            'cpf' => ['required', new Cpf,'size:11', 'unique:users,cpf'],
+            'tipo' => ['string', 'nullable'],
+            'cargo' => ['required_if:tipo,on','string','max:255','regex:/^([^0-9]*)$/','nullable'],
+            'sede' => ['required_if:tipo,on','string','max:255','regex:/^([^0-9]*)$/','nullable'],
+            'matricula' => ['required_if:tipo,on','integer', 'nullable']
         ]);
     }
 
@@ -69,7 +74,12 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'username' => $data['username']
+            'username' => $data['username'],
+            'cargo' => $data['cargo'] ?? null,
+            'sede' => $data['sede'] ?? null,
+            'matricula' => $data['matricula'] ?? null,
+            'cpf' => $data['cpf'],
+            'tipo' => $data['tipo'] ?? null === 'on' ? 'administrador' : 'comum',
         ]);
     }
 }

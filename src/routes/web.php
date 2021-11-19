@@ -20,4 +20,15 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::namespace(App\Http\Controllers::class)->group(function () {
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/eventos', 'EventoController')->name('eventos');
+    Route::get('/eventos/novo', 'EventoController@new')->name('eventos.novo');
+    Route::post('/eventos/novo', 'EventoController@add')->name('eventos.novo');
+    Route::get('/eventos/{id}/editar', 'EventoController@edit')->name('eventos.editar');
+    Route::post('/eventos/{id}/editar', 'EventoController@update')->name('eventos.editar');
+    Route::post('/eventos/deletar', 'EventoController@delete')->name('eventos.deletar');
+    // Route::get('/eventos/{event}', [App\Http\Controllers\EventController::class, 'show'])->name('eventos.show');
+    // Route::get('/eventos/{event}/inscricao', [App\Http\Controllers\EventController::class, 'inscricao'])->name('eventos.inscricao');
+    // Route::post('/eventos/{event}/inscricao', [App\Http\Controllers\EventController::class, 'store'])->name('eventos.store');
+});
