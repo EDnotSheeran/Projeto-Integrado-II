@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Rules\Cpf;
+
 class RegisterController extends Controller
 {
     /*
@@ -49,20 +50,18 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        #$fields = $data->all();
-        #$fields['cpf'] = str_replace(['.',''],['-',''],$fields['cpf']);
-
+        $data['cpf'] = str_replace(['.', '-'], ['', ''], $data['cpf']);
 
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255', 'regex:/^([^0-9]*)$/'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'username' => ['required', 'string', 'min:8', 'unique:users,username'],
-            'cpf' => ['required', new Cpf,'regex:/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/', 'unique:users,cpf'],
+            'cpf' => ['required', new Cpf, 'unique:users,cpf'],
             'tipo' => ['string', 'nullable'],
-            'cargo' => ['required_if:tipo,on','string','max:255','regex:/^([^0-9]*)$/','nullable'],
-            'sede' => ['required_if:tipo,on','string','max:255','regex:/^([^0-9]*)$/','nullable'],
-            'matricula' => ['required_if:tipo,on','integer', 'nullable']
+            'cargo' => ['required_if:tipo,on', 'string', 'max:255', 'regex:/^([^0-9]*)$/', 'nullable'],
+            'sede' => ['required_if:tipo,on', 'string', 'max:255', 'regex:/^([^0-9]*)$/', 'nullable'],
+            'matricula' => ['required_if:tipo,on', 'integer', 'nullable']
         ]);
     }
 
@@ -74,8 +73,8 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $data['cpf'] = str_replace(['.','-'],['',''],$data['cpf']);
-      
+        $data['cpf'] = str_replace(['.', '-'], ['', ''], $data['cpf']);
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
