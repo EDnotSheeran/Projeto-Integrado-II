@@ -10,7 +10,7 @@
     "Forgot your password?": "Esqueceu sua senha?",
     "Already registered?": "Já registrado?",
     "Login": "Login",
-    "Register": "Cadastro",
+    "Register": "Cadastrar",
     "Home": "Principal",
     "Logout": "Sair",
     "Toggle navigation": "Alternar navegação",
@@ -92,5 +92,11 @@
     "Local": "Local",
     "Event Status": "Estado do Evento",
     "Method": "Método",
-    "Create Event": "Cadastrar Evento"
+    "Create Event": "Cadastrar Evento",
+    "Select \"Logout\" below if you are ready to end your current session.": "Selecione \"Sair\" abaixo se você estiver pronto para encerrar sua sessão atual.",
+    "Ready to Leave?": "Pronto para sair?",
+    "Cancel": "Cancelar",
+    "Delete": "Excluir",
+    "Search for...":"Procurar..."
+
 }
