@@ -23,7 +23,11 @@ class CreateEventoTable extends Migration
             $table->time('duracao');
             $table->unsignedBigInteger('certificado_id');
             $table->string('descricao');
+            $table->string('cep');
+            $table->string('uf');
+            $table->string('cidade');
             $table->string('endereco');
+            $table->string('numero');
             $table->string('bairro');
             $table->string('local');
             $table->boolean('status');

@@ -41,11 +41,12 @@ class EventoController extends Controller
     }
 
     public function add(Request $request)
-    {
+       
+    {   
         $requestData = $request->all();
         $certificado = new Certificado();
         $evento = new Evento();
-
+        
         if ($request->hasFile('evento.imagem') && $request->file('evento.imagem')->isValid()) {
             $eventoImagem = $request->file('evento.imagem');
             $extension = $eventoImagem->getClientOriginalExtension();
@@ -68,7 +69,7 @@ class EventoController extends Controller
 
         return redirect()->route('eventos')->with('success', 'Evento cadastrado com sucesso!');
     }
-
+    
     public function edit(Request $request)
     {
         if (!is_numeric($request->id)) {
@@ -82,11 +83,11 @@ class EventoController extends Controller
     }
 
     public function update(Request $request, $id)
-    {
+    {  
         $requestData = $request->all();
         $evento = Evento::findOrFail($id);
         $certificado = Certificado::findOrFail($evento->certificado_id);
-
+        
         if ($request->hasFile('evento.imagem') && $request->file('evento.imagem')->isValid()) {
             $eventoImagem = $request->file('evento.imagem');
             $extension = $eventoImagem->getClientOriginalExtension();

@@ -86,7 +86,7 @@
                                                     id="hora"
                                                     name="evento[hora]"
                                                     required
-                                                    value="{{ $evento->hora }}"
+                                                    value="{{ $evento->hora}}"
                                                     placeholder="{{ __('Hour') }}">
                                                 @error('evento.hora')
                                                     <span class="invalid-feedback" role="alert">
@@ -185,6 +185,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                                                   
                                     <div class="form-group row col-12 mx-auto">
                                         <div class="col-sm-12 mb-3">
                                             <textarea class="form-control form-control-user @error('evento.descricao') is-invalid @enderror"
@@ -201,14 +202,75 @@
                                         </div>
                                     </div>
                                     <div class="form-group row col-12 mx-auto">
-                                        <div class="col-sm-12 mb-3">
+                                        <div class="col-sm-12 mb-3 col-md-4">
+                                            <input type="text" class="form-control form-control-user @error('evento.cep') is-invalid @enderror"
+                                                id="cepEvento"
+                                                name="evento[cep]"
+                                                required
+                                                value="{{ $evento->cep }}"
+                                                placeholder="{{ __('cep') }}">
+                                            @error('evento.cep')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    
+                                        <div class="col-sm-12 mb-3 col-md-2">
+                                            <input type="text" class="form-control form-control-user @error('evento.uf') is-invalid @enderror"
+                                                id="ufEvento"
+                                                name="evento[uf]"
+                                                required
+                                                value="{{ $evento->uf }}"
+                                                placeholder="{{ __('uf') }}"
+                                                readonly>
+                                            @error('evento.uf')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    
+                                        <div class="col-sm-12 mb-3 col-md-6">
+                                            <input type="text" class="form-control form-control-user @error('evento.cidade') is-invalid @enderror"
+                                                id="cidadeEvento"
+                                                name="evento[cidade]"
+                                                required
+                                                value="{{ $evento->cidade }}"
+                                                placeholder="{{ __('cidade') }}"
+                                                readonly>
+                                            @error('evento.cidade')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group row col-12 mx-auto">
+                                        <div class="col-sm-12 mb-3 col-md-10">
                                             <input type="text" class="form-control form-control-user @error('evento.endereco') is-invalid @enderror"
                                                 id="enderecoEvento"
                                                 name="evento[endereco]"
                                                 required
                                                 value="{{ $evento->endereco }}"
-                                                placeholder="{{ __('Address') }}">
+                                                placeholder="{{ __('Address') }}"
+                                                readonly>
                                             @error('evento.endereco')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                        <div class="col-sm-12 mb-3 col-md-2">
+                                            <input type="text" class="form-control form-control-user @error('evento.numero') is-invalid @enderror"
+                                                id="numeroEvento"
+                                                name="evento[numero]"
+                                                required
+                                                value="{{ $evento->numero }}"
+                                                placeholder="{{ __('numero') }}">
+                                            @error('evento.numero')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
@@ -222,7 +284,8 @@
                                                 name="evento[bairro]"
                                                 required
                                                 value="{{ $evento->bairro }}"
-                                                placeholder="{{ __('District') }}">
+                                                placeholder="{{ __('District') }}"
+                                                readonly>
                                             @error('evento.bairro')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -444,16 +507,75 @@
                                                 </span>
                                             @enderror
                                         </div>
+                                    <div class="form-group row col-12 mx-auto">
+                                        <div class="col-sm-12 mb-3 col-md-4">
+                                            <input type="text" class="form-control form-control-user @error('evento.cep') is-invalid @enderror"
+                                                id="cepEvento"
+                                                name="evento[cep]"
+                                                required
+                                                value="{{ old('evento.cep') }}"
+                                                placeholder="{{ __('CEP') }}">
+                                            @error('evento.cep')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                
+                                        <div class="col-sm-12 mb-3 col-md-2">
+                                            <input type="text" class="form-control form-control-user @error('evento.cep') is-invalid @enderror"
+                                                id="ufEvento"
+                                                name="evento[uf]"
+                                                required
+                                                value="{{ old('evento.uf') }}"
+                                                placeholder="{{ __('UF') }}"
+                                                readonly>
+                                            @error('evento.uf')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    
+                                        
+                                        <div class="col-sm-12 mb-3 col-md-6">
+                                            <input type="text" class="form-control form-control-user @error('evento.cidade') is-invalid @enderror"
+                                                id="cidadeEvento"
+                                                name="evento[cidade]"
+                                                required
+                                                value="{{ old('evento.cidade') }}"
+                                                placeholder="{{ __('Cidade') }}"
+                                                readonly>
+                                            @error('evento.cidade')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
                                     </div>
                                     <div class="form-group row col-12 mx-auto">
-                                        <div class="col-sm-12 mb-3">
+                                        <div class="col-sm-12 mb-3 col-md-10">
                                             <input type="text" class="form-control form-control-user @error('evento.endereco') is-invalid @enderror"
                                                 id="enderecoEvento"
                                                 name="evento[endereco]"
                                                 required
                                                 value="{{ old('evento.endereco') }}"
-                                                placeholder="{{ __('Address') }}">
+                                                placeholder="{{ __('Address') }}"
+                                                readonly>
                                             @error('evento.endereco')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                        <div class="col-sm-12 mb-3 col-md-2">
+                                            <input type="text" class="form-control form-control-user @error('evento.numero') is-invalid @enderror"
+                                                id="numeroEvento"
+                                                name="evento[numero]"
+                                                required
+                                                value="{{ old('evento.numero') }}"
+                                                placeholder="{{ __('Number') }}">
+                                            @error('evento.numero')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
@@ -467,20 +589,23 @@
                                                 name="evento[bairro]"
                                                 required
                                                 value="{{ old('evento.bairro') }}"
-                                                placeholder="{{ __('District') }}">
+                                                placeholder="{{ __('District') }}"
+                                                readonly>
                                             @error('evento.bairro')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
                                         </div>
+                                         
+    
                                         <div class="col-sm-12 mb-3 col-md-6">
                                             <input type="text" class="form-control form-control-user @error('evento.local') is-invalid @enderror"
                                                 id="localEvento"
                                                 name="evento[local]"
                                                 required
                                                 value="{{ old('evento.local') }}"
-                                                placeholder="{{ __('Local') }}">
+                                                placeholder="{{ __('Complemento') }}">
                                             @error('evento.local')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -534,3 +659,8 @@
     </div>
 </div>
 @endsection
+
+<script src="{{ asset('js/jquery-3.6.0.js') }}" ></script>
+<script src="{{ asset('js/plugins/jquery.mask.min.js') }}" ></script>
+<script src="{{ asset('js/eventos/eventos.js') }}"></script>
+
