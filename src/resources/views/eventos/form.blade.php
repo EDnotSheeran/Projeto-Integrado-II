@@ -664,5 +664,30 @@
     <script src="{{ asset('js/jquery-3.6.0.js') }}" ></script>
     <script src="{{ asset('js/plugins/jquery.mask.min.js') }}" ></script>
     <script src="{{ asset('js/eventos/eventos.js') }}"></script>
+    <script type="module">
+
+        ((ids)=>{
+            ids.forEach(id => {
+                let elemento = document.getElementById(id);
+                elemento.addEventListener('change', function () {
+                    const input = this;
+                    const img = document.querySelector('label[for='+id+'] img');
+                    previewImagem(input, img)
+                });
+            });
+
+        })(['imagemEvento', 'imagemCertificado'])
+
+        function previewImagem(input, img) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    img.setAttribute('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+    </script>
 @endpush
 
