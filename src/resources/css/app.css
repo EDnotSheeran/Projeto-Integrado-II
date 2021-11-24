@@ -97,3 +97,38 @@ form.user select.form-control-user {
         height: 0px;
     }
 }
+
+[tooltip] {
+    position: relative;
+}
+
+[tooltip]:after {
+    content: attr(tooltip);
+    display: none;
+    /* display: block; */
+    position: absolute;
+    bottom: calc(100% + 5px);
+    left: 50%;
+    transform: translateX(-50%);
+    border: solid transparent;
+    border-radius: 2px;
+    padding: 3px 7px;
+    background-color: #000a;
+    color: #fffb;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+[tooltip]:hover:after {
+    display: block;
+    animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

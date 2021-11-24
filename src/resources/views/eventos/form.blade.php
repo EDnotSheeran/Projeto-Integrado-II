@@ -54,7 +54,7 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-12 mb-3 mb-sm-0 col-lg-7 col-xl-8">
-                                        <div class="col-sm-12 mb-3">
+                                        <div class="col-sm-12 mb-3" tooltip="{{ __('Name') }}">
                                             <input type="text" class="form-control form-control-user @error('evento.nome') is-invalid @enderror"
                                                 id="nomeEvento"
                                                 name="evento[nome]"
@@ -74,7 +74,7 @@
                                                     name="evento[data]"
                                                     required
                                                     value="{{ $evento->data }}"
-                                                    placeholder="{{ __('Date') }}">
+                                                    tooltip="{{ __('Date') }}">
                                                 @error('evento.data')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -87,7 +87,7 @@
                                                     name="evento[hora]"
                                                     required
                                                     value="{{ $evento->hora}}"
-                                                    placeholder="{{ __('Hour') }}">
+                                                    tooltip="{{ __('Hour') }}">
                                                 @error('evento.hora')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -95,7 +95,7 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="col-sm-12 mb-3">
+                                        <div class="col-sm-12 mb-3" tooltip="{{ __('Speaker Name') }}">
                                             <input type="text" class="form-control form-control-user @error('evento.nome_palestrante') is-invalid @enderror"
                                                 id="nome_palestranteEvento"
                                                 name="evento[nome_palestrante]"
@@ -109,7 +109,7 @@
                                             @enderror
                                         </div>
                                         <div class="row mx-1">
-                                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <div class="col-sm-6 mb-3 mb-sm-0" tooltip="{{ __('Available Vacancies') }}">
                                                 <input type="number" class="form-control form-control-user @error('evento.vagas_disponiveis') is-invalid @enderror"
                                                     id="vagas_disponiveis"
                                                     name="evento[vagas_disponiveis]"
@@ -128,7 +128,7 @@
                                                     name="evento[duracao]"
                                                     required
                                                     value="{{ $evento->duracao }}"
-                                                    placeholder="{{ __('End Date') }}">
+                                                    tooltip="{{ __('End Date') }}">
                                                 @error('evento.duracao')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -155,7 +155,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12 mb-3 mb-sm-0 col-lg-7 col-xl-8">
-                                                    <div class="col-sm-12 mb-3">
+                                                    <div class="col-sm-12 mb-3" tooltip="{{ __('Certificate Name') }}">
                                                         <input type="text" class="form-control form-control-user @error('certificado.nome') is-invalid @enderror"
                                                             id="nomeCertificado"
                                                             name="certificado[nome]"
@@ -168,7 +168,7 @@
                                                             </span>
                                                         @enderror
                                                     </div>
-                                                    <div class="col-sm-12 mb-3">
+                                                    <div class="col-sm-12 mb-3" tooltip="{{ __('Certificate Text') }}">
                                                         <textarea class="form-control form-control-user @error('certificado.texto') is-invalid @enderror"
                                                             id="textoCertificado"
                                                             name="certificado[texto]"
@@ -187,7 +187,7 @@
                                     </div>
 
                                     <div class="form-group row col-12 mx-auto">
-                                        <div class="col-sm-12 mb-3">
+                                        <div class="col-sm-12 mb-3" tooltip="{{ __('Event Description') }}">
                                             <textarea class="form-control form-control-user @error('evento.descricao') is-invalid @enderror"
                                                 id="descricaoEvento"
                                                 name="evento[descricao]"
@@ -202,7 +202,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group row col-12 mx-auto">
-                                        <div class="col-sm-12 mb-3 col-md-4">
+                                        <div class="col-sm-12 mb-3 col-md-4" tooltip="{{ __('cep') }}">
                                             <input type="text" class="form-control form-control-user @error('evento.cep') is-invalid @enderror"
                                                 id="cepEvento"
                                                 name="evento[cep]"
@@ -216,7 +216,7 @@
                                             @enderror
                                         </div>
 
-                                        <div class="col-sm-12 mb-3 col-md-2">
+                                        <div class="col-sm-12 mb-3 col-md-2" tooltip="{{ __('uf') }}">
                                             <input type="text" class="form-control form-control-user @error('evento.uf') is-invalid @enderror"
                                                 id="ufEvento"
                                                 name="evento[uf]"
@@ -231,7 +231,7 @@
                                             @enderror
                                         </div>
 
-                                        <div class="col-sm-12 mb-3 col-md-6">
+                                        <div class="col-sm-12 mb-3 col-md-6" tooltip="{{ __('cidade') }}">
                                             <input type="text" class="form-control form-control-user @error('evento.cidade') is-invalid @enderror"
                                                 id="cidadeEvento"
                                                 name="evento[cidade]"
@@ -249,7 +249,7 @@
 
 
                                     <div class="form-group row col-12 mx-auto">
-                                        <div class="col-sm-12 mb-3 col-md-10">
+                                        <div class="col-sm-12 mb-3 col-md-10" tooltip="{{ __('Address') }}">
                                             <input type="text" class="form-control form-control-user @error('evento.endereco') is-invalid @enderror"
                                                 id="enderecoEvento"
                                                 name="evento[endereco]"
@@ -263,7 +263,7 @@
                                                 </span>
                                             @enderror
                                         </div>
-                                        <div class="col-sm-12 mb-3 col-md-2">
+                                        <div class="col-sm-12 mb-3 col-md-2" tooltip="{{ __('numero') }}">
                                             <input type="text" class="form-control form-control-user @error('evento.numero') is-invalid @enderror"
                                                 id="numeroEvento"
                                                 name="evento[numero]"
@@ -278,7 +278,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group row col-12 mx-auto">
-                                        <div class="col-sm-12 mb-3 col-md-6">
+                                        <div class="col-sm-12 mb-3 col-md-6" tooltip="{{ __('District') }}">
                                             <input type="text" class="form-control form-control-user @error('evento.bairro') is-invalid @enderror"
                                                 id="bairroEvento"
                                                 name="evento[bairro]"
@@ -292,7 +292,7 @@
                                                 </span>
                                             @enderror
                                         </div>
-                                        <div class="col-sm-12 mb-3 col-md-6">
+                                        <div class="col-sm-12 mb-3 col-md-6" tooltip="{{ __('Local') }}">
                                             <input type="text" class="form-control form-control-user @error('evento.local') is-invalid @enderror"
                                                 id="localEvento"
                                                 name="evento[local]"
@@ -307,7 +307,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group row col-12 mx-auto">
-                                        <div class="col-sm-12 mb-3 col-md-6">
+                                        <div class="col-sm-12 mb-3 col-md-6" tooltip="{{ __('Event Status') }}">
                                             <select class="form-control form-control-user @error('evento.status') is-invalid @enderror"
                                                 id="statusEvento"
                                                 name="evento[status]"
@@ -322,7 +322,7 @@
                                                 </span>
                                             @enderror
                                         </div>
-                                        <div class="col-sm-12 mb-3 col-md-6">
+                                        <div class="col-sm-12 mb-3 col-md-6" tooltip="{{ __('Method') }}">
                                             <select class="form-control form-control-user @error('evento.metodo') is-invalid @enderror"
                                                 id="metodoEvento"
                                                 name="evento[metodo]"
@@ -362,7 +362,7 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-12 mb-3 mb-sm-0 col-lg-7 col-xl-8">
-                                        <div class="col-sm-12 mb-3">
+                                        <div class="col-sm-12 mb-3" tooltip="{{ __('Name') }}">
                                             <input type="text" class="form-control form-control-user @error('evento.nome') is-invalid @enderror"
                                                 id="nomeEvento"
                                                 name="evento[nome]"
@@ -376,7 +376,7 @@
                                             @enderror
                                         </div>
                                         <div class="row mx-1">
-                                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <div class="col-sm-6 mb-3 mb-sm-0" tooltip="{{ __('Date') }}">
                                                 <input type="date" class="form-control form-control-user @error('evento.data') is-invalid @enderror"
                                                     id="eventoData"
                                                     name="evento[data]"
@@ -389,7 +389,7 @@
                                                     </span>
                                                 @enderror
                                             </div>
-                                            <div class="col-sm-6 mb-3">
+                                            <div class="col-sm-6 mb-3" tooltip="{{ __('Hour') }}">
                                                 <input type="time" class="form-control form-control-user @error('evento.hora') is-invalid @enderror"
                                                     id="hora"
                                                     name="evento[hora]"
@@ -403,7 +403,7 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="col-sm-12 mb-3">
+                                        <div class="col-sm-12 mb-3" tooltip="{{ __('Speaker Name') }}">
                                             <input type="text" class="form-control form-control-user @error('evento.nome_palestrante') is-invalid @enderror"
                                                 id="nome_palestranteEvento"
                                                 name="evento[nome_palestrante]"
@@ -417,7 +417,7 @@
                                             @enderror
                                         </div>
                                         <div class="row mx-1">
-                                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <div class="col-sm-6 mb-3 mb-sm-0" tooltip="{{ __('Available Vacancies') }}">
                                                 <input type="number" class="form-control form-control-user @error('evento.vagas_disponiveis') is-invalid @enderror"
                                                     id="vagas_disponiveis"
                                                     name="evento[vagas_disponiveis]"
@@ -430,7 +430,7 @@
                                                     </span>
                                                 @enderror
                                             </div>
-                                            <div class="col-sm-6 mb-3">
+                                            <div class="col-sm-6 mb-3" tooltip="{{ __('End Date') }}">
                                                 <input type="time" class="form-control form-control-user @error('evento.duracao') is-invalid @enderror"
                                                     id="duracao"
                                                     name="evento[duracao]"
@@ -463,7 +463,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12 mb-3 mb-sm-0 col-lg-7 col-xl-8">
-                                                    <div class="col-sm-12 mb-3">
+                                                    <div class="col-sm-12 mb-3" tooltip="{{ __('Certificate Name') }}">
                                                         <input type="text" class="form-control form-control-user @error('certificado.nome') is-invalid @enderror"
                                                             id="nomeCertificado"
                                                             name="certificado[nome]"
@@ -476,7 +476,7 @@
                                                             </span>
                                                         @enderror
                                                     </div>
-                                                    <div class="col-sm-12 mb-3">
+                                                    <div class="col-sm-12 mb-3" tooltip="{{ __('Certificate Text') }}">
                                                         <textarea class="form-control form-control-user @error('certificado.texto') is-invalid @enderror"
                                                             id="textoCertificado"
                                                             name="certificado[texto]"
@@ -494,7 +494,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group row col-12 mx-auto">
-                                        <div class="col-sm-12 mb-3">
+                                        <div class="col-sm-12 mb-3" tooltip="{{ __('Event Description') }}">
                                             <textarea class="form-control form-control-user @error('evento.descricao') is-invalid @enderror"
                                                 id="descricaoEvento"
                                                 name="evento[descricao]"
@@ -508,7 +508,7 @@
                                             @enderror
                                         </div>
                                     <div class="form-group row col-12 mx-auto">
-                                        <div class="col-sm-12 mb-3 col-md-4">
+                                        <div class="col-sm-12 mb-3 col-md-4" tooltip="{{ __('CEP') }}">
                                             <input type="text" class="form-control form-control-user @error('evento.cep') is-invalid @enderror"
                                                 id="cepEvento"
                                                 name="evento[cep]"
@@ -522,7 +522,7 @@
                                             @enderror
                                         </div>
 
-                                        <div class="col-sm-12 mb-3 col-md-2">
+                                        <div class="col-sm-12 mb-3 col-md-2" tooltip="{{ __('UF') }}">
                                             <input type="text" class="form-control form-control-user @error('evento.cep') is-invalid @enderror"
                                                 id="ufEvento"
                                                 name="evento[uf]"
@@ -538,7 +538,7 @@
                                         </div>
 
 
-                                        <div class="col-sm-12 mb-3 col-md-6">
+                                        <div class="col-sm-12 mb-3 col-md-6" tooltip="{{ __('Cidade') }}">
                                             <input type="text" class="form-control form-control-user @error('evento.cidade') is-invalid @enderror"
                                                 id="cidadeEvento"
                                                 name="evento[cidade]"
@@ -554,7 +554,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group row col-12 mx-auto">
-                                        <div class="col-sm-12 mb-3 col-md-10">
+                                        <div class="col-sm-12 mb-3 col-md-10" tooltip="{{ __('Address') }}">
                                             <input type="text" class="form-control form-control-user @error('evento.endereco') is-invalid @enderror"
                                                 id="enderecoEvento"
                                                 name="evento[endereco]"
@@ -568,7 +568,7 @@
                                                 </span>
                                             @enderror
                                         </div>
-                                        <div class="col-sm-12 mb-3 col-md-2">
+                                        <div class="col-sm-12 mb-3 col-md-2" tooltip="{{ __('Number') }}">
                                             <input type="text" class="form-control form-control-user @error('evento.numero') is-invalid @enderror"
                                                 id="numeroEvento"
                                                 name="evento[numero]"
@@ -583,7 +583,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group row col-12 mx-auto">
-                                        <div class="col-sm-12 mb-3 col-md-6">
+                                        <div class="col-sm-12 mb-3 col-md-6" tooltip="{{ __('District') }}">
                                             <input type="text" class="form-control form-control-user @error('evento.bairro') is-invalid @enderror"
                                                 id="bairroEvento"
                                                 name="evento[bairro]"
@@ -599,7 +599,7 @@
                                         </div>
 
 
-                                        <div class="col-sm-12 mb-3 col-md-6">
+                                        <div class="col-sm-12 mb-3 col-md-6" tooltip="{{ __('Complemento') }}">
                                             <input type="text" class="form-control form-control-user @error('evento.local') is-invalid @enderror"
                                                 id="localEvento"
                                                 name="evento[local]"
@@ -614,7 +614,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group row col-12 mx-auto">
-                                        <div class="col-sm-12 mb-3 col-md-6">
+                                        <div class="col-sm-12 mb-3 col-md-6" tooltip="{{ __('Event Status') }}">
                                             <select class="form-control form-control-user @error('evento.status') is-invalid @enderror"
                                                 id="statusEvento"
                                                 name="evento[status]"
@@ -629,7 +629,7 @@
                                                 </span>
                                             @enderror
                                         </div>
-                                        <div class="col-sm-12 mb-3 col-md-6">
+                                        <div class="col-sm-12 mb-3 col-md-6" tooltip="{{ __('Method') }}">
                                             <select class="form-control form-control-user @error('evento.metodo') is-invalid @enderror"
                                                 id="metodoEvento"
                                                 name="evento[metodo]"
