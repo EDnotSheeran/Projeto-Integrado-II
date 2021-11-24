@@ -185,7 +185,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                                                   
+
                                     <div class="form-group row col-12 mx-auto">
                                         <div class="col-sm-12 mb-3">
                                             <textarea class="form-control form-control-user @error('evento.descricao') is-invalid @enderror"
@@ -215,7 +215,7 @@
                                                 </span>
                                             @enderror
                                         </div>
-                                    
+
                                         <div class="col-sm-12 mb-3 col-md-2">
                                             <input type="text" class="form-control form-control-user @error('evento.uf') is-invalid @enderror"
                                                 id="ufEvento"
@@ -230,7 +230,7 @@
                                                 </span>
                                             @enderror
                                         </div>
-                                    
+
                                         <div class="col-sm-12 mb-3 col-md-6">
                                             <input type="text" class="form-control form-control-user @error('evento.cidade') is-invalid @enderror"
                                                 id="cidadeEvento"
@@ -521,7 +521,7 @@
                                                 </span>
                                             @enderror
                                         </div>
-                                
+
                                         <div class="col-sm-12 mb-3 col-md-2">
                                             <input type="text" class="form-control form-control-user @error('evento.cep') is-invalid @enderror"
                                                 id="ufEvento"
@@ -536,8 +536,8 @@
                                                 </span>
                                             @enderror
                                         </div>
-                                    
-                                        
+
+
                                         <div class="col-sm-12 mb-3 col-md-6">
                                             <input type="text" class="form-control form-control-user @error('evento.cidade') is-invalid @enderror"
                                                 id="cidadeEvento"
@@ -597,8 +597,8 @@
                                                 </span>
                                             @enderror
                                         </div>
-                                         
-    
+
+
                                         <div class="col-sm-12 mb-3 col-md-6">
                                             <input type="text" class="form-control form-control-user @error('evento.local') is-invalid @enderror"
                                                 id="localEvento"
@@ -660,7 +660,9 @@
 </div>
 @endsection
 
-<script src="{{ asset('js/jquery-3.6.0.js') }}" ></script>
-<script src="{{ asset('js/plugins/jquery.mask.min.js') }}" ></script>
-<script src="{{ asset('js/eventos/eventos.js') }}"></script>
+@push('scripts')
+    <script src="{{ asset('js/jquery-3.6.0.js') }}" ></script>
+    <script src="{{ asset('js/plugins/jquery.mask.min.js') }}" ></script>
+    <script src="{{ asset('js/eventos/eventos.js') }}"></script>
+@endpush
 

@@ -412,6 +412,7 @@
             </div>
         </div>
     </div>
+</div>
     <!-- Bootstrap core JavaScript-->
     <script type="module" src="{{ asset('js/plugins/sb-admin-2.min.js') }}"></script>
     @stack('scripts')

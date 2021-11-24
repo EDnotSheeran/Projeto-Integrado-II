@@ -49,7 +49,7 @@
                                                 required
                                                 value="{{ old('cpf') }}"
                                                 placeholder="{{__('CPF')}}"
-                                                
+
                                                 >
                                             @error('cpf')
                                                 <span class="invalid-feedback" role="alert">
@@ -188,9 +188,7 @@
             });
         }
 
-       
     </script>
-
 
     <script>
         (function( $ ) {
@@ -198,9 +196,6 @@
                 $("#cpf").mask("000.000.000-00");
              });
         })(jQuery);
-
-              
-
     </script>
 
 @endpush
