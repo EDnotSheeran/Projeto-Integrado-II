@@ -67,7 +67,7 @@ services:
       - laravel
 
   npm:
-    image: node:latest
+    image: node:16-alpine
     container_name: npm
     volumes:
       - ./src:/var/www/html
