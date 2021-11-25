@@ -52,6 +52,15 @@ class RegisterController extends Controller
     {
         $data['cpf'] = str_replace(['.', '-'], ['', ''], $data['cpf']);
 
+
+        $mensagens = [
+            'required' => ':attribute é obrigátorio.',
+            'required_if' => ':attribute é obrigátorio.',
+            'matricula.integer' => 'É permitido somente números.',
+            'regex' => 'Não é permitido números.'
+            
+        ];
+
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255', 'regex:/^([^0-9]*)$/'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -62,7 +71,7 @@ class RegisterController extends Controller
             'cargo' => ['required_if:tipo,on', 'string', 'max:255', 'regex:/^([^0-9]*)$/', 'nullable'],
             'sede' => ['required_if:tipo,on', 'string', 'max:255', 'regex:/^([^0-9]*)$/', 'nullable'],
             'matricula' => ['required_if:tipo,on', 'integer', 'nullable']
-        ]);
+        ], $mensagens);
     }
 
     /**
