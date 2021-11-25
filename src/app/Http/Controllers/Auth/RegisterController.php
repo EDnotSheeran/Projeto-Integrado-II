@@ -57,7 +57,7 @@ class RegisterController extends Controller
             'required' => 'O campo :attribute é obrigátorio.',
             'required_if' => 'O campo :attribute é obrigátorio.',
             'matricula.integer' => 'Neste campo é permitido somente números.',
-            'matricula.max' => 'O limite máximo para esse campo é de 4 digitos',
+            'matricula.max' => 'O limite máximo para esse campo é de 6 digitos',
             'regex' => 'Neste campo não é permitido números.'
             
         ];
@@ -71,7 +71,7 @@ class RegisterController extends Controller
             'tipo' => ['string', 'nullable'],
             'cargo' => ['required_if:tipo,on', 'string', 'max:255', 'regex:/^([^0-9]*)$/', 'nullable'],
             'sede' => ['required_if:tipo,on', 'string', 'max:255', 'regex:/^([^0-9]*)$/', 'nullable'],
-            'matricula' => ['required_if:tipo,on','integer','max:9999', 'nullable']
+            'matricula' => ['required_if:tipo,on','integer','max:999999', 'nullable']
         ], $mensagens);
     }
 
