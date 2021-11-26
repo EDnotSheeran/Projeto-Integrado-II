@@ -43,6 +43,10 @@
                     <a class="nav-link" href="{{ route('eventos') }}">
                         <i class="far fa-calendar-check"></i>
                         <span>Eventos</span></a>
+
+                    <a class="nav-link" href="{{ route('usuario') }}">
+                        <i class="fas fa-users"></i>
+                        <span>Usuários</span></a>
                 </li>
 
                 <!-- Divider -->
