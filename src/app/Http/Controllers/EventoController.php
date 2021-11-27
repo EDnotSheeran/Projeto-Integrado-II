@@ -12,26 +12,14 @@ use function PHPUnit\Framework\isNan;
 
 class EventoController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('auth');
     }
 
-    /**
-     * Handle the incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function __invoke(Request $request)
     {
         $eventos = Evento::all();
-
         return view('eventos.list', compact('eventos'));
     }
 
@@ -41,7 +29,6 @@ class EventoController extends Controller
     }
 
     public function add(Request $request)
-       
     {   
         $requestData = $request->all();
         $certificado = new Certificado();

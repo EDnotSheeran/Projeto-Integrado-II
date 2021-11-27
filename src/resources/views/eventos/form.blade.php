@@ -313,8 +313,8 @@
                                                 name="evento[status]"
                                                 required>
                                                 <option value="" disabled selected>{{ __('Event Status') }}</option>
-                                                <option value="true" {{ $evento->status == "1" ? 'selected': '' }}>Ativo</option>
-                                                <option value="false" {{ $evento->status == "" ? 'selected': '' }}>Desativado</option>
+                                                <option value="1" {{ $evento->status == "1" ? 'selected': '' }}>Ativo</option>
+                                                <option value="0" {{ $evento->status == "" ? 'selected': '' }}>Desativado</option>
                                             </select>
                                             @error('evento.status')
                                                 <span class="invalid-feedback" role="alert">
@@ -328,8 +328,8 @@
                                                 name="evento[metodo]"
                                                 required>
                                                 <option value="" disabled selected>{{ __('Method') }}</option>
-                                                <option value="true" {{ $evento->metodo == "1" ? 'selected': '' }}>Ativo</option>
-                                                <option value="false" {{ $evento->metodo == "" ? 'selected': '' }}>Desativado</option>
+                                                <option value="1" {{ $evento->metodo == "1" ? 'selected': '' }}>Ativo</option>
+                                                <option value="0" {{ $evento->metodo == "" ? 'selected': '' }}>Desativado</option>
                                             </select>
                                             @error('evento.metodo')
                                                 <span class="invalid-feedback" role="alert">
@@ -620,8 +620,8 @@
                                                 name="evento[status]"
                                                 required>
                                                 <option value="" disabled selected>{{ __('Event Status') }}</option>
-                                                <option value="true" {{ old('evento.status') == "true" ? 'selected': '' }}>Ativo</option>
-                                                <option value="false" {{ old('evento.status') == "false" ? 'selected': '' }}>Desativado</option>
+                                                <option value="1" {{ old('evento.status') == "true" ? 'selected': '' }}>Ativo</option>
+                                                <option value="0" {{ old('evento.status') == "false" ? 'selected': '' }}>Desativado</option>
                                             </select>
                                             @error('evento.status')
                                                 <span class="invalid-feedback" role="alert">
@@ -635,8 +635,8 @@
                                                 name="evento[metodo]"
                                                 required>
                                                 <option value="" disabled selected>{{ __('Method') }}</option>
-                                                <option value="true" {{ old('evento.metodo') == "true" ? 'selected': '' }}>Ativo</option>
-                                                <option value="false" {{ old('evento.metodo') == "false" ? 'selected': '' }}>Desativado</option>
+                                                <option value="1" {{ old('evento.metodo') == "true" ? 'selected': '' }}>Ativo</option>
+                                                <option value="0" {{ old('evento.metodo') == "false" ? 'selected': '' }}>Desativado</option>
                                             </select>
                                             @error('evento.metodo')
                                                 <span class="invalid-feedback" role="alert">
