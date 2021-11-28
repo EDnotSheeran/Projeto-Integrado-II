@@ -43,7 +43,7 @@
                                     <div class="col-sm-12 mb-3 mb-sm-0 col-lg-5 col-xl-4">
                                         <div class="file-field">
                                             <div class="mb-4">
-                                            <label for="imagemEvento">
+                                            <label for="imagemEvento" image-preview="Fazer Upload">
                                                 <img src="{{ asset($evento->imagem) }}"
                                                     class="placeholder" alt="placeholder">
                                                 </div>
@@ -144,7 +144,7 @@
                                                 <div class="col-sm-12 mb-3 mb-sm-0 col-lg-5 col-xl-4">
                                                     <div class="file-field">
                                                         <div class="mb-4">
-                                                        <label for="imagemCertificado">
+                                                        <label for="imagemCertificado" image-preview="Fazer Upload">
                                                             <img src="{{ asset($certificado->imagem) }}"
                                                                 class="placeholder" alt="placeholder">
                                                             </div>
@@ -351,7 +351,7 @@
                                     <div class="col-sm-12 mb-3 mb-sm-0 col-lg-5 col-xl-4">
                                         <div class="file-field">
                                             <div class="mb-4">
-                                            <label for="imagemEvento">
+                                            <label for="imagemEvento" image-preview="Fazer Upload"="Fazer Upload">
                                                 <img src="{{ asset('img/placeholder.png') }}"
                                                     class="placeholder" alt="placeholder">
                                                 </div>
@@ -452,7 +452,7 @@
                                                 <div class="col-sm-12 mb-3 mb-sm-0 col-lg-5 col-xl-4">
                                                     <div class="file-field">
                                                         <div class="mb-4">
-                                                        <label for="imagemCertificado">
+                                                        <label for="imagemCertificado" image-preview="Fazer Upload">
                                                             <img src="{{ asset('img/placeholder.png') }}"
                                                                 class="placeholder" alt="placeholder">
                                                             </div>
