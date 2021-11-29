@@ -5,10 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Evento;
 use App\Models\Certificado;
-use Faker\Core\Number;
-use Illuminate\Support\Facades\Redirect;
-
-use function PHPUnit\Framework\isNan;
+use Illuminate\Support\Facades\Validator;
 
 class EventoController extends Controller
 {
@@ -29,34 +26,69 @@ class EventoController extends Controller
     }
 
     public function add(Request $request)
-    {   
-        $requestData = $request->all();
+    {
+        // Validar os dados do formulário
+        $validator = Validator::make($request->all(), [
+            'evento.nome' => 'required|max:255',
+            'evento.data' => 'required|date',
+            'evento.hora' => 'required',
+            'evento.nome_palestrante' => 'required|max:255',
+            'evento.vagas_disponiveis' => 'required|numeric',
+            'evento.duracao' => 'required',
+            'evento.descricao' => 'required|max:500',
+            'evento.cep' => 'required|max:9',
+            'evento.uf' => 'required|max:2',
+            'evento.cidade' => 'required|max:255',
+            'evento.endereco' => 'required|max:255',
+            'evento.numero' => 'required|max:10',
+            'evento.bairro' => 'required|max:255',
+            'evento.local' => 'required|max:255',
+            'evento.status' => 'required|max:1',
+            'evento.metodo' => 'required|max:1',
+            'certificado.nome' => 'required|max:255',
+            'certificado.texto' => 'required|max:255',
+        ]);
+
+        // Se a validação falhar, redireciona para a página de edição
+        if ($validator->fails()) {
+            return redirect()->route('eventos.novo')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        // Pega os dados validados e filtra os campos que não devem ser atualizados
+        $validated = $validator->validated();
+
         $certificado = new Certificado();
         $evento = new Evento();
-        
+
+        // Salva a imagem do evento
         if ($request->hasFile('evento.imagem') && $request->file('evento.imagem')->isValid()) {
             $eventoImagem = $request->file('evento.imagem');
             $extension = $eventoImagem->getClientOriginalExtension();
             $imageName = md5($eventoImagem->getClientOriginalName() . strtotime('now')) . '.' . $extension;
             $request->file('evento.imagem')->move(public_path('/uploads'), $imageName);
-            $requestData['evento']['imagem'] = 'uploads/' . $imageName;
+            $validated['evento']['imagem'] = 'uploads/' . $imageName;
         }
 
+        // Salva a imagem do certificado
         if ($request->hasFile('certificado.imagem') && $request->file('certificado.imagem')->isValid()) {
             $certificadoImagem = $request->file('certificado.imagem');
             $extension = $certificadoImagem->getClientOriginalExtension();
             $imageName = md5($certificadoImagem->getClientOriginalName() . strtotime('now')) . '.' . $extension;
             $request->file('certificado.imagem')->move(public_path('/uploads'), $imageName);
-            $requestData['certificado']['imagem'] = 'uploads/' . $imageName;
+            $validated['certificado']['imagem'] = 'uploads/' . $imageName;
         }
 
-        $certificado = $certificado->create($requestData['certificado']);
-        $requestData['evento']['certificado_id'] = $certificado->id;
-        $evento = $evento->create($requestData['evento']);
+        // Salva o certificado e o evento
+        $certificado = $certificado->create($validated['certificado']);
+        $validated['evento']['certificado_id'] = $certificado->id;
+        $evento = $evento->create($validated['evento']);
 
+        // Redireciona para a lista de eventos
         return redirect()->route('eventos')->with('success', 'Evento cadastrado com sucesso!');
     }
-    
+
     public function edit(Request $request)
     {
         if (!is_numeric($request->id)) {
@@ -70,17 +102,50 @@ class EventoController extends Controller
     }
 
     public function update(Request $request, $id)
-    {  
-        $requestData = $request->all();
+    {
+        // return request()->all();
+
+        // Validação
+        $validator = Validator::make($request->all(), [
+            'evento.nome' => 'required|max:255',
+            'evento.data' => 'required|date',
+            'evento.hora' => 'required',
+            'evento.nome_palestrante' => 'required|max:255',
+            'evento.vagas_disponiveis' => 'required|numeric',
+            'evento.duracao' => 'required',
+            'evento.descricao' => 'required|max:500',
+            'evento.cep' => 'required|max:9',
+            'evento.uf' => 'required|max:2',
+            'evento.cidade' => 'required|max:255',
+            'evento.endereco' => 'required|max:255',
+            'evento.numero' => 'required|max:10',
+            'evento.bairro' => 'required|max:255',
+            'evento.local' => 'required|max:255',
+            'evento.status' => 'required|max:1',
+            'evento.metodo' => 'required|max:1',
+            'certificado.nome' => 'required|max:255',
+            'certificado.texto' => 'required|max:255',
+        ]);
+
+        // Se a validação falhar, redireciona para a página de edição
+        if ($validator->fails()) {
+            return redirect()->route('eventos.editar', $id)
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        // Pega os dados validados e filtra os campos que não devem ser atualizados
+        $validated = $validator->validated();
+
         $evento = Evento::findOrFail($id);
         $certificado = Certificado::findOrFail($evento->certificado_id);
-        
+
         if ($request->hasFile('evento.imagem') && $request->file('evento.imagem')->isValid()) {
             $eventoImagem = $request->file('evento.imagem');
             $extension = $eventoImagem->getClientOriginalExtension();
             $imageName = md5($eventoImagem->getClientOriginalName() . strtotime('now')) . '.' . $extension;
             $request->file('evento.imagem')->move(public_path('/uploads'), $imageName);
-            $requestData['evento']['imagem'] = 'uploads/' . $imageName;
+            $validated['evento']['imagem'] = 'uploads/' . $imageName;
         }
 
         if ($request->hasFile('certificado.imagem') && $request->file('certificado.imagem')->isValid()) {
@@ -88,11 +153,11 @@ class EventoController extends Controller
             $extension = $certificadoImagem->getClientOriginalExtension();
             $imageName = md5($certificadoImagem->getClientOriginalName() . strtotime('now')) . '.' . $extension;
             $request->file('certificado.imagem')->move(public_path('/uploads'), $imageName);
-            $requestData['certificado']['imagem'] = 'uploads/' . $imageName;
+            $validated['certificado']['imagem'] = 'uploads/' . $imageName;
         }
 
-        $evento->update($requestData['evento']);
-        $certificado->update($requestData['certificado']);
+        $evento->update($validated['evento']);
+        $certificado->update($validated['certificado']);
 
         return redirect()->route('eventos.editar', ['id' => $evento->id])->with('success', 'Evento atualizado com sucesso!');
     }

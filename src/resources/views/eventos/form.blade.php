@@ -3,6 +3,11 @@
 @section('title', 'Alterar Evento')
 
 @section('content')
+
+@if($errors->any())
+    {{ implode('', $errors->all('<div>:message</div>')) }}
+@endif
+
 <div class="container ">
     @if (session()->has('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -49,7 +54,7 @@
                                                 </div>
                                             </label>
                                             <div class="file-input">
-                                                <input id="imagemEvento" name="evento[imagem]" type="file">
+                                                <input id="imagemEvento" name="evento[imagem]" type="file" required>
                                             </div>
                                         </div>
                                     </div>
@@ -351,7 +356,7 @@
                                     <div class="col-sm-12 mb-3 mb-sm-0 col-lg-5 col-xl-4">
                                         <div class="file-field">
                                             <div class="mb-4">
-                                            <label for="imagemEvento" image-preview="Fazer Upload"="Fazer Upload">
+                                            <label for="imagemEvento" image-preview="Fazer Upload">
                                                 <img src="{{ asset('img/placeholder.png') }}"
                                                     class="placeholder" alt="placeholder">
                                                 </div>
