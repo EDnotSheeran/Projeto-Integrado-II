@@ -4,9 +4,9 @@
 
 @section('content')
 
-@if($errors->any())
+{{-- @if($errors->any())
     {{ implode('', $errors->all('<div>:message</div>')) }}
-@endif
+@endif --}}
 
 <div class="container ">
     @if (session()->has('success'))
