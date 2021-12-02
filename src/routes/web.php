@@ -22,6 +22,8 @@ Route::namespace(App\Http\Controllers::class)->group(function () {
     //Route::view('/usuarios', 'usuarios.list');
     Route::get('/usuarios', 'UsuariosController@index')->name('usuarios');
     Route::get('/usuarios/{id}/editar', 'UsuariosController@edit')->name('usuarios.editar');
+    Route::post('/usuarios/{id}/editar', 'UsuariosController@update')->name('usuarios.editar');
     Route::get('/usuarios/novo', 'UsuariosController@new')->name('usuarios.novo');
     Route::post('/usuarios/novo', 'UsuariosController@add')->name('usuarios.novo');
+    Route::post('/usuarios/deletar', 'UsuariosController@delete')->name('usuarios.deletar');
 });

@@ -91,7 +91,7 @@
                      onclick="event.preventDefault();document.getElementById('delete-form').submit();">
                      {{ __('Delete') }}
                  </a>
-                 <form id="delete-form" action="" method="POST" class="d-none">
+                 <form id="delete-form" action="{{ route('usuarios.deletar') }}" method="POST" class="d-none">
                      @csrf
                         <input id="usuario-id" type="hidden" name="id" value="">
                  </form>
