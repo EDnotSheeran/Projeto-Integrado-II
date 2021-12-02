@@ -44,7 +44,7 @@
                         <i class="far fa-calendar-check"></i>
                         <span>Eventos</span></a>
 
-                    <a class="nav-link" href="{{ route('usuario') }}">
+                    <a class="nav-link" href="{{ route('usuarios') }}">
                         <i class="fas fa-users"></i>
                         <span>Usuários</span></a>
                 </li>

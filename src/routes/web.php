@@ -28,7 +28,9 @@ Route::namespace(App\Http\Controllers::class)->group(function () {
     Route::get('/eventos/{id}/editar', 'EventoController@edit')->name('eventos.editar');
     Route::post('/eventos/{id}/editar', 'EventoController@update')->name('eventos.editar');
     Route::post('/eventos/deletar', 'EventoController@delete')->name('eventos.deletar');
-    Route::view('/usuarios', 'usuarios.list');
-    Route::get('/usuarios', 'UsuariosController@index')->name('usuario');
-
+    //Route::view('/usuarios', 'usuarios.list');
+    Route::get('/usuarios', 'UsuariosController@index')->name('usuarios');
+    Route::get('/usuarios/{id}/editar', 'UsuariosController@edit')->name('usuarios.editar');
+    Route::get('/usuarios/novo', 'UsuariosController@new')->name('usuarios.novo');
+    Route::post('/usuarios/novo', 'UsuariosController@add')->name('usuarios.novo');
 });

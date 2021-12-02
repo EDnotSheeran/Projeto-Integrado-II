@@ -1,5 +1,9 @@
+@extends('layouts.admin')
+
+@section('content')
+
 <!-- Page Heading -->
-<h1 class="h3 mb-2 text-gray-800">Eventos</h1>
+<h1 class="h3 mb-2 text-gray-800">Usuários</h1>
 <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
     For more information about DataTables, please visit the <a target="_blank"
         href="https://datatables.net">official DataTables documentation</a>.</p>
@@ -15,9 +19,9 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <a class="btn btn-primary btn-icon" href="{{ route('eventos.novo') }}" role="button">
+        <a class="btn btn-primary btn-icon" href="{{ route('usuarios.novo') }}" role="button">
             <i class="fas fa-plus-circle"></i>
-            Novo Evento
+            Novo Usuário
         </a>
     </div>
     <div class="card-body">
@@ -44,13 +48,14 @@
                     </tr>
                 </tfoot>
                 <tbody>
-                    {{-- Eventos --}}
+                    {{-- Usuários --}}
                     @foreach ($usuarios as $usuario)
                         <tr>
                             <td class="text-center">{{ $usuario->id }}</td>
                             <td>{{ $usuario->name }}</td>
                             <td>{{ $usuario->email }}</td>
                             <td>{{ $usuario->username }}</td>
+                            <td>{{ $usuario->tipo == 1 ? "Comum" : "Administrador"}}</td>
                             <td class="text-center">
                                 <a href="{{ route('usuarios.editar', ['id' => $usuario->id]) }}">
                                     <i class="fas fa-edit"></i>
@@ -95,3 +100,5 @@
      </div>
  </div>
 </div>
+
+@endsection
