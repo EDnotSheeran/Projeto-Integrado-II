@@ -9,6 +9,7 @@ img.placeholder {
     background-color: #ccc;
     border-radius: 5px;
     cursor: pointer;
+    position: relative;
 }
 
 .file-field {
@@ -24,6 +25,60 @@ img.placeholder {
 .file-input input[type="file" i] {
     width: 1px;
     height: 1px;
+}
+
+/* label[image-preview]:hover:before {
+    content: attr(image-preview);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    color: #fff8;
+    font-size: 25px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 0.5rem);
+    background-image: url("/img/upload-cloud.svg");
+    background-repeat: no-repeat;
+    background-position: center 35%;
+    background-size: 90px;
+    z-index: 1;
+    padding-top: 60%;
+}
+
+label[image-preview]:hover:after {
+    content: "";
+    border-radius: 5px;
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 0.5rem);
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+} */
+
+label[image-preview]:hover:after {
+    content: "";
+    border-radius: 5px;
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 0.5rem);
+    cursor: pointer;
+    background-image: url("/img/placeholder.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.6;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 1;
 }
 
 .btn-icon {

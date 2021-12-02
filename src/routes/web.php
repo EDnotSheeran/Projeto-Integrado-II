@@ -1,27 +1,18 @@
 <?php
 
+use App\Http\Controllers\UsuariosController;
+use App\Http\Controllers\EventoController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PaginaInicialController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
 
 Route::namespace(App\Http\Controllers::class)->group(function () {
-    Route::get('/home', 'HomeController@index')->name('home');
+
+    Route::get('/', [PaginaInicialController::class, 'index'])->name('list.eventos');
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/eventos', 'EventoController')->name('eventos');
     Route::get('/eventos/novo', 'EventoController@new')->name('eventos.novo');
     Route::post('/eventos/novo', 'EventoController@add')->name('eventos.novo');

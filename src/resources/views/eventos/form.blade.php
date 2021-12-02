@@ -3,6 +3,11 @@
 @section('title', 'Alterar Evento')
 
 @section('content')
+
+{{-- @if($errors->any())
+    {{ implode('', $errors->all('<div>:message</div>')) }}
+@endif --}}
+
 <div class="container ">
     @if (session()->has('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -43,13 +48,13 @@
                                     <div class="col-sm-12 mb-3 mb-sm-0 col-lg-5 col-xl-4">
                                         <div class="file-field">
                                             <div class="mb-4">
-                                            <label for="imagemEvento">
+                                            <label for="imagemEvento" image-preview="Fazer Upload">
                                                 <img src="{{ asset($evento->imagem) }}"
                                                     class="placeholder" alt="placeholder">
                                                 </div>
                                             </label>
                                             <div class="file-input">
-                                                <input id="imagemEvento" name="evento[imagem]" type="file">
+                                                <input id="imagemEvento" name="evento[imagem]" type="file" required>
                                             </div>
                                         </div>
                                     </div>
@@ -144,7 +149,7 @@
                                                 <div class="col-sm-12 mb-3 mb-sm-0 col-lg-5 col-xl-4">
                                                     <div class="file-field">
                                                         <div class="mb-4">
-                                                        <label for="imagemCertificado">
+                                                        <label for="imagemCertificado" image-preview="Fazer Upload">
                                                             <img src="{{ asset($certificado->imagem) }}"
                                                                 class="placeholder" alt="placeholder">
                                                             </div>
@@ -313,8 +318,8 @@
                                                 name="evento[status]"
                                                 required>
                                                 <option value="" disabled selected>{{ __('Event Status') }}</option>
-                                                <option value="true" {{ $evento->status == "1" ? 'selected': '' }}>Ativo</option>
-                                                <option value="false" {{ $evento->status == "" ? 'selected': '' }}>Desativado</option>
+                                                <option value="1" {{ $evento->status == "1" ? 'selected': '' }}>Ativo</option>
+                                                <option value="0" {{ $evento->status == "" ? 'selected': '' }}>Desativado</option>
                                             </select>
                                             @error('evento.status')
                                                 <span class="invalid-feedback" role="alert">
@@ -328,8 +333,8 @@
                                                 name="evento[metodo]"
                                                 required>
                                                 <option value="" disabled selected>{{ __('Method') }}</option>
-                                                <option value="true" {{ $evento->metodo == "1" ? 'selected': '' }}>Ativo</option>
-                                                <option value="false" {{ $evento->metodo == "" ? 'selected': '' }}>Desativado</option>
+                                                <option value="1" {{ $evento->metodo == "1" ? 'selected': '' }}>Ativo</option>
+                                                <option value="0" {{ $evento->metodo == "" ? 'selected': '' }}>Desativado</option>
                                             </select>
                                             @error('evento.metodo')
                                                 <span class="invalid-feedback" role="alert">
@@ -351,7 +356,7 @@
                                     <div class="col-sm-12 mb-3 mb-sm-0 col-lg-5 col-xl-4">
                                         <div class="file-field">
                                             <div class="mb-4">
-                                            <label for="imagemEvento">
+                                            <label for="imagemEvento" image-preview="Fazer Upload">
                                                 <img src="{{ asset('img/placeholder.png') }}"
                                                     class="placeholder" alt="placeholder">
                                                 </div>
@@ -452,7 +457,7 @@
                                                 <div class="col-sm-12 mb-3 mb-sm-0 col-lg-5 col-xl-4">
                                                     <div class="file-field">
                                                         <div class="mb-4">
-                                                        <label for="imagemCertificado">
+                                                        <label for="imagemCertificado" image-preview="Fazer Upload">
                                                             <img src="{{ asset('img/placeholder.png') }}"
                                                                 class="placeholder" alt="placeholder">
                                                             </div>
@@ -620,8 +625,8 @@
                                                 name="evento[status]"
                                                 required>
                                                 <option value="" disabled selected>{{ __('Event Status') }}</option>
-                                                <option value="true" {{ old('evento.status') == "true" ? 'selected': '' }}>Ativo</option>
-                                                <option value="false" {{ old('evento.status') == "false" ? 'selected': '' }}>Desativado</option>
+                                                <option value="1" {{ old('evento.status') == "true" ? 'selected': '' }}>Ativo</option>
+                                                <option value="0" {{ old('evento.status') == "false" ? 'selected': '' }}>Desativado</option>
                                             </select>
                                             @error('evento.status')
                                                 <span class="invalid-feedback" role="alert">
@@ -635,8 +640,8 @@
                                                 name="evento[metodo]"
                                                 required>
                                                 <option value="" disabled selected>{{ __('Method') }}</option>
-                                                <option value="true" {{ old('evento.metodo') == "true" ? 'selected': '' }}>Ativo</option>
-                                                <option value="false" {{ old('evento.metodo') == "false" ? 'selected': '' }}>Desativado</option>
+                                                <option value="1" {{ old('evento.metodo') == "true" ? 'selected': '' }}>Ativo</option>
+                                                <option value="0" {{ old('evento.metodo') == "false" ? 'selected': '' }}>Desativado</option>
                                             </select>
                                             @error('evento.metodo')
                                                 <span class="invalid-feedback" role="alert">
