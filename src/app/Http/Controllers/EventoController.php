@@ -103,8 +103,6 @@ class EventoController extends Controller
 
     public function update(Request $request, $id)
     {
-        // return request()->all();
-
         // Validação
         $validator = Validator::make($request->all(), [
             'evento.nome' => 'required|max:255',
