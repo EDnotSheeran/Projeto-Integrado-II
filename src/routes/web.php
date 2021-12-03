@@ -12,7 +12,6 @@ Route::namespace(App\Http\Controllers::class)->group(function () {
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('/home', 'HomeController@index')->name('home');
 
-
     Route::prefix('/eventos')->middleware('role:administrator')->group(function () {
         Route::get('/', 'EventoController')->name('eventos');
         Route::get('/novo', 'EventoController@new')->name('eventos.novo');
@@ -21,13 +20,13 @@ Route::namespace(App\Http\Controllers::class)->group(function () {
         Route::post('/{id}/editar', 'EventoController@update')->name('eventos.editar');
         Route::post('/deletar', 'EventoController@delete')->name('eventos.deletar');
     });
-    //Route::view('/usuarios', 'usuarios.list');
 
-
-    Route::get('/usuarios', 'UsuariosController@index')->name('usuarios');
-    Route::get('/usuarios/{id}/editar', 'UsuariosController@edit')->name('usuarios.editar');
-    Route::post('/usuarios/{id}/editar', 'UsuariosController@update')->name('usuarios.editar');
-    Route::get('/usuarios/novo', 'UsuariosController@new')->name('usuarios.novo');
-    Route::post('/usuarios/novo', 'UsuariosController@add')->name('usuarios.novo');
-    Route::post('/usuarios/deletar', 'UsuariosController@delete')->name('usuarios.deletar');
+    Route::prefix('/usuarios')->middleware('role:administrator')->group(function () {
+        Route::get('/', 'UsuariosController@index')->name('usuarios');
+        Route::get('/{id}/editar', 'UsuariosController@edit')->name('usuarios.editar');
+        Route::post('/{id}/editar', 'UsuariosController@update')->name('usuarios.editar');
+        Route::get('/novo', 'UsuariosController@new')->name('usuarios.novo');
+        Route::post('/novo', 'UsuariosController@add')->name('usuarios.novo');
+        Route::post('/deletar', 'UsuariosController@delete')->name('usuarios.deletar');
+    });
 });

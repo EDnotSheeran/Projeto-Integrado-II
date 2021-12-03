@@ -23,10 +23,6 @@ class Role
             if ($userRole === 'comum') {
                 return redirect()->route('home');
             }
-
-            if ($userRole === 'administrador') {
-                return redirect()->route('home');
-            }
         }
         return $next($request);
     }

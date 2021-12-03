@@ -21,7 +21,8 @@
     "request": "docker-compose run --rm --user=${PHPUSER}  artisan make:request",
     "migrate": "docker-compose run --rm --user=${PHPUSER}  artisan migrate",
     "refresh": "docker-compose run --rm --user=${PHPUSER}  artisan migrate:refresh",
-    "watch": "docker-compose run --rm --user=${PHPUSER}  --service-ports npm run watch"
+    "watch": "docker-compose run --rm --user=${PHPUSER}  --service-ports npm run watch",
+    "seed": "docker-compose run --rm --user=${PHPUSER}  artisan db:seed"
   },
   "repository": {
     "type": "git",

@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="pt-br">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,6 +21,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
 </head>
+
 <body id="page-top" style="background-color: red">
     <div id="app">
         <!-- Page Wrapper -->
@@ -32,25 +34,50 @@
                     <div class="sidebar-brand-icon rotate-n-15">
                         <i class="fas fa-laugh-wink"></i>
                     </div>
-                    <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+                    <div class="sidebar-brand-text mx-3">Laravel <sup>eventos</sup></div>
                 </a>
 
                 <!-- Divider -->
                 <hr class="sidebar-divider my-0">
 
-                <!-- Nav Item - Dashboard -->
+                @if (Auth::user()->role == 'administrador')
+                    <!-- Nav Item - Dashboard -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('eventos') }}">
+                            <i class="far fa-calendar-check"></i>
+                            <span>Eventos</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('usuarios') }}">
+                            <i class="fas fa-users"></i>
+                            <span>Usuários</span>
+                        </a>
+                    </li>
+                    <!-- Divider -->
+                    <hr class="sidebar-divider">
+                @endif
+
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('eventos') }}">
-                        <i class="far fa-calendar-check"></i>
-                        <span>Eventos</span></a>
-
+                        <i class="fas fa-scroll"></i>
+                        <span>Minha Agenda</span>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="{{ route('usuarios') }}">
-                        <i class="fas fa-users"></i>
-                        <span>Usuários</span></a>
+                        <i class="fas fa-user"></i>
+                        <span>Meus Dados</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-labelledby="navbarDropdown" href="{{ route('logout') }}"
+                        onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                        <i class="fas fa-door-open"></i>
+                        <span>Sair</span>
+                    </a>
                 </li>
 
-                <!-- Divider -->
-                <hr class="sidebar-divider">
 
                 <!-- Heading -->
                 {{-- <div class="sidebar-heading">
@@ -167,7 +194,7 @@
                         <form
                             class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                             <div class="input-group">
-                                <input type="text" class="form-control bg-light border-0 small" placeholder="{{ __('Search for...' )}}"
+                                <input type="text" class="form-control bg-light border-0 small" placeholder="{{ __('Search for...') }}"
                                     aria-label="Search" aria-describedby="basic-addon2">
                                 <div class="input-group-append">
                                     <button class="btn btn-primary" type="button">
@@ -192,7 +219,7 @@
                                     <form class="form-inline mr-auto w-100 navbar-search">
                                         <div class="input-group">
                                             <input type="text" class="form-control bg-light border-0 small"
-                                                placeholder="{{ __('Search for...' )}}" aria-label="Search"
+                                                placeholder="{{ __('Search for...') }}" aria-label="Search"
                                                 aria-describedby="basic-addon2">
                                             <div class="input-group-append">
                                                 <button class="btn btn-primary" type="button">
@@ -327,7 +354,8 @@
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
+                                    <span
+                                        class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()?->name }}</span>
                                     <img class="img-profile rounded-circle"
                                         src="{{ asset('img/undraw_profile.svg') }}">
                                 </a>
@@ -395,17 +423,17 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">{{ __('Ready to Leave?' )}}</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">{{ __('Ready to Leave?') }}</h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
-                    <div class="modal-body">{{ __('Select "Logout" below if you are ready to end your current session.') }}</div>
+                    <div class="modal-body">
+                        {{ __('Select "Logout" below if you are ready to end your current session.') }}</div>
                     <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">{{ __('Cancel') }}</button>
-                        <a class="btn btn-primary"
-                            aria-labelledby="navbarDropdown"
-                            href="{{ route('logout') }}"
+                        <button class="btn btn-secondary" type="button"
+                            data-dismiss="modal">{{ __('Cancel') }}</button>
+                        <a class="btn btn-primary" aria-labelledby="navbarDropdown" href="{{ route('logout') }}"
                             onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
                         </a>
@@ -417,7 +445,7 @@
             </div>
         </div>
     </div>
-</div>
+    </div>
     <!-- Bootstrap core JavaScript-->
     <script type="module" src="{{ asset('js/plugins/sb-admin-2.min.js') }}"></script>
     @stack('scripts')
