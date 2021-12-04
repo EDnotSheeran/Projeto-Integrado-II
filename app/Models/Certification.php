@@ -16,4 +16,9 @@ class Certification extends Model
         'description',
         'image_url'
     ];
+
+    public function event()
+    {
+        return $this->hasOne(Event::class);
+    }
 }

@@ -35,6 +35,6 @@ class Event extends Model
 
     public function certification()
     {
-        return $this->hasOne(Certification::class);
+        return $this->belongsTo(Certification::class);
     }
 }

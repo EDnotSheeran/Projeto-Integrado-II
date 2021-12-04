@@ -14,7 +14,7 @@ class AddHeadOfficeFkToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('head_office_id')->unsigned()->nullable();
+            $table->bigInteger('head_office_id')->unsigned()->nullable();
             $table->index('head_office_id');
             $table->foreign('head_office_id')->references('id')->on('head_office');
         });
