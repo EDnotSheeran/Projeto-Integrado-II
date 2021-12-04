@@ -16,9 +16,8 @@ class CreateEventTable extends Migration
         Schema::create('event', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->date('start_date');
+            $table->date('date');
             $table->time('start_time');
-            $table->time('end_date');
             $table->time('end_time');
             $table->string('speaker_name');
             $table->integer('available_vacancies')->unsigned();

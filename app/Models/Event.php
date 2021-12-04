@@ -13,9 +13,8 @@ class Event extends Model
 
     protected $fillable = [
         'name',
-        'start_date',
+        'date',
         'start_time',
-        'end_date',
         'end_time',
         'speaker_name',
         'available_vagancies',
@@ -27,8 +26,7 @@ class Event extends Model
     ];
 
     protected $casts = [
-        'start_date' => 'date',
-        'end_date' => 'date',
+        'date' => 'date',
         'status' => 'boolean',
         'method' => 'boolean',
     ];

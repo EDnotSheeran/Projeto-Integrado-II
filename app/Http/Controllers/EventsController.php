@@ -3,26 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Evento;
-use App\Models\Certificado;
+use App\Models\Event;
+use App\Models\Certification;
 use Illuminate\Support\Facades\Validator;
 
-class EventoController extends Controller
+class EventsController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
     }
 
-    public function __invoke(Request $request)
+    public function index()
     {
-        $eventos = Evento::all();
-        return view('eventos.list', compact('eventos'));
+        $events = Event::all();
+        return view('events.list', compact('events'));
     }
 
-    public function new(Request $request)
+    public function new()
     {
-        return view('eventos.form');
+        return view('events.form');
     }
 
     public function add(Request $request)

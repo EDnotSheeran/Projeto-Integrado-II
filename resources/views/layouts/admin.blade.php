@@ -34,13 +34,13 @@
                     <div class="sidebar-brand-icon rotate-n-15">
                         <i class="fas fa-laugh-wink"></i>
                     </div>
-                    <div class="sidebar-brand-text mx-3">Laravel <sup>eventos</sup></div>
+                    <div class="sidebar-brand-text mx-3">Laravel <sup>{{ __('events') }}</sup></div>
                 </a>
 
                 <!-- Divider -->
                 <hr class="sidebar-divider my-0">
 
-                @if (Auth::user()->role == 'administrador')
+                @if (Auth::user()->isAdmin)
                     <!-- Nav Item - Dashboard -->
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('eventos') }}">
@@ -134,7 +134,7 @@
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span
-                                        class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()?->name }}</span>
+                                        class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
                                     <img class="img-profile rounded-circle"
                                         src="{{ asset('img/undraw_profile.svg') }}">
                                 </a>
