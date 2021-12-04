@@ -1,6 +1,0 @@
-path=$(printf '%s\n' "${PWD##*/}")
-command="docker-compose exec php php "$@""
-echo "\033[0;36mbinRunning php on docker ${path}.php\033[0m"
-$command
-
-# for (( i = 30; i < 38; i++ )); do echo -e "\033[0;"$i"m Normal: (0;$i); \033[1;"$i"m Light: (1;$i)"; done
