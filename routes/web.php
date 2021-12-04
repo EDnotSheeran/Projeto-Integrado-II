@@ -1,32 +1,32 @@
 <?php
 
-use App\Http\Controllers\PaginaInicialController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Middleware\Role;
+
+use App\Http\Controllers\{
+    HomeController,
+    EventsController
+};
 
 Auth::routes();
 
-Route::namespace(App\Http\Controllers::class)->group(function () {
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-    Route::get('/', 'HomeController@index')->name('home');
-    Route::get('/home', 'HomeController@index')->name('home');
+Route::prefix('/eventos')->middleware('role:admin')->group(function () {
+    Route::get('/', [EventsController::class, 'index'])->name('eventos');
+    Route::get('/novo', [EventsController::class, 'new'])->name('eventos.novo');
+    Route::post('/novo', [EventsController::class, 'add'])->name('eventos.novo');
+    Route::get('/{id}/editar', [EventsController::class, 'edit'])->name('eventos.editar');
+    Route::post('/{id}/editar', [EventsController::class, 'update'])->name('eventos.editar');
+    Route::post('/deletar', [EventsController::class, 'delete'])->name('eventos.deletar');
+});
 
-    Route::prefix('/eventos')->middleware('role:administrator')->group(function () {
-        Route::get('/', 'EventoController')->name('eventos');
-        Route::get('/novo', 'EventoController@new')->name('eventos.novo');
-        Route::post('/novo', 'EventoController@add')->name('eventos.novo');
-        Route::get('/{id}/editar', 'EventoController@edit')->name('eventos.editar');
-        Route::post('/{id}/editar', 'EventoController@update')->name('eventos.editar');
-        Route::post('/deletar', 'EventoController@delete')->name('eventos.deletar');
-    });
-
-    Route::prefix('/usuarios')->middleware('role:administrator')->group(function () {
-        Route::get('/', 'UsuariosController@index')->name('usuarios');
-        Route::get('/{id}/editar', 'UsuariosController@edit')->name('usuarios.editar');
-        Route::post('/{id}/editar', 'UsuariosController@update')->name('usuarios.editar');
-        Route::get('/novo', 'UsuariosController@new')->name('usuarios.novo');
-        Route::post('/novo', 'UsuariosController@add')->name('usuarios.novo');
-        Route::post('/deletar', 'UsuariosController@delete')->name('usuarios.deletar');
-    });
+Route::prefix('/usuarios')->middleware('role:admin')->group(function () {
+    Route::get('/', [UsersController::class, 'index'])->name('usuarios');
+    Route::get('/{id}/editar', [UsersController::class, 'edit'])->name('usuarios.editar');
+    Route::post('/{id}/editar', [UsersController::class, 'update'])->name('usuarios.editar');
+    Route::get('/novo', [UsersController::class, 'new'])->name('usuarios.novo');
+    Route::post('/novo', [UsersController::class, 'add'])->name('usuarios.novo');
+    Route::post('/deletar', [UsersController::class, 'delete'])->name('usuarios.deletar');
 });

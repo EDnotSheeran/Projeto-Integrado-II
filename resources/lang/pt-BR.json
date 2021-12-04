@@ -104,5 +104,12 @@
     "Create User": "Criar Usuário",
     "Edit User": "Editar Usuário",
     "My Data": "Meus Dados",
-    "My Agenda": "Minha Agenda"
+    "My Agenda": "Minha Agenda",
+    "Participate!": "Participar!",
+    "events": "eventos",
+    "New Event": "Novo Evento",
+    "Event Name": "Nome do Evento",
+    "Actions": "Ações",
+    "Please confirm below if you want to delete this event.": "Confirme abaixo se deseja excluir este evento.",
+    "Are you sure?": "Tem certeza?"
 }

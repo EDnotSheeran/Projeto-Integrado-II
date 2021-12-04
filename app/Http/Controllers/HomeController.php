@@ -3,20 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Evento;
+use App\Models\Event;
 
 class HomeController extends Controller
 {
-    // /**
-    //  * Create a new controller instance.
-    //  *
-    //  * @return void
-    //  */
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
-
     /**
      * Show the application dashboard.
      *
@@ -24,7 +14,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $eventos = Evento::paginate(1);
-        return View('home', compact('eventos'));
+        $events = Event::paginate(1);
+        return View('home', compact('events'));
     }
 }
