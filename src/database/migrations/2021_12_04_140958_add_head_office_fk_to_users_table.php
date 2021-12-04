@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddFieldsToUsersTable extends Migration
+class AddHeadOfficeFkToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,11 +14,9 @@ class AddFieldsToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('cargo')->nullable();
-            $table->string('sede')->nullable();
-            $table->integer('matricula')->nullable();
-            $table->bigInteger('cpf');
-            $table->integer('tipo')->default(1);
+            $table->integer('head_office_id')->unsigned();
+            $table->index('head_office_id')->nullable();
+            $table->foreign('head_office_id')->references('id')->on('head_office');
         });
     }
 
@@ -30,11 +28,9 @@ class AddFieldsToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('cargo');
-            $table->dropColumn('sede');
-            $table->dropColumn('matricula');
-            $table->dropColumn('cpf');
-            $table->dropColumn('tipo');
+            $table->dropForeign('users_head_office_id_foreign');
+            $table->dropIndex('users_head_office_id_index');
+            $table->dropColumn('head_office_id');
         });
     }
 }
