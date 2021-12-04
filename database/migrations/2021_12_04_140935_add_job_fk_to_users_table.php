@@ -14,7 +14,7 @@ class AddJobFkToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('job_id')->unsigned()->nullable();
+            $table->bigInteger('job_id')->unsigned()->nullable();
             $table->index('job_id');
             $table->foreign('job_id')->references('id')->on('job');
         });

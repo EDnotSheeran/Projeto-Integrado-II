@@ -17,7 +17,7 @@ class CreateHeadOfficeTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('description');
-            $table->integer('address_id')->unsigned();
+            $table->bigInteger('address_id')->unsigned();
             $table->timestamps();
 
             $table->index('address_id');

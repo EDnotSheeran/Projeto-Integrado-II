@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use App\Models\Event;
 use App\Models\Certification;
 
-class EventSeeder extends Seeder
+class CertificationSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,9 +15,9 @@ class EventSeeder extends Seeder
      */
     public function run()
     {
-        Event::factory()->count(10)->create();
-        // ->each(function ($event) {
-        //     $event->certfication()->save(Certification::factory()->make());
-        // });
+        Certification::factory()->count(10)->create()
+            ->each(function ($certification) {
+                $certification->event()->save(Event::factory()->make());
+            });
     }
 }

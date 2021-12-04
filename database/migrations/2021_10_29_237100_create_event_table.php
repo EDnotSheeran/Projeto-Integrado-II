@@ -22,14 +22,15 @@ class CreateEventTable extends Migration
             $table->time('end_time');
             $table->string('speaker_name');
             $table->integer('available_vacancies')->unsigned();
-            $table->string('description');
+            $table->text('description');
             $table->boolean('status');
             $table->boolean('method');
             $table->string('image_url');
-            $table->integer('certification_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('certification_id')->references('id')->on('certification')->onDelete('cascade');
+            $table->bigInteger('certification_id')->unsigned()->unique();
+            $table->index('certification_id');
+            $table->foreign('certification_id')->references('id')->on('certification');
         });
     }
 
