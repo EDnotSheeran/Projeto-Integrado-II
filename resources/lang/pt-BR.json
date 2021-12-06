@@ -111,5 +111,18 @@
     "Event Name": "Nome do Evento",
     "Actions": "Ações",
     "Please confirm below if you want to delete this event.": "Confirme abaixo se deseja excluir este evento.",
-    "Are you sure?": "Tem certeza?"
+    "Are you sure?": "Tem certeza?",
+    "Event Certificate": "Certificado do Evento",
+    "Upload Image": "Fazer Upload",
+    "Active": "Ativo",
+    "Inactive": "Desativado",
+    "Check-in and Check-out": "Check-in e Check-out",
+    "City": "Cidade",
+    "Start Time": "Hora de Inicio",
+    "End Time": "Hora de Término",
+    "Event Date": "Data do Evento",
+    "Event Start Time": "Horario do Inicio do Evento",
+    "Event End Time": "Horario do Término do Evento",
+    "Events": "Eventos",
+    "Users": "Usuários"
 }

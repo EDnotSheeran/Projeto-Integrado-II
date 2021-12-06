@@ -37,10 +37,6 @@ label[image-preview]:hover:after {
     width: 100%;
     height: calc(100% - 0.5rem);
     cursor: pointer;
-    background-image: url("/img/placeholder.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
     opacity: 0.6;
     background-color: rgba(0, 0, 0, 0.4);
     z-index: 1;

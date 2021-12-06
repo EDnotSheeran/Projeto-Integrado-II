@@ -2,172 +2,157 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Address;
 use Illuminate\Http\Request;
 use App\Models\Event;
 use App\Models\Certification;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\File;
 
 class EventsController extends Controller
 {
     public function __construct()
     {
+        // Verifica se o usuário está logado
         $this->middleware('auth');
     }
 
     public function index()
     {
+        // Busca todos os eventos
         $events = Event::all();
+        // Retorna a view com os eventos
         return view('events.list', compact('events'));
     }
 
     public function new()
     {
+        // Retorna a view de cadastro de eventos
         return view('events.form');
     }
 
     public function add(Request $request)
     {
-        // Validar os dados do formulário
-        $validator = Validator::make($request->all(), [
-            'evento.nome' => 'required|max:255',
-            'evento.data' => 'required|date',
-            'evento.hora' => 'required',
-            'evento.nome_palestrante' => 'required|max:255',
-            'evento.vagas_disponiveis' => 'required|numeric',
-            'evento.duracao' => 'required',
-            'evento.descricao' => 'required|max:500',
-            'evento.cep' => 'required|max:9',
-            'evento.uf' => 'required|max:2',
-            'evento.cidade' => 'required|max:255',
-            'evento.endereco' => 'required|max:255',
-            'evento.numero' => 'required|max:10',
-            'evento.bairro' => 'required|max:255',
-            'evento.local' => 'required|max:255',
-            'evento.status' => 'required|max:1',
-            'evento.metodo' => 'required|max:1',
-            'certificado.nome' => 'required|max:255',
-            'certificado.texto' => 'required|max:255',
-        ]);
-
-        // Se a validação falhar, redireciona para a página de edição
-        if ($validator->fails()) {
-            return redirect()->route('eventos.novo')
-                ->withErrors($validator)
-                ->withInput();
-        }
-
-        // Pega os dados validados e filtra os campos que não devem ser atualizados
-        $validated = $validator->validated();
-
-        $certificado = new Certificado();
-        $evento = new Evento();
-
-        // Salva a imagem do evento
-        if ($request->hasFile('evento.imagem') && $request->file('evento.imagem')->isValid()) {
-            $eventoImagem = $request->file('evento.imagem');
-            $extension = $eventoImagem->getClientOriginalExtension();
-            $imageName = md5($eventoImagem->getClientOriginalName() . strtotime('now')) . '.' . $extension;
-            $request->file('evento.imagem')->move(public_path('/uploads'), $imageName);
-            $validated['evento']['imagem'] = 'uploads/' . $imageName;
-        }
-
-        // Salva a imagem do certificado
-        if ($request->hasFile('certificado.imagem') && $request->file('certificado.imagem')->isValid()) {
-            $certificadoImagem = $request->file('certificado.imagem');
-            $extension = $certificadoImagem->getClientOriginalExtension();
-            $imageName = md5($certificadoImagem->getClientOriginalName() . strtotime('now')) . '.' . $extension;
-            $request->file('certificado.imagem')->move(public_path('/uploads'), $imageName);
-            $validated['certificado']['imagem'] = 'uploads/' . $imageName;
-        }
-
-        // Salva o certificado e o evento
-        $certificado = $certificado->create($validated['certificado']);
-        $validated['evento']['certificado_id'] = $certificado->id;
-        $evento = $evento->create($validated['evento']);
+        // Valida os dados do formulário
+        $validated = $this->validate($request, $this->getRules(), [], $this->getcustomAttributes());
+        //Faz o upload das imagens
+        $validated['event']['image_url'] = $this->uploadImage($request->file('eventimage'));
+        $validated['event']['certification']['image_url'] =  $this->uploadImage($request->file('certificationimage'));
+        // Cria o endereço, cerfiticação e evento
+        $Address = Address::create($validated['event']['address']);
+        $Certification = Certification::create($validated['event']['certification']);
+        $validated['event']['address_id'] = $Address->id;
+        $validated['event']['certification_id'] = $Certification->id;
+        Event::create($validated['event']);
 
         // Redireciona para a lista de eventos
-        return redirect()->route('eventos')->with('success', 'Evento cadastrado com sucesso!');
+        return redirect()->route('events')->with('success', 'Evento cadastrado com sucesso!');
     }
 
-    public function edit(Request $request)
+    public function edit(Request $request, $id)
     {
-        if (!is_numeric($request->id)) {
-            return view('404', ['message' => 'Evento não encontrado']);
-        }
-
-        $evento = Evento::findOrFail($request->id);
-        $certificado = Certificado::where('id', $evento->certificado_id)->first();
-
-        return view('eventos.form', compact('evento', 'certificado'));
+        // Busca o evento pelo id
+        $event = Event::with(['address', 'certification'])->findOrFail($id);
+        // Retorna a view de edição de eventos
+        return view('events.form', compact('event'));
     }
 
     public function update(Request $request, $id)
     {
-        // Validação
-        $validator = Validator::make($request->all(), [
-            'evento.nome' => 'required|max:255',
-            'evento.data' => 'required|date',
-            'evento.hora' => 'required',
-            'evento.nome_palestrante' => 'required|max:255',
-            'evento.vagas_disponiveis' => 'required|numeric',
-            'evento.duracao' => 'required',
-            'evento.descricao' => 'required|max:500',
-            'evento.cep' => 'required|max:9',
-            'evento.uf' => 'required|max:2',
-            'evento.cidade' => 'required|max:255',
-            'evento.endereco' => 'required|max:255',
-            'evento.numero' => 'required|max:10',
-            'evento.bairro' => 'required|max:255',
-            'evento.local' => 'required|max:255',
-            'evento.status' => 'required|max:1',
-            'evento.metodo' => 'required|max:1',
-            'certificado.nome' => 'required|max:255',
-            'certificado.texto' => 'required|max:255',
-        ]);
-
-        // Se a validação falhar, redireciona para a página de edição
-        if ($validator->fails()) {
-            return redirect()->route('eventos.editar', $id)
-                ->withErrors($validator)
-                ->withInput();
+        // Valida os dados do formulário
+        $validated = $this->validate($request, $this->getRules(true), [], $this->getcustomAttributes());
+        // Busca o evento pelo id
+        $event = Event::with(['address', 'certification'])->findOrFail($id);
+        if ($request->hasFile('eventimage')) {
+            $validated['event']['image_url'] = $this->uploadImage($request->file('eventimage'));
+            if (File::exists(public_path() . '/' . $event->image_url)) {
+                File::delete(public_path() . '/' . $event->image_url);
+            }
         }
-
-        // Pega os dados validados e filtra os campos que não devem ser atualizados
-        $validated = $validator->validated();
-
-        $evento = Evento::findOrFail($id);
-        $certificado = Certificado::findOrFail($evento->certificado_id);
-
-        if ($request->hasFile('evento.imagem') && $request->file('evento.imagem')->isValid()) {
-            $eventoImagem = $request->file('evento.imagem');
-            $extension = $eventoImagem->getClientOriginalExtension();
-            $imageName = md5($eventoImagem->getClientOriginalName() . strtotime('now')) . '.' . $extension;
-            $request->file('evento.imagem')->move(public_path('/uploads'), $imageName);
-            $validated['evento']['imagem'] = 'uploads/' . $imageName;
+        if ($request->hasFile('certificationimage')) {
+            $validated['event']['certification']['image_url'] =  $this->uploadImage($request->file('certificationimage'));
+            if (File::exists(public_path() . '/' . $event->certification->image_url)) {
+                File::delete(public_path() . '/' . $event->certification->image_url);
+            }
         }
+        $event->update($validated['event']);
+        $event->certification->update($validated['event']['certification']);
+        $event->address->update($validated['event']['address']);
 
-        if ($request->hasFile('certificado.imagem') && $request->file('certificado.imagem')->isValid()) {
-            $certificadoImagem = $request->file('certificado.imagem');
-            $extension = $certificadoImagem->getClientOriginalExtension();
-            $imageName = md5($certificadoImagem->getClientOriginalName() . strtotime('now')) . '.' . $extension;
-            $request->file('certificado.imagem')->move(public_path('/uploads'), $imageName);
-            $validated['certificado']['imagem'] = 'uploads/' . $imageName;
-        }
-
-        $evento->update($validated['evento']);
-        $certificado->update($validated['certificado']);
-
-        return redirect()->route('eventos.editar', ['id' => $evento->id])->with('success', 'Evento atualizado com sucesso!');
+        // Redireciona para a edição de eventos
+        return redirect()->route('events.update', ['id' => $event->id])->with('success', 'Evento atualizado com sucesso!');
     }
 
-    public function delete(Request $request)
+    public function delete(Request $request, $id)
     {
-        $evento = Evento::findOrFail($request->all()['id']);
-        $certificado = Certificado::findOrFail($evento->certificado_id);
+        $event = Event::findOrFail($id);
+        $event->delete();
+        $event->address->delete();
+        $event->certification->delete();
+        if (File::exists(public_path() . '/' . $event->image_url)) {
+            File::delete(public_path() . '/' . $event->image_url);
+        }
+        if (File::exists(public_path() . '/' . $event->certification->image_url)) {
+            File::delete(public_path() . '/' . $event->certification->image_url);
+        }
+        return redirect()->route('events')->with('success', 'Evento deletado com sucesso!');
+    }
 
-        $evento->delete();
-        $certificado->delete();
+    private function uploadImage($image)
+    {
+        $imageName = 'uploads/' . md5(strtotime('now') . rand()) . '-' . $image->getClientOriginalName();
+        $image->move(public_path('/uploads'), $imageName);
+        return $imageName;
+    }
 
-        return redirect()->route('eventos')->with('success', 'Evento deletado com sucesso!');
+    private function getcustomAttributes()
+    {
+        return [
+            'event.name' => 'Nome do evento',
+            'event.date' => 'Data do evento',
+            'event.start_time' => 'Hora de início do evento',
+            'event.end_time' => 'Hora de término do evento',
+            'event.speaker_name' => 'Nome do palestrante',
+            'event.avaliable_vacancies' => 'Quantidade de vagas disponíveis',
+            'event.description' => 'Descrição do evento',
+            'event.address.zipcode' => 'CEP do endereço',
+            'event.address.state' => 'UF do endereço',
+            'event.address.city' => 'Cidade do endereço',
+            'event.address.street' => 'Endereço do evento',
+            'event.address.number' => 'Número do endereço',
+            'event.address.district' => 'Bairro do endereço',
+            'event.address.complement' => 'Complemento do endereço',
+            'event.status' => 'Status do evento',
+            'event.method' => 'Método do evento',
+            'event.certification.title' => 'Título da certificação',
+            'event.certification.content' => 'Conteúdo da certificação',
+            'event.image' => 'Imagem do evento',
+            'certification.image' => 'Imagem da certificação'
+        ];
+    }
+
+    private function getRules($updating = false)
+    {
+        return [
+            'event.name' => 'required|max:255',
+            'event.date' => 'required|date_format:d/m/Y',
+            'event.start_time' => 'required|date_format:H:i',
+            'event.end_time' => 'required|after:event.start_time|date_format:H:i',
+            'event.speaker_name' => 'required|max:255',
+            'event.available_vacancies' => 'required|numeric',
+            'event.description' => 'required|max:500',
+            'event.address.zipcode' => 'required|max:9',
+            'event.address.state' => 'required|max:2',
+            'event.address.city' => 'required|max:255',
+            'event.address.street' => 'required|max:255',
+            'event.address.number' => 'required|max:10',
+            'event.address.district' => 'required|max:255',
+            'event.address.complement' => 'max:255',
+            'event.status' => 'required|max:1',
+            'event.method' => 'required|max:1',
+            'event.certification.title' => 'required|max:255',
+            'event.certification.content' => 'required|max:255',
+            'eventimage' => !$updating ? 'required|' : '' . 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'certificationimage' => !$updating ? 'required|' : '' .  'image|mimes:jpeg,png,jpg,gif|max:2048'
+        ];
     }
 }

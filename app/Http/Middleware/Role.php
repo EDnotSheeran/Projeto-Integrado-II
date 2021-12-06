@@ -19,8 +19,7 @@ class Role
         $userRole = auth()->user()->role;
 
         if ($userRole !== $role) {
-
-            if ($userRole === 'comum') {
+            if ($userRole !== 'admin') {
                 return redirect()->route('home');
             }
         }

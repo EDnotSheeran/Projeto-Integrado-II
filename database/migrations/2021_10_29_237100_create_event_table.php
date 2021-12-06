@@ -30,6 +30,10 @@ class CreateEventTable extends Migration
             $table->bigInteger('certification_id')->unsigned()->unique();
             $table->index('certification_id');
             $table->foreign('certification_id')->references('id')->on('certification');
+
+            $table->bigInteger('address_id')->unsigned()->unique();
+            $table->index('address_id');
+            $table->foreign('address_id')->references('id')->on('address');
         });
     }
 

@@ -43,13 +43,13 @@
                 @if (Auth::user()->isAdmin)
                     <!-- Nav Item - Dashboard -->
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('eventos') }}">
+                        <a class="nav-link" href="{{ route('events') }}">
                             <i class="far fa-calendar-check"></i>
                             <span>{{ __('Events') }}</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('usuarios') }}">
+                        <a class="nav-link" href="{{ route('users') }}">
                             <i class="fas fa-users"></i>
                             <span>{{ __('Users') }}</span>
                         </a>
@@ -59,13 +59,13 @@
                 @endif
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('eventos') }}">
+                    <a class="nav-link" href="{{ route('events') }}">
                         <i class="fas fa-scroll"></i>
                         <span>{{ __('My Agenda') }}</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('usuarios') }}">
+                    <a class="nav-link" href="{{ route('users') }}">
                         <i class="fas fa-user"></i>
                         <span>{{ __('My Data') }}</span>
                     </a>

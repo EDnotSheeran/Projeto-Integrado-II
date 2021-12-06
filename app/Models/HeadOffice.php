@@ -9,7 +9,7 @@ class HeadOffice extends Model
 {
     use HasFactory;
 
-    private $table = 'head_office';
+    protected $table = 'head_office';
 
     protected $fillable = [
         'name',
