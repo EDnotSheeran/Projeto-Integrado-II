@@ -7,6 +7,10 @@
     <h1 class="h3 mb-2 text-gray-800">{{ __('Events') }}</h1>
     <p class="mb-4"></p>
 
+    @if ($errors->any())
+        {{ implode('', $errors->all('<div>:message</div>')) }}
+    @endif
+
     @if (session()->has('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
@@ -18,7 +22,7 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <a class="btn btn-primary btn-icon" href="{{ route('eventos.novo') }}" role="button">
+            <a class="btn btn-primary btn-icon" href="{{ route('events.store') }}" role="button">
                 <i class="fas fa-plus-circle"></i>
                 {{ __('New Event') }}
             </a>
@@ -53,12 +57,12 @@
                                 <td>{{ date('d/m/Y', strtotime($event->date)) }}</td>
                                 <td>{{ date('h:i', strtotime($event->start_time)) }}</td>
                                 <td class="text-center">
-                                    <a href="{{ route('eventos.editar', ['id' => $event->id]) }}">
+                                    <a href="{{ route('events.update', ['id' => $event->id]) }}">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <a href="{{ route('eventos.deletar') }}" data-toggle="modal"
+                                    <a href="{{ route('events.delete', ['id' => $event->id]) }}" data-toggle="modal"
                                         data-target="#deleteModal"
-                                        onclick="document.getElementById('event-id').value = {{ $event->id }}">
+                                        onclick="document.querySelector('#deleteButton').href = this.href">
                                         <i class="fas fa-trash"></i>
                                     </a>
                                 </td>
@@ -83,15 +87,10 @@
                         {{ __('Please confirm below if you want to delete this event.') }}</div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">{{ __('Cancel') }}</button>
-                        <a class="btn btn-primary" aria-labelledby="navbarDropdown" href="{{ route('eventos.deletar') }}"
-                            onclick="event.preventDefault();document.getElementById('delete-form').submit();">
+                        <a id="deleteButton" class="btn btn-primary" aria-labelledby="navbarDropdown" href="#">
                             {{ __('Delete') }}
                         </a>
-                        <form id="delete-form" action="{{ route('eventos.deletar') }}" method="POST"
-                            class="d-none">
-                            @csrf
-                            <input id="event-id" type="hidden" name="id" value="">
-                        </form>
+                        <input id="event-id" type="hidden" name="id" value="">
                     </div>
                 </div>
             </div>

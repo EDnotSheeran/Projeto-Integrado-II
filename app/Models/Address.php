@@ -5,16 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Certification extends Model
+class Address extends Model
 {
     use HasFactory;
 
-    protected $table = 'certification';
+    protected $table = 'address';
 
     protected $fillable = [
-        'title',
-        'content',
-        'image_url'
+        'state',       // uf
+        'street',     // rua
+        'city',      // cidade
+        'district', // bairro
+        'zipcode', // cep
+        'number', // numero
+        'complement', // local
     ];
 
     public function event()

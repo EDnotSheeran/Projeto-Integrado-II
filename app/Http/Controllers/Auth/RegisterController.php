@@ -52,27 +52,27 @@ class RegisterController extends Controller
     {
         $data['cpf'] = str_replace(['.', '-'], ['', ''], $data['cpf']);
 
-
-        $mensagens = [
-            'required' => 'O campo :attribute é obrigátorio.',
-            'required_if' => 'O campo :attribute é obrigátorio.',
-            'matricula.integer' => 'Neste campo é permitido somente números.',
-            'matricula.max' => 'O limite máximo para esse campo é de 6 digitos',
-            'regex' => 'Neste campo não é permitido números.'
-            
-        ];
-
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255', 'regex:/^([^0-9]*)$/'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'username' => ['required', 'string', 'min:8', 'unique:users,username'],
             'cpf' => ['required', new Cpf, 'unique:users,cpf'],
-            'tipo' => ['string', 'nullable'],
-            'cargo' => ['required_if:tipo,on', 'string', 'max:255', 'regex:/^([^0-9]*)$/', 'nullable'],
-            'sede' => ['required_if:tipo,on', 'string', 'max:255', 'regex:/^([^0-9]*)$/', 'nullable'],
-            'matricula' => ['required_if:tipo,on','integer','max:999999', 'nullable']
-        ], $mensagens);
+            'kind' => ['string', 'nullable'],
+            'job' => ['required_if:kind,on', 'integer', 'exists:job,id', 'nullable'],
+            'head_office' => ['required_if:kind,on', 'integer', 'exists:head_office,id', 'nullable'],
+            'registration_number' => ['required_if:kind,on', 'integer', 'digits:5', 'nullable']
+        ], [], [
+            'name' => 'Nome',
+            'email' => 'E-mail',
+            'password' => 'Senha',
+            'username' => 'Usuário',
+            'cpf' => 'CPF',
+            'kind' => 'Tipo',
+            'job' => 'Cargo',
+            'head_office' => 'Sede',
+            'registration_number' => 'Matrícula'
+        ]);
     }
 
     /**
@@ -90,11 +90,17 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'username' => $data['username'],
-            'cargo' => $data['cargo'] ?? null,
-            'sede' => $data['sede'] ?? null,
-            'matricula' => $data['matricula'] ?? null,
-            'cpf' => $data['cpf'],
-            'tipo' => $data['tipo'] ?? null === 'on' ? 'administrador' : 'comum',
+            'job_id' => $data['job'] ?? null,
+            'head_office_id' => $data['head_office'] ?? null,
+            'registration_number' => $data['registration_number'] ?? null,
+            'cpf' => $data['cpf']
         ]);
+    }
+
+    protected function showRegistrationForm()
+    {
+        $jobs = \App\Models\Job::all();
+        $headOffices = \App\Models\HeadOffice::all();
+        return view('auth.register', compact('jobs', 'headOffices'));
     }
 }

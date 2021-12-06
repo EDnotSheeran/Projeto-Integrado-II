@@ -14,19 +14,19 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::prefix('/eventos')->middleware('role:admin')->group(function () {
-    Route::get('/', [EventsController::class, 'index'])->name('eventos');
-    Route::get('/novo', [EventsController::class, 'new'])->name('eventos.novo');
-    Route::post('/novo', [EventsController::class, 'add'])->name('eventos.novo');
-    Route::get('/{id}/editar', [EventsController::class, 'edit'])->name('eventos.editar');
-    Route::post('/{id}/editar', [EventsController::class, 'update'])->name('eventos.editar');
-    Route::post('/deletar', [EventsController::class, 'delete'])->name('eventos.deletar');
+    Route::get('/', [EventsController::class, 'index'])->name('events');
+    Route::get('/novo', [EventsController::class, 'new'])->name('events.store');
+    Route::post('/novo', [EventsController::class, 'add'])->name('events.store');
+    Route::get('/{id}', [EventsController::class, 'edit'])->name('events.update');
+    Route::post('/{id}', [EventsController::class, 'update'])->name('events.update');
+    Route::get('/{id}/deletar', [EventsController::class, 'delete'])->name('events.delete');
 });
 
 Route::prefix('/usuarios')->middleware('role:admin')->group(function () {
-    Route::get('/', [UsersController::class, 'index'])->name('usuarios');
-    Route::get('/{id}/editar', [UsersController::class, 'edit'])->name('usuarios.editar');
-    Route::post('/{id}/editar', [UsersController::class, 'update'])->name('usuarios.editar');
-    Route::get('/novo', [UsersController::class, 'new'])->name('usuarios.novo');
-    Route::post('/novo', [UsersController::class, 'add'])->name('usuarios.novo');
-    Route::post('/deletar', [UsersController::class, 'delete'])->name('usuarios.deletar');
+    Route::get('/', [UsersController::class, 'index'])->name('users');
+    Route::get('/novo', [UsersController::class, 'new'])->name('user.store');
+    Route::post('/novo', [UsersController::class, 'add'])->name('user.store');
+    Route::get('/{id}', [UsersController::class, 'edit'])->name('user.update');
+    Route::post('/{id}', [UsersController::class, 'update'])->name('user.update');
+    Route::post('/deletar', [UsersController::class, 'delete'])->name('user.delete');
 });

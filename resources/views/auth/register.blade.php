@@ -83,34 +83,43 @@
                                     <hr>
                                     <div class="form-group">
                                         <div class="custom-control custom-checkbox small">
-                                            <input class="custom-control-input" type="checkbox" name="tipo" id="tipo"
-                                                {{ old('tipo') ? 'checked' : '' }}>
+                                            <input class="custom-control-input" type="checkbox" name="kind" id="kind"
+                                                {{ old('kind') ? 'checked' : '' }}>
 
-                                            <label class="custom-control-label" for="tipo" style="line-height: 26px;">
+                                            <label class="custom-control-label" for="kind" style="line-height: 26px;">
                                                 {{ __('Sou funcionário da prefeitura') }}
                                             </label>
                                         </div>
                                     </div>
-                                    <div id="dadosAdicionais">
+                                    <div id="additionalData">
                                         <hr>
                                         <div class="form-group row">
                                             <div class="col-sm-6 mb-3 mb-sm-0">
                                                 <input type="text"
-                                                    class="form-control form-control-user @error('matricula') is-invalid @enderror"
-                                                    id="matricula" name="matricula" value="{{ old('matricula') }}"
+                                                    class="form-control form-control-user @error('registration_number') is-invalid @enderror"
+                                                    id="registration_number" name="registration_number"
+                                                    value="{{ old('registration_number') }}"
                                                     placeholder="{{ __('Registration') }}">
-                                                @error('matricula')
+                                                @error('registration_number')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
                                                 @enderror
                                             </div>
                                             <div class="col-sm-6">
-                                                <input type="text"
-                                                    class="form-control form-control-user @error('cargo') is-invalid @enderror"
-                                                    id="cargo" name="cargo" value="{{ old('cargo') }}"
-                                                    placeholder="{{ __('Office') }}">
-                                                @error('cargo')
+                                                <select
+                                                    class="form-control form-control-user @error('job') is-invalid @enderror"
+                                                    id="job" name="job">
+                                                    <option value="" disabled>
+                                                        {{ __('Office') }}</option>
+                                                    @foreach ($jobs as $job)
+                                                        <option value="{{ $job->id }}"
+                                                            {{ old('job') == $job->id ? 'selected' : '' }}>
+                                                            {{ $job->name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                                @error('job')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
@@ -118,11 +127,21 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <input type="text"
-                                                class="form-control form-control-user @error('sede') is-invalid @enderror"
-                                                id="sede" name="sede" value="{{ old('sede') }}"
+                                            <select
+                                                class="form-control form-control-user @error('head_office') is-invalid @enderror"
+                                                id="head_office" name="head_office" value="{{ old('head_office') }}"
                                                 placeholder="{{ __('Head Office') }}">
-                                            @error('sede')
+
+                                                <option value="" disabled>
+                                                    {{ __('Head Office') }}</option>
+                                                @foreach ($headOffices as $headOffice)
+                                                    <option value="{{ $headOffice->id }}"
+                                                        {{ old('head_office') == $headOffice->id ? 'selected' : '' }}>
+                                                        {{ $headOffice->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            @error('head_office')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
@@ -145,65 +164,57 @@
     <script type="module">
         const $ = window.$;
 
-        function toogleDadosAdicionais({
+        $().ready(function() {
+            $('#job').find('option[selected="selected"]').each(function() {
+                $(this).prop('selected', true);
+            });
+            $('#head_office').find('option[selected="selected"]').each(function() {
+                $(this).prop('selected', true);
+            });
+            $('#registration_number').val($('#registration_number').attr('value'))
+        });
+
+
+        function toogleAdditionalData({
             animate
         } = {
             animate: true
         }) {
-            const campos = [$('#matricula'), $('#cargo'), $('#sede')];
+            const fields = [$('#registration_number'), $('#job'), $('#head_office')];
 
-            if (tipo.checked) {
-                limpaCampos(campos);
-                setCamposObrigatorios(campos);
-                animate && $('#dadosAdicionais').addClass('animate-grow');
-                animate && $('#dadosAdicionais').removeClass('animate-shrink');
-                $('#dadosAdicionais').show();
+            if (kind.checked) {
+                clearFields(fields);
+                animate && $('#additionalData').addClass('animate-grow');
+                animate && $('#additionalData').removeClass('animate-shrink');
+                $('#additionalData').show();
             } else {
-                limpaCampos(campos);
-                removeCamposObrigatorios(campos);
-                animate && $('#dadosAdicionais').removeClass('animate-grow');
-                animate && $('#dadosAdicionais').addClass('animate-shrink');
-                animate && $('#dadosAdicionais').one("animationend", function() {
+                clearFields(fields);
+                animate && $('#additionalData').removeClass('animate-grow');
+                animate && $('#additionalData').addClass('animate-shrink');
+                animate && $('#additionalData').one("animationend", function() {
                     $(this).hide();
                 });
-                !animate && $('#dadosAdicionais').hide();
+                !animate && $('#additionalData').hide();
             }
         }
 
-        function limpaCampos(fields) {
+        function clearFields(fields) {
             fields.map(field => {
                 field.val('');
             });
         }
 
-        function setCamposObrigatorios(fields) {
-            fields.map(field => {
-                field.attr('required', true);
-            });
-        }
+        let kind = document.querySelector('#kind');
+        console.log(kind.che);
 
-        function removeCamposObrigatorios(fields) {
-            fields.map(field => {
-                field.removeAttr('required');
-            });
-        }
-
-        if (tipo) {
-            toogleDadosAdicionais({
+        if (kind) {
+            toogleAdditionalData({
                 animate: false
             });
-            tipo.addEventListener('change', function() {
-                toogleDadosAdicionais();
+            kind.addEventListener('change', function() {
+                toogleAdditionalData();
             });
         }
-    </script>
-
-    <script>
-        (function($) {
-            $(function() {
-                $("#cpf").mask("000.000.000-00");
-            });
-        })(jQuery);
     </script>
 
 @endpush

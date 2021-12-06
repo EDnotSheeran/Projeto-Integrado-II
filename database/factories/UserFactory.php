@@ -29,7 +29,7 @@ class UserFactory extends Factory
             'password' => '$2y$10$sCUtOkRlHQ8S7vbjhmZh1O2ihtdD8HxLMl4uAjGjGUahc70VOrnuO', // 12345678
             'registration_number' => $this->faker->unique()->randomNumber(8),
             'cpf' => $this->faker->unique()->numerify('###########'),
-            'role' => $this->faker->randomElement([1, 2]),
+            'role' => $this->faker->randomElement(['admin', 'default']),
         ];
     }
 

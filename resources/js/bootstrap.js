@@ -10,6 +10,7 @@ try {
     window.Popper = require("popper.js").default;
     window.$ = window.jQuery = require("jquery");
     window.$.DataTable = window.jQuery.DataTable = require("datatables.net-bs4");
+    window.$.mask = window.jQuery.mask = require("jquery-mask-plugin");
 
     require("bootstrap");
 } catch (e) {}

@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
             'email' => 'edson.junior@aluno.ifsp.edu.br',
             'password' => '$2y$10$sCUtOkRlHQ8S7vbjhmZh1O2ihtdD8HxLMl4uAjGjGUahc70VOrnuO',
             'cpf' => '81469310066',
-            'role' => 2,
+            'role' => 'admin',
         ]);
 
         User::factory()

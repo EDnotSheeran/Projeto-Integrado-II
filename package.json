@@ -35,6 +35,7 @@
     },
     "dependencies": {
         "datatables": "^1.10.18",
-        "datatables.net-bs4": "^1.11.3"
+        "datatables.net-bs4": "^1.11.3",
+        "jquery-mask-plugin": "^1.14.16"
     }
 }
