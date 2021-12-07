@@ -39,7 +39,7 @@ class UsuariosController extends Controller
 
         // Se a validação falhar, redireciona para a página de edição
         if ($validator->fails()) {
-            return redirect()->route('usuarios.novo')
+            return redirect()->route('usuarios.create')
                 ->withErrors($validator)
                 ->withInput();
         }
@@ -73,7 +73,7 @@ class UsuariosController extends Controller
 
         // Se a validação falhar, redireciona para a página de edição
         if ($validator->fails()) {
-            return redirect()->route('usuarios.editar', $id)
+            return redirect()->route('usuarios.edit', $id)
                 ->withErrors($validator)
                 ->withInput();
         }

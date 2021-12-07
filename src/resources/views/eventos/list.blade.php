@@ -18,7 +18,7 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <a class="btn btn-primary btn-icon" href="{{ route('eventos.novo') }}" role="button">
+        <a class="btn btn-primary btn-icon" href="{{ route('eventos.create') }}" role="button">
             <i class="fas fa-plus-circle"></i>
             Novo Evento
         </a>
@@ -53,10 +53,10 @@
                             <td>{{ date('d/m/Y', strtotime($evento->data)) }}</td>
                             <td>{{ date('h:i', strtotime($evento->hora)) }}</td>
                             <td class="text-center">
-                                <a href="{{ route('eventos.editar', ['id' => $evento->id]) }}">
+                                <a href="{{ route('eventos.edit', ['id' => $evento->id]) }}">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <a href="{{ route('eventos.deletar') }}" data-toggle="modal" data-target="#deleteModal"
+                                <a href="{{ route('eventos.destroy') }}" data-toggle="modal" data-target="#deleteModal"
                                     onclick="document.getElementById('event-id').value = {{ $evento->id }}">
                                     <i class="fas fa-trash"></i>
                                 </a>
@@ -83,11 +83,11 @@
                  <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                  <a class="btn btn-primary"
                      aria-labelledby="navbarDropdown"
-                     href="{{ route('eventos.deletar') }}"
+                     href="{{ route('eventos.destroy') }}"
                      onclick="event.preventDefault();document.getElementById('delete-form').submit();">
                      {{ __('Delete') }}
                  </a>
-                 <form id="delete-form" action="{{ route('eventos.deletar') }}" method="POST" class="d-none">
+                 <form id="delete-form" action="{{ route('eventos.destroy') }}" method="POST" class="d-none">
                      @csrf
                         <input id="event-id" type="hidden" name="id" value="">
                  </form>
