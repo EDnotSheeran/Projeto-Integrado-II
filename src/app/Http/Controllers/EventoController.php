@@ -25,12 +25,21 @@ class EventoController extends Controller
         return view('eventos.form');
     }
 
+    public function presentlist(Request $request)
+    {
+        return view('eventos.presentlist');
+    }
+
     public function add(Request $request)
     {
+        $mensagens = [
+            'after' => 'A data do evento não pode ser anterior ao dia atual.'          
+        ];
+
         // Validar os dados do formulário
         $validator = Validator::make($request->all(), [
             'evento.nome' => 'required|max:255',
-            'evento.data' => 'required|date',
+            'evento.data' => 'required|after:yesterday',
             'evento.hora' => 'required',
             'evento.nome_palestrante' => 'required|max:255',
             'evento.vagas_disponiveis' => 'required|numeric',
@@ -43,11 +52,11 @@ class EventoController extends Controller
             'evento.numero' => 'required|max:10',
             'evento.bairro' => 'required|max:255',
             'evento.local' => 'required|max:255',
+            'evento.complemento' => 'max:255',
             'evento.status' => 'required|max:1',
-            'evento.metodo' => 'required|max:1',
             'certificado.nome' => 'required|max:255',
             'certificado.texto' => 'required|max:255',
-        ]);
+        ], $mensagens);
 
         // Se a validação falhar, redireciona para a página de edição
         if ($validator->fails()) {
@@ -103,10 +112,14 @@ class EventoController extends Controller
 
     public function update(Request $request, $id)
     {
+        $mensagens = [
+            'after' => 'A data do evento não pode ser anterior ao dia atual.'          
+        ];
+        
         // Validação
         $validator = Validator::make($request->all(), [
             'evento.nome' => 'required|max:255',
-            'evento.data' => 'required|date',
+            'evento.data' => 'required|after:yesterday',
             'evento.hora' => 'required',
             'evento.nome_palestrante' => 'required|max:255',
             'evento.vagas_disponiveis' => 'required|numeric',
@@ -119,11 +132,11 @@ class EventoController extends Controller
             'evento.numero' => 'required|max:10',
             'evento.bairro' => 'required|max:255',
             'evento.local' => 'required|max:255',
+            'evento.complemento' => 'max:255',
             'evento.status' => 'required|max:1',
-            'evento.metodo' => 'required|max:1',
             'certificado.nome' => 'required|max:255',
             'certificado.texto' => 'required|max:255',
-        ]);
+        ], $mensagens);
 
         // Se a validação falhar, redireciona para a página de edição
         if ($validator->fails()) {

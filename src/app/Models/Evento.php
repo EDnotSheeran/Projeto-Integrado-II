@@ -27,8 +27,8 @@ class Evento extends Model
         'numero',
         'bairro',
         'local',
+        'complemento',
         'status',
-        'metodo',
         'imagem'
     ];
 }

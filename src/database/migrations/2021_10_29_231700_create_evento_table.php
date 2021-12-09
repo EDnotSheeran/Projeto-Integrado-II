@@ -30,8 +30,8 @@ class CreateEventoTable extends Migration
             $table->string('numero');
             $table->string('bairro');
             $table->string('local');
+            $table->string('complemento')-> nullable();
             $table->boolean('status');
-            $table->boolean('metodo');
             $table->string('imagem');
             $table->timestamps();
             
