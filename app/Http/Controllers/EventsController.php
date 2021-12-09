@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Address;
 use Illuminate\Http\Request;
 use App\Models\Event;
+use App\Models\EventParticipants;
 use App\Models\Certification;
 use Illuminate\Support\Facades\File;
 
@@ -97,6 +98,26 @@ class EventsController extends Controller
         return redirect()->route('events')->with('success', 'Evento deletado com sucesso!');
     }
 
+    public function participate(Request $request, $id)
+    {
+        $event = Event::findOrFail($id);
+
+        $alreadyParticipating = EventParticipants::where('event_id', $id)->where('user_id', auth()->user()->id)->get();
+        if (count($alreadyParticipating) > 0) {
+            return redirect()->route('home')->with('warning', 'Você já está participando deste evento!');
+        }
+
+        if ($event->available_vacancies <= 0) {
+            return redirect()->route('home')->with('warning', 'Não há mais vagas disponíveis para este evento!');
+        }
+
+        EventParticipants::create([
+            'event_id' => $event->id,
+            'user_id' => auth()->user()->id
+        ]);
+        return redirect()->route('home')->with('success', 'Você está participando do evento!');
+    }
+
     private function uploadImage($image)
     {
         $imageName = 'uploads/' . md5(strtotime('now') . rand()) . '-' . $image->getClientOriginalName();
@@ -150,7 +171,7 @@ class EventsController extends Controller
             'event.status' => 'required|max:1',
             'event.method' => 'required|max:1',
             'event.certification.title' => 'required|max:255',
-            'event.certification.content' => 'required|max:255',
+            'event.certification.content' => 'required|max:500',
             'eventimage' => !$updating ? 'required|' : '' . 'image|mimes:jpeg,png,jpg,gif|max:2048',
             'certificationimage' => !$updating ? 'required|' : '' .  'image|mimes:jpeg,png,jpg,gif|max:2048'
         ];

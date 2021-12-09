@@ -95,24 +95,28 @@ window.addEventListener("load", function () {
                         city.setAttribute("readonly", "readonly");
                     } else {
                         city.removeAttribute("readonly");
+                        city.value = "";
                     }
                     if (state && district) {
                         state.value = response.data.uf;
                         state.setAttribute("readonly", "readonly");
                     } else {
                         state.removeAttribute("readonly");
+                        state.value = "";
                     }
                     if (district && response.data.bairro) {
                         district.value = response.data.bairro;
                         district.setAttribute("readonly", "readonly");
                     } else {
                         district.removeAttribute("readonly");
+                        district.value = "";
                     }
                     if (street && response.data.logradouro) {
                         street.value = response.data.logradouro;
                         street.setAttribute("readonly", "readonly");
                     } else {
                         street.removeAttribute("readonly");
+                        street.value = "";
                     }
                 });
             }

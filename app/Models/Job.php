@@ -18,6 +18,11 @@ class Job extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->hasOne(User::class);
+    }
+
+    public function getEmployeesAttribute()
+    {
+        return $this->hasMany(User::class)->count();
     }
 }

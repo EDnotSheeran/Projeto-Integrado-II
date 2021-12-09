@@ -1,10 +1,9 @@
 @extends('layouts.admin')
 
-@section('title', __('Events') . ' - ')
-
 @section('content')
+
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">{{ __('Events') }}</h1>
+    <h1 class="h3 mb-2 text-gray-800">{{ __('Users') }}</h1>
     <p class="mb-4"></p>
 
     @if (session()->has('success'))
@@ -18,9 +17,9 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <a class="btn btn-primary btn-icon" href="{{ route('events.store') }}" role="button">
+            <a class="btn btn-primary btn-icon" href="{{ route('user.store') }}" role="button">
                 <i class="fas fa-plus-circle"></i>
-                {{ __('New Event') }}
+                {{ __('New User') }}
             </a>
         </div>
         <div class="card-body">
@@ -29,38 +28,46 @@
                     <thead>
                         <tr>
                             <th class="text-center">ID</th>
-                            <th>{{ __('Event Name') }}</th>
-                            <th>{{ __('Date') }}</th>
-                            <th>{{ __('Hour') }}</th>
+                            <th>{{ __('Name') }}</th>
+                            <th>{{ __('Email') }}</th>
+                            <th>{{ __('User Name') }}</th>
+                            <th>{{ __('City Hall employee') }}</th>
+                            <th>{{ __('Role') }}</th>
                             <th class="text-center">{{ __('Actions') }}</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th class="text-center">ID</th>
-                            <th>{{ __('Event Name') }}</th>
-                            <th>{{ __('Date') }}</th>
-                            <th>{{ __('Hour') }}</th>
+                            <th>{{ __('Name') }}</th>
+                            <th>{{ __('Email') }}</th>
+                            <th>{{ __('User Name') }}</th>
+                            <th>{{ __('City Hall employee') }}</th>
+                            <th>{{ __('Role') }}</th>
                             <th class="text-center">{{ __('Actions') }}</th>
                         </tr>
                     </tfoot>
                     <tbody>
-                        {{-- Eventos --}}
-                        @foreach ($events as $event)
+                        {{-- Usuários --}}
+                        @foreach ($users as $user)
                             <tr>
-                                <td class="text-center">{{ $event->id }}</td>
-                                <td>{{ $event->name }}</td>
-                                <td>{{ date('d/m/Y', strtotime($event->date)) }}</td>
-                                <td>{{ date('h:i', strtotime($event->start_time)) }}</td>
+                                <td class="text-center">{{ $user->id }}</td>
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->email }}</td>
+                                <td>{{ $user->username }}</td>
+                                <td>{{ $user->job_id !== null ? __('Yes') : __('No') }}</td>
+                                <td>{{ __($user->role) }}</td>
                                 <td class="text-center">
-                                    <a href="{{ route('events.update', ['id' => $event->id]) }}">
+                                    <a href="{{ route('user.update', ['id' => $user->id]) }}">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <a href="{{ route('events.delete', ['id' => $event->id]) }}" data-toggle="modal"
-                                        data-target="#deleteModal"
-                                        onclick="document.querySelector('#deleteButton').href = this.href">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
+                                    @if ($user->id !== Auth::user()->id)
+                                        <a href="{{ route('user.delete', ['id' => $user->id]) }}" data-toggle="modal"
+                                            data-target="#deleteModal"
+                                            onclick="document.querySelector('#deleteButton').href = this.href">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
@@ -79,14 +86,12 @@
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-                        {{ __('Please confirm below if you want to delete this event.') }}</div>
+                    <div class="modal-body">{{ __('Please confirm below if you want to delete this user.') }}</div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">{{ __('Cancel') }}</button>
                         <a id="deleteButton" class="btn btn-primary" aria-labelledby="navbarDropdown" href="#">
                             {{ __('Delete') }}
                         </a>
-                        <input id="event-id" type="hidden" name="id" value="">
                     </div>
                 </div>
             </div>

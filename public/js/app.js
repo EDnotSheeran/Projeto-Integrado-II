@@ -2176,6 +2176,7 @@ window.addEventListener("load", function () {
             city.setAttribute("readonly", "readonly");
           } else {
             city.removeAttribute("readonly");
+            city.value = "";
           }
 
           if (state && district) {
@@ -2183,6 +2184,7 @@ window.addEventListener("load", function () {
             state.setAttribute("readonly", "readonly");
           } else {
             state.removeAttribute("readonly");
+            state.value = "";
           }
 
           if (district && response.data.bairro) {
@@ -2190,6 +2192,7 @@ window.addEventListener("load", function () {
             district.setAttribute("readonly", "readonly");
           } else {
             district.removeAttribute("readonly");
+            district.value = "";
           }
 
           if (street && response.data.logradouro) {
@@ -2197,6 +2200,7 @@ window.addEventListener("load", function () {
             street.setAttribute("readonly", "readonly");
           } else {
             street.removeAttribute("readonly");
+            street.value = "";
           }
         });
       }

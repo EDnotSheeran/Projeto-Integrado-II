@@ -25,4 +25,9 @@ class Address extends Model
     {
         return $this->hasOne(Event::class);
     }
+
+    public function getFullAddressAttribute()
+    {
+        return "{$this->street}, {$this->number}, {$this->district}, {$this->city} - {$this->state}";
+    }
 }

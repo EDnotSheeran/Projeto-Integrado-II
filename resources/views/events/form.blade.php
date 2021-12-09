@@ -4,10 +4,6 @@
 
 @section('content')
 
-    {{-- @if ($errors->any())
-        {{ implode('', $errors->all('<div>:message</div>')) }}
-    @endif --}}
-
     <div class="container ">
         @if (session()->has('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -46,10 +42,11 @@
                                     enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-group row">
-                                        <div class="col-sm-12 mb-3 mb-sm-0 col-lg-5 col-xl-4">
+                                        <div class="col-sm-12 mb-3 mb-sm-0 col-xl-4">
                                             <div class="file-field">
                                                 <div class="mb-4">
-                                                    <label for="eventImage" image-preview="Fazer Upload">
+                                                    <label for="eventImage" image-preview="Fazer Upload"
+                                                        style="width: 100%;">
                                                         <img src="{{ isset($event) ? asset($event->image_url) : asset('img/placeholder.png') }}"
                                                             class="placeholder" alt="placeholder">
                                                     </label>
@@ -65,11 +62,12 @@
                                                 </span>
                                             @enderror
                                         </div>
-                                        <div class="col-sm-12 mb-3 mb-sm-0 col-lg-7 col-xl-8">
+                                        <div class="col-sm-12 mb-3 mb-sm-0 col-xl-7">
                                             <div class="col-sm-12 mb-3" tooltip="{{ __('Event Name') }}">
                                                 <input type="text"
                                                     class="form-control form-control-user @error('event.name') is-invalid @enderror"
-                                                    name="event[name]" value="{{ $event->name ?? old('event.name') }}"
+                                                    name="event[name]"
+                                                    value="{{ old('event.name') ?? ($event->name ?? '') }}"
                                                     placeholder="{{ __('Event Name') }}">
                                                 @error('event.name')
                                                     <span class="invalid-feedback" role="alert">
@@ -77,12 +75,13 @@
                                                     </span>
                                                 @enderror
                                             </div>
-                                            <div class="row mx-1">
-                                                <div class="col-sm-6 mb-3 mb-sm-0" tooltip="{{ __('Event Date') }}">
+                                            <div class="row px-3 mb-3">
+                                                <div class="col-sm-12 col-lg-6 mb-3 mg-lg-0"
+                                                    tooltip="{{ __('Event Date') }}">
                                                     <input type="text"
                                                         class="form-control form-control-user @error('event.date') is-invalid @enderror"
                                                         name="event[date]" mask="date"
-                                                        value="{{ $event->date ?? old('event.date') }}"
+                                                        value="{{ old('event.date') ?? ($event->date ?? '') }}"
                                                         placeholder="{{ __('Event Date') }}">
                                                     @error('event.date')
                                                         <span class="invalid-feedback" role="alert">
@@ -90,11 +89,11 @@
                                                         </span>
                                                     @enderror
                                                 </div>
-                                                <div class="col-sm-6 mb-3" tooltip="{{ __('Event Start Time') }}">
+                                                <div class="col-sm-12 col-lg-6" tooltip="{{ __('Event Start Time') }}">
                                                     <input type="text"
                                                         class="form-control form-control-user @error('event.start_time') is-invalid @enderror"
                                                         name="event[start_time]" mask="time"
-                                                        value="{{ $event->start_time ?? old('event.start_time') }}"
+                                                        value="{{ old('event.start_time') ?? ($event->start_time ?? '') }}"
                                                         placeholder="{{ __('Event Start Time') }}">
                                                     @error('event.start_time')
                                                         <span class="invalid-feedback" role="alert">
@@ -107,7 +106,7 @@
                                                 <input type="text"
                                                     class="form-control form-control-user @error('event.speaker_name') is-invalid @enderror"
                                                     name="event[speaker_name]"
-                                                    value="{{ $event->speaker_name ?? old('event.speaker_name') }}"
+                                                    value="{{ old('event.speaker_name') ?? ($event->speaker_name ?? '') }}"
                                                     placeholder="{{ __('Speaker Name') }}">
                                                 @error('event.speaker_name')
                                                     <span class="invalid-feedback" role="alert">
@@ -121,7 +120,7 @@
                                                     <input type="number"
                                                         class="form-control form-control-user @error('event.available_vacancies') is-invalid @enderror"
                                                         name="event[available_vacancies]"
-                                                        value="{{ $event->available_vacancies ?? old('event.available_vacancies') }}"
+                                                        value="{{ old('event.available_vacancies') ?? ($event->available_vacancies ?? '') }}"
                                                         placeholder="{{ __('Available Vacancies') }}">
                                                     @error('event.available_vacancies')
                                                         <span class="invalid-feedback" role="alert">
@@ -133,7 +132,7 @@
                                                     <input type="text"
                                                         class="form-control form-control-user @error('event.end_time') is-invalid @enderror"
                                                         name="event[end_time]" mask="time"
-                                                        value="{{ $event->end_time ?? old('event.end_time') }}"
+                                                        value="{{ old('event.end_time') ?? ($event->end_time ?? '') }}"
                                                         placeholder="{{ __('Event End Time') }}">
                                                     @error('event.end_time')
                                                         <span class="invalid-feedback" role="alert">
@@ -145,12 +144,12 @@
                                         </div>
                                         <div class="card text-center col-12 mb-4" style="--bs-bg-opacity: .5;">
                                             <div class="card-body">
-                                                <h4 class="card-title">{{ __('Event Certificate') }}</h4>
+                                                <h4 class="card-title mb-4">{{ __('Event Certificate') }}</h4>
                                                 <div class="form-group row">
-                                                    <div class="col-sm-12 mb-3 mb-sm-0 col-lg-5 col-xl-4">
+                                                    <div class="col-sm-12 mb-3 mb-sm-0 col-xl-5">
                                                         <div class="file-field">
                                                             <div class="mb-4">
-                                                                <label for="certificationImage"
+                                                                <label for="certificationImage" style="width: 100%;"
                                                                     image-preview="{{ __('Upload Image') }}">
                                                                     <img src="{{ isset($event) ? asset($event->certification->image_url) : asset('img/placeholder.png') }}"
                                                                         class="placeholder" alt="placeholder">
@@ -168,13 +167,13 @@
                                                             </span>
                                                         @enderror
                                                     </div>
-                                                    <div class="col-sm-12 mb-3 mb-sm-0 col-lg-7 col-xl-8">
+                                                    <div class="col-sm-12 mb-3 mb-sm-0 col-xl-7">
                                                         <div class="col-sm-12 mb-3"
                                                             tooltip="{{ __('Certificate Name') }}">
                                                             <input type="text"
                                                                 class="form-control form-control-user @error('event.certification.title') is-invalid @enderror"
                                                                 name="event[certification][title]"
-                                                                value="{{ $event->certification->title ?? old('event.certification.title') }}"
+                                                                value="{{ old('event.certification.title') ?? ($event->certification->title ?? '') }}"
                                                                 placeholder="{{ __('Certificate Name') }}">
                                                             @error('event.certification.title')
                                                                 <span class="invalid-feedback" role="alert">
@@ -187,7 +186,7 @@
                                                             <textarea
                                                                 class="form-control form-control-user @error('event.certification.content') is-invalid @enderror"
                                                                 name="event[certification][content]" rows="8"
-                                                                placeholder="{{ __('Certificate Text') }}">{{ $event->certification->content ?? old('event.certification.content') }}</textarea>
+                                                                placeholder="{{ __('Certificate Text') }}">{{ old('event.certification.content') ?? ($event->certification->content ?? '') }}</textarea>
                                                             @error('event.certification.content')
                                                                 <span class="invalid-feedback" role="alert">
                                                                     <strong>{{ $message }}</strong>
@@ -204,7 +203,7 @@
                                                 <textarea
                                                     class="form-control form-control-user @error('event.description') is-invalid @enderror"
                                                     name="event[description]" rows="8"
-                                                    placeholder="{{ __('Event Description') }}">{{ $event->description ?? old('event.description') }}</textarea>
+                                                    placeholder="{{ __('Event Description') }}">{{ old('event.description') ?? ($event->description ?? '') }}</textarea>
                                                 @error('event.description')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -217,7 +216,7 @@
                                                 <input type="text"
                                                     class="form-control form-control-user @error('event.address.zipcode') is-invalid @enderror"
                                                     name="event[address][zipcode]" data-address="zipcode"
-                                                    value="{{ $event->address->zipcode ?? old('event.address.zipcode') }}"
+                                                    value="{{ old('event.address.zipcode') ?? ($event->address->zipcode ?? '') }}"
                                                     placeholder="{{ __('CEP') }}">
                                                 @error('event.address.zipcode')
                                                     <span class="invalid-feedback" role="alert">
@@ -230,7 +229,7 @@
                                                 <input type="text"
                                                     class="form-control form-control-user @error('event.address.state') is-invalid @enderror"
                                                     name="event[address][state]" data-address="state"
-                                                    value="{{ $event->address->state ?? old('event.address.state') }}"
+                                                    value="{{ old('event.address.state') ?? ($event->address->state ?? '') }}"
                                                     placeholder="{{ __('UF') }}" readonly>
                                                 @error('event.address.state')
                                                     <span class="invalid-feedback" role="alert">
@@ -243,7 +242,7 @@
                                                 <input type="text"
                                                     class="form-control form-control-user @error('event.address.city') is-invalid @enderror"
                                                     name="event[address][city]" data-address="city"
-                                                    value="{{ $event->address->city ?? old('event.address.city') }}"
+                                                    value="{{ old('event.address.city') ?? ($event->address->city ?? '') }}"
                                                     placeholder="{{ __('City') }}" readonly>
                                                 @error('event.address.city')
                                                     <span class="invalid-feedback" role="alert">
@@ -259,7 +258,7 @@
                                                 <input type="text"
                                                     class="form-control form-control-user @error('event.address.street') is-invalid @enderror"
                                                     name="event[address][street]" data-address="street"
-                                                    value="{{ $event->address->street ?? old('event.address.street') }}"
+                                                    value="{{ old('event.address.street') ?? ($event->address->street ?? '') }}"
                                                     placeholder="{{ __('Address') }}" readonly>
                                                 @error('event.address.street')
                                                     <span class="invalid-feedback" role="alert">
@@ -271,7 +270,7 @@
                                                 <input type="text"
                                                     class="form-control form-control-user @error('event.address.number') is-invalid @enderror"
                                                     name="event[address][number]"
-                                                    value="{{ $event->address->number ?? old('event.address.number') }}"
+                                                    value="{{ old('event.address.number') ?? ($event->address->number ?? '') }}"
                                                     placeholder="{{ __('Number') }}">
                                                 @error('event.address.number')
                                                     <span class="invalid-feedback" role="alert">
@@ -285,7 +284,7 @@
                                                 <input type="text"
                                                     class="form-control form-control-user @error('event.address.district') is-invalid @enderror"
                                                     name="event[address][district]" data-address="district"
-                                                    value="{{ $event->address->district ?? old('event.address.district') }}"
+                                                    value="{{ old('event.address.district') ?? ($event->address->district ?? '') }}"
                                                     placeholder="{{ __('District') }}" readonly>
                                                 @error('event.address.district')
                                                     <span class="invalid-feedback" role="alert">
@@ -297,7 +296,7 @@
                                                 <input type="text"
                                                     class="form-control form-control-user @error('event.address.complement') is-invalid @enderror"
                                                     name="event[address][complement]"
-                                                    value="{{ $event->address->complement ?? old('event.address.complement') }}"
+                                                    value="{{ old('event.address.complement') ?? ($event->address->complement ?? '') }}"
                                                     placeholder="{{ __('Local') }}">
                                                 @error('event.address.complement')
                                                     <span class="invalid-feedback" role="alert">
@@ -381,10 +380,3 @@
         </div>
     </div>
 @endsection
-
-@push('scripts')
-    <script src="{{ asset('js/jquery-3.6.0.js') }}"></script>
-    <script src="{{ asset('js/plugins/jquery.mask.min.js') }}"></script>
-    <script src="{{ asset('js/eventos/eventos.js') }}"></script>
-
-@endpush

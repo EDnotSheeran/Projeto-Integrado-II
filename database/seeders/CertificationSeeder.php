@@ -18,7 +18,7 @@ class CertificationSeeder extends Seeder
     {
 
 
-        Certification::factory()->count(10)->create()
+        Certification::factory()->count(50)->create()
             ->each(function ($certification) {
                 Address::factory()->count(1)->create()->each(function ($address) use ($certification) {
                     $certification->event()->save(

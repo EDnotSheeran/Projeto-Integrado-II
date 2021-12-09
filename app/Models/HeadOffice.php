@@ -21,4 +21,9 @@ class HeadOffice extends Model
     {
         return $this->belongsTo(Address::class);
     }
+
+    public function employees()
+    {
+        return $this->hasMany(User::class);
+    }
 }
