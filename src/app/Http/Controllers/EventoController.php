@@ -148,7 +148,7 @@ class EventoController extends Controller
 
         // Se a validação falhar, redireciona para a página de edição
         if ($validator->fails()) {
-            return redirect()->route('eventos.editar', $id)
+            return redirect()->route('eventos.edit', $id)
                 ->withErrors($validator)
                 ->withInput();
         }
@@ -184,7 +184,7 @@ class EventoController extends Controller
 
         
 
-        return redirect()->route('eventos.editar', ['id' => $evento->id])->with('success', 'Evento atualizado com sucesso!');
+        return redirect()->route('eventos.update', ['id' => $evento->id])->with('success', 'Evento atualizado com sucesso!');
     }
 
     public function delete(Request $request)
