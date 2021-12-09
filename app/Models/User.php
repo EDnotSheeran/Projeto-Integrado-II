@@ -73,12 +73,12 @@ class User extends Authenticatable
 
     public function job()
     {
-        return $this->hasOne(Job::class);
+        return $this->belongsTo(Job::class);
     }
 
-    public function headOffice()
+    public function head_office()
     {
-        return $this->hasOne(HeadOffice::class);
+        return $this->belongsTo(HeadOffice::class);
     }
 
     public function getisAdminAttribute()

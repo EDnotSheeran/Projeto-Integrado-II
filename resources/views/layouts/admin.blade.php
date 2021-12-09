@@ -38,9 +38,14 @@
                 </a>
 
                 <!-- Divider -->
-                <hr class="sidebar-divider my-0">
+                <hr class="sidebar-divider">
 
                 @if (Auth::user()->isAdmin)
+
+                    <div class="sidebar-heading">
+                        Administração
+                    </div>
+
                     <!-- Nav Item - Dashboard -->
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('events') }}">
@@ -54,18 +59,30 @@
                             <span>{{ __('Users') }}</span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('jobs') }}">
+                            <i class="fas fa-briefcase"></i>
+                            <span>{{ __('Jobs') }}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('headOffices') }}">
+                            <i class="fas fa-building"></i>
+                            <span>{{ __('HeadOffices') }}</span>
+                        </a>
+                    </li>
                     <!-- Divider -->
                     <hr class="sidebar-divider">
                 @endif
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('events') }}">
+                    <a class="nav-link" href="{{ route('user.agenda') }}">
                         <i class="fas fa-scroll"></i>
                         <span>{{ __('My Agenda') }}</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('users') }}">
+                    <a class="nav-link" href="{{ route('profile') }}">
                         <i class="fas fa-user"></i>
                         <span>{{ __('My Data') }}</span>
                     </a>
@@ -94,6 +111,21 @@
 
                     <!-- Topbar -->
                     <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                        <form
+                            onsubmit="event.preventDefault();location.href = '{{ route('home') }}?search=' + document.getElementById('search').value;"
+                            class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                            <div class="input-group">
+                                <input type="text" id="search" class="form-control bg-light border-0 small"
+                                    placeholder="{{ __('Search for events...') }}" aria-label="Search"
+                                    aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="button">
+                                        <i class="fas fa-search fa-sm"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
 
                         <!-- Sidebar Toggle (Topbar) -->
                         <form class="form-inline">
@@ -141,7 +173,7 @@
                                 <!-- Dropdown - User Information -->
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                     aria-labelledby="userDropdown">
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" href="{{ route('profile') }}">
                                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                         {{ __('Profile') }}
                                     </a>

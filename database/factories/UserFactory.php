@@ -27,7 +27,6 @@ class UserFactory extends Factory
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => $this->faker->dateTimeBetween('-1 years', 'now'),
             'password' => '$2y$10$sCUtOkRlHQ8S7vbjhmZh1O2ihtdD8HxLMl4uAjGjGUahc70VOrnuO', // 12345678
-            'registration_number' => $this->faker->unique()->randomNumber(8),
             'cpf' => $this->faker->unique()->numerify('###########'),
             'role' => $this->faker->randomElement(['admin', 'default']),
         ];

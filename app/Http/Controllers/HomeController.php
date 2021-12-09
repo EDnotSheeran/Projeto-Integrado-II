@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Event;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -12,9 +13,11 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        $events = Event::paginate(1);
-        return View('home', compact('events'));
+        $page = $request->page ?? 1;
+        $events = Event::where([['status', '=', true], ['date', '>=', DB::raw('NOW()')], ['name', 'like', '%' . $request->search . '%']])->orderBy('date', 'desc')->paginate(10, ['*'], 'page', $page);
+        $page_count = ceil($events->total() / $events->perPage());
+        return View('home', compact('events', 'page', 'page_count'));
     }
 }

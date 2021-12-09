@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\EventParticipants;
 
 class Event extends Model
 {
@@ -44,7 +45,12 @@ class Event extends Model
 
     public function getDateAttribute($value)
     {
-        return date('d-m-Y', strtotime($value));
+        return date('d/m/Y', strtotime($value));
+    }
+
+    public function getStartTimeAttribute($value)
+    {
+        return date('H:i', strtotime($value));
     }
 
     public function setDateAttribute($value)
@@ -57,5 +63,25 @@ class Event extends Model
         } else {
             $this->attributes['date'] = $value;
         }
+    }
+
+    public function getEventParticipants()
+    {
+        return $this->hasMany(EventParticipants::class, 'event_id', 'id');
+    }
+
+    public function getEventParticipantsCountAttribute()
+    {
+        return $this->getEventParticipants()->count();
+    }
+
+    public function getAllAvailableVacanciesAttribute()
+    {
+        return $this->attributes['available_vacancies'] - $this->getEventParticipantsCountAttribute();
+    }
+
+    public function getIsUserParticipatingAttribute()
+    {
+        return $this->getEventParticipants()->where('user_id', auth()->user()->id)->count() > 0;
     }
 }
