@@ -24,7 +24,8 @@
                     <div class="card-body font-weight-bold text-center">
                         <p>Endereço: {{ $evento->endereco }},{{ $evento->numero }}</p>
                         <p>Local: {{ $evento->local }}</p>
-                        <p>Data: {{ $evento->data }} Hora: {{ $evento->hora}}</p>
+                        <p>Data: {{ date('d/m/Y', strtotime($evento->data)) }} Hora: {{ date('h:i', strtotime($evento->hora)) }}</p>
+                        <p>Duração: {{ date('h:i', strtotime($evento->duracao)) }}</p>
                     </div>
                 </div>
 

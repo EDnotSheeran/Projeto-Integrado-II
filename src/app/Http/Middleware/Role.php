@@ -17,13 +17,12 @@ class Role
     public function handle(Request $request, Closure $next, $role)
     {
         $userRole = auth()->user()->role;
-
+           
         if ($userRole !== $role) {
-
-            if ($userRole === 'comum') {
-                return redirect()->route('home');
-            }
+            
+            return redirect()->route('403');
         }
+
         return $next($request);
     }
 }

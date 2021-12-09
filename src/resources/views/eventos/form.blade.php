@@ -42,7 +42,7 @@
                             </div>
                             {{-- Update --}}
                             @if( Request::is('*/editar') )
-                            <form id="form-update" class="user" method="POST" action="{{ route('eventos.editar', $evento->id) }}" enctype="multipart/form-data">
+                            <form id="form-update" class="user" method="POST" action="{{ route('eventos.update', $evento->id) }}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group row">
                                     <div class="col-sm-12 mb-3 mb-sm-0 col-lg-5 col-xl-4">
@@ -348,7 +348,7 @@
                             </form>
                             @else
                             {{-- Create --}}
-                            <form class="user" method="POST" action="{{ route('eventos.novo') }}" enctype="multipart/form-data">
+                            <form class="user" method="POST" action="{{ route('eventos.store') }}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group row">
                                     <div class="col-sm-12 mb-3 mb-sm-0 col-lg-5 col-xl-4">

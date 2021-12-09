@@ -94,7 +94,7 @@ class RegisterController extends Controller
             'sede' => $data['sede'] ?? null,
             'matricula' => $data['matricula'] ?? null,
             'cpf' => $data['cpf'],
-            'tipo' => $data['tipo'] ?? null === 'on' ? 'administrador' : 'comum',
+            'tipo' => $data['tipo'] ?? null === 'on' ? 'comum' : 'comum', //O user deve ser por padrão comum
         ]);
     }
 }

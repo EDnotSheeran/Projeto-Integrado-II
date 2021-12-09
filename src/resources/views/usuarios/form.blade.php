@@ -37,7 +37,7 @@
                             </div>
                             {{-- Update --}}
                             @if( Request::is('*/editar') )
-                            <form id="form-update" class="user" method="POST" action="{{ route('usuarios.editar', $usuario->id) }}" enctype="multipart/form-data">
+                            <form id="form-update" class="user" method="POST" action="{{ route('usuarios.update', $usuario->id) }}" enctype="multipart/form-data">
                                 @csrf
                                     <div class="form-group">
                                         <input type="text" class="form-control form-control-user @error('name') is-invalid @enderror"
@@ -179,7 +179,7 @@
                             </form>
                             @else
                             {{-- Create --}}
-                            <form class="user" method="POST" action="{{ route('usuarios.novo') }}" enctype="multipart/form-data">
+                            <form class="user" method="POST" action="{{ route('usuarios.store') }}" enctype="multipart/form-data">
                                 @csrf
                                     <div class="form-group">
                                         <input type="text" class="form-control form-control-user @error('name') is-invalid @enderror"

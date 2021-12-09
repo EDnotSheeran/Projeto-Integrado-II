@@ -19,7 +19,7 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <a class="btn btn-primary btn-icon" href="{{ route('usuarios.novo') }}" role="button">
+        <a class="btn btn-primary btn-icon" href="{{ route('usuarios.create') }}" role="button">
             <i class="fas fa-plus-circle"></i>
             Novo Usuário
         </a>
@@ -57,7 +57,7 @@
                             <td>{{ $usuario->username }}</td>
                             <td>{{ $usuario->tipo == 1 ? "Comum" : "Administrador"}}</td>
                             <td class="text-center">
-                                <a href="{{ route('usuarios.editar', ['id' => $usuario->id]) }}">
+                                <a href="{{ route('usuarios.edit', ['id' => $usuario->id]) }}">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <a href="{}" data-toggle="modal" data-target="#deleteModal"
@@ -91,7 +91,7 @@
                      onclick="event.preventDefault();document.getElementById('delete-form').submit();">
                      {{ __('Delete') }}
                  </a>
-                 <form id="delete-form" action="{{ route('usuarios.deletar') }}" method="POST" class="d-none">
+                 <form id="delete-form" action="{{ route('usuarios.destroy') }}" method="POST" class="d-none">
                      @csrf
                         <input id="usuario-id" type="hidden" name="id" value="">
                  </form>

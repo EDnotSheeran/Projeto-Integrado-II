@@ -14,7 +14,7 @@ class EventoController extends Controller
         $this->middleware('auth');
     }
 
-    public function __invoke(Request $request)
+    public function index()
     {
         $eventos = Evento::all();
         return view('eventos.list', compact('eventos'));
@@ -60,7 +60,7 @@ class EventoController extends Controller
 
         // Se a validação falhar, redireciona para a página de edição
         if ($validator->fails()) {
-            return redirect()->route('eventos.novo')
+            return redirect()->route('eventos.edit')
                 ->withErrors($validator)
                 ->withInput();
         }
