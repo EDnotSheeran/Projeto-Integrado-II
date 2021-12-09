@@ -62,7 +62,7 @@ class EventoController extends Controller
 
         // Se a validação falhar, redireciona para a página de edição
         if ($validator->fails()) {
-            return redirect()->route('eventos.edit')
+            return redirect()->route('eventos.create')
                 ->withErrors($validator)
                 ->withInput();
         }
