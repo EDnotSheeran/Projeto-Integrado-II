@@ -297,6 +297,21 @@
                                                 </span>
                                             @enderror
                                         </div>
+
+                                        <div class="col-sm-12 mb-3 col-md-6" tooltip="{{ __('Complemento') }}">
+                                            <input type="text" class="form-control form-control-user @error('evento.complemento') is-invalid @enderror"
+                                                id="complementoEvento"
+                                                name="evento[complemento]"
+                                                value="{{ $evento->complemento }}"
+                                                placeholder="{{ __('Complemento') }}">
+                                            @error('evento.complemento')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="form-group row col-12 mx-auto">
                                         <div class="col-sm-12 mb-3 col-md-6" tooltip="{{ __('Local') }}">
                                             <input type="text" class="form-control form-control-user @error('evento.local') is-invalid @enderror"
                                                 id="localEvento"
@@ -310,8 +325,6 @@
                                                 </span>
                                             @enderror
                                         </div>
-                                    </div>
-                                    <div class="form-group row col-12 mx-auto">
                                         <div class="col-sm-12 mb-3 col-md-6" tooltip="{{ __('Event Status') }}">
                                             <select class="form-control form-control-user @error('evento.status') is-invalid @enderror"
                                                 id="statusEvento"
@@ -322,21 +335,6 @@
                                                 <option value="0" {{ $evento->status == "" ? 'selected': '' }}>Desativado</option>
                                             </select>
                                             @error('evento.status')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                        <div class="col-sm-12 mb-3 col-md-6" tooltip="{{ __('Method') }}">
-                                            <select class="form-control form-control-user @error('evento.metodo') is-invalid @enderror"
-                                                id="metodoEvento"
-                                                name="evento[metodo]"
-                                                required>
-                                                <option value="" disabled selected>{{ __('Method') }}</option>
-                                                <option value="1" {{ $evento->metodo == "1" ? 'selected': '' }}>Ativo</option>
-                                                <option value="0" {{ $evento->metodo == "" ? 'selected': '' }}>Desativado</option>
-                                            </select>
-                                            @error('evento.metodo')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
@@ -435,13 +433,13 @@
                                                     </span>
                                                 @enderror
                                             </div>
-                                            <div class="col-sm-6 mb-3" tooltip="{{ __('End Date') }}">
+                                            <div class="col-sm-6 mb-3" tooltip="{{ __('Event Duration') }}">
                                                 <input type="time" class="form-control form-control-user @error('evento.duracao') is-invalid @enderror"
                                                     id="duracao"
                                                     name="evento[duracao]"
                                                     required
                                                     value="{{ old('evento.duracao') }}"
-                                                    placeholder="{{ __('End Date') }}">
+                                                    placeholder="{{ __('Event Duration') }}">
                                                 @error('evento.duracao')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -605,13 +603,12 @@
 
 
                                         <div class="col-sm-12 mb-3 col-md-6" tooltip="{{ __('Complemento') }}">
-                                            <input type="text" class="form-control form-control-user @error('evento.local') is-invalid @enderror"
-                                                id="localEvento"
-                                                name="evento[local]"
-                                                required
-                                                value="{{ old('evento.local') }}"
+                                            <input type="text" class="form-control form-control-user @error('evento.complemento') is-invalid @enderror"
+                                                id="complementoEvento"
+                                                name="evento[complemento]"
+                                                value="{{ old('evento.complemento') }}"
                                                 placeholder="{{ __('Complemento') }}">
-                                            @error('evento.local')
+                                            @error('evento.complemento')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
@@ -619,6 +616,19 @@
                                         </div>
                                     </div>
                                     <div class="form-group row col-12 mx-auto">
+                                        <div class="col-sm-12 mb-3 col-md-6" tooltip="{{ __('Local') }}">
+                                            <input type="text" class="form-control form-control-user @error('evento.local') is-invalid @enderror"
+                                                id="localEvento"
+                                                name="evento[local]"
+                                                required
+                                                value="{{ old('evento.local') }}"
+                                                placeholder="{{ __('Local') }}">
+                                            @error('evento.local')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
                                         <div class="col-sm-12 mb-3 col-md-6" tooltip="{{ __('Event Status') }}">
                                             <select class="form-control form-control-user @error('evento.status') is-invalid @enderror"
                                                 id="statusEvento"
@@ -629,21 +639,6 @@
                                                 <option value="0" {{ old('evento.status') == "false" ? 'selected': '' }}>Desativado</option>
                                             </select>
                                             @error('evento.status')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                        <div class="col-sm-12 mb-3 col-md-6" tooltip="{{ __('Method') }}">
-                                            <select class="form-control form-control-user @error('evento.metodo') is-invalid @enderror"
-                                                id="metodoEvento"
-                                                name="evento[metodo]"
-                                                required>
-                                                <option value="" disabled selected>{{ __('Method') }}</option>
-                                                <option value="1" {{ old('evento.metodo') == "true" ? 'selected': '' }}>Ativo</option>
-                                                <option value="0" {{ old('evento.metodo') == "false" ? 'selected': '' }}>Desativado</option>
-                                            </select>
-                                            @error('evento.metodo')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
