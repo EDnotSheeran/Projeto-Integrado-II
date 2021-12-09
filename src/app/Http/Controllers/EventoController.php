@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+
+use PDOException;
 use Illuminate\Http\Request;
 use App\Models\Evento;
 use App\Models\Certificado;
@@ -83,7 +85,13 @@ class EventoController extends Controller
         // Salva o certificado e o evento
         $certificado = $certificado->create($validated['certificado']);
         $validated['evento']['certificado_id'] = $certificado->id;
-        $evento = $evento->create($validated['evento']);
+
+        try{
+            $evento = $evento->create($validated['evento']);
+        }catch(PDOException $ex){
+            
+        };
+        
 
         // Redireciona para a lista de eventos
         return redirect()->route('eventos')->with('success', 'Evento cadastrado com sucesso!');
@@ -154,8 +162,14 @@ class EventoController extends Controller
             $validated['certificado']['imagem'] = 'uploads/' . $imageName;
         }
 
-        $evento->update($validated['evento']);
-        $certificado->update($validated['certificado']);
+        try{
+            $evento->update($validated['evento']);
+            $certificado->update($validated['certificado']);
+        }catch(PDOException $ex){
+            
+        };
+
+        
 
         return redirect()->route('eventos.editar', ['id' => $evento->id])->with('success', 'Evento atualizado com sucesso!');
     }
@@ -165,8 +179,13 @@ class EventoController extends Controller
         $evento = Evento::findOrFail($request->all()['id']);
         $certificado = Certificado::findOrFail($evento->certificado_id);
 
-        $evento->delete();
-        $certificado->delete();
+        try{
+            $evento->delete();
+            $certificado->delete();
+        }catch(PDOException $ex){
+            
+        };
+        
 
         return redirect()->route('eventos')->with('success', 'Evento deletado com sucesso!');
     }

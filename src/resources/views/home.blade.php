@@ -36,7 +36,11 @@
                         <p>{{ $evento->descricao }}</p>
                     </div>
                     <p class="font-weight-bold">Vagas Disponiveis: {{ $evento->vagas_disponiveis }}</p>
-                    <a href="{{ route('login') }}">
+                    
+                    
+                    
+                    <a href="{}" data-toggle="modal" data-target="#participeModal"
+                                >
                         <button type="submit" class="btn btn-primary btn-user btn-block">
                             {{ __('Participate!') }}
                         </button>
@@ -48,6 +52,38 @@
     </div>
     @endforeach
 
+    <!-- Particioe Modal-->
+    <div class="modal fade" id="participeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Confirmação</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Você confirma sua inscrição no evento 'Name', que acontecerá no dia: 'Date'
+                    às 'Time' no 'Endereço'
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                    <a class="btn btn-primary" aria-labelledby="navbarDropdown" href=""
+                        onclick="event.preventDefault();document.getElementById('delete-form').submit();">
+                        {{ __('Confirm') }}
+                    </a>
+                    <form id="delete-form" action="{{ route('home') }}" class="d-none">
+                        @csrf
+                        <input id="usuario-id" type="hidden" name="id" value="">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    
 
 
 </div>

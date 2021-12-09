@@ -32,14 +32,21 @@
                 <!-- Sidebar - Brand -->
                 <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('home') }}">
                     <div class="sidebar-brand-icon rotate-n-15">
-                        <i class="fas fa-laugh-wink"></i>
+                    <i class="fas fa-book-open"></i>
                     </div>
-                    <div class="sidebar-brand-text mx-3">Laravel <sup>eventos</sup></div>
+                    <div class="sidebar-brand-text mx-3">Seduc Eventos</div>
                 </a>
 
                 <!-- Divider -->
                 <hr class="sidebar-divider my-0">
-
+                
+                <li class="nav-item">
+                        <a class="nav-link" href="{{ route('home') }}">
+                        <i class="fas fa-home"></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                
                 @if (Auth::user()->role == 'administrador')
                     <!-- Nav Item - Dashboard -->
                     <li class="nav-item">
@@ -57,19 +64,29 @@
                     <!-- Divider -->
                     <hr class="sidebar-divider">
                 @endif
-
+                @if (Auth::user()->role == 'comum')
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('eventos') }}">
-                        <i class="fas fa-scroll"></i>
+                    <a class="nav-link" href="{{ route('profile.agenda') }}">
+                    <i class="far fa-calendar-alt"></i>
                         <span>Minha Agenda</span>
                     </a>
                 </li>
+                
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('usuarios') }}">
+                    <a class="nav-link" href="{{ route('profile.certificate') }}">
+                    <i class="fas fa-medal"></i>
+                        <span>Meus Certificados</span>
+                    </a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('profile.edit', Auth::user()->id ) }}">
                         <i class="fas fa-user"></i>
                         <span>Meus Dados</span>
                     </a>
                 </li>
+                @endif
                 <li class="nav-item">
                     <a class="nav-link" aria-labelledby="navbarDropdown" href="{{ route('logout') }}"
                         onclick="event.preventDefault();document.getElementById('logout-form').submit();">

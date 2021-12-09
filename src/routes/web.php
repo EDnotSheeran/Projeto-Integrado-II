@@ -33,11 +33,16 @@ Auth::routes();
         
     });
 
-    Route::prefix('/usuarios')->middleware('role:comum')->group(function () {
+    Route::prefix('/profile')->middleware('role:comum')->group(function () {
+        Route::get('/{id}/editar', [UsuariosController::class, 'editProfile'])->name('profile.edit');
+        Route::post('/{id}/editar', [UsuariosController::class, 'updateProfile'])->name('profile.update'); 
+        Route::view('/agenda','usuarios.agenda')->name('profile.agenda');
+        Route::view('/certificate','usuarios.certificate')->name('profile.certificate');
+
         
     });
 
-    Route::view('/error','403')->name('403');
+    Route::view('/error','errors.403')->name('403');
    
 
 
