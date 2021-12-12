@@ -34,7 +34,7 @@ class EventsController extends Controller
     public function add(Request $request)
     {
         // Valida os dados do formulário
-        $validated = $this->validate($request, $this->getRules(), [], $this->getcustomAttributes());
+        $validated = $this->validate($request, $this->getRules(), $this->getCustomMessages(), $this->getcustomAttributes());
         //Faz o upload das imagens
         $validated['event']['image_url'] = $this->uploadImage($request->file('eventimage'));
         $validated['event']['certification']['image_url'] =  $this->uploadImage($request->file('certificationimage'));
@@ -60,7 +60,7 @@ class EventsController extends Controller
     public function update(Request $request, $id)
     {
         // Valida os dados do formulário
-        $validated = $this->validate($request, $this->getRules(true), [], $this->getcustomAttributes());
+        $validated = $this->validate($request, $this->getRules(true), $this->getCustomMessages(), $this->getcustomAttributes());
         // Busca o evento pelo id
         $event = Event::with(['address', 'certification'])->findOrFail($id);
         if ($request->hasFile('eventimage')) {
@@ -118,11 +118,26 @@ class EventsController extends Controller
         return redirect()->route('home')->with('success', 'Você está participando do evento!');
     }
 
+    function attendance(Request $request, $id)
+    {
+        $participants = EventParticipants::where('event_id', $id)->get();
+        $event = Event::findOrFail($id);
+
+        return view('events.attendance', compact('participants', 'event'));
+    }
+
     private function uploadImage($image)
     {
         $imageName = 'uploads/' . md5(strtotime('now') . rand()) . '-' . $image->getClientOriginalName();
         $image->move(public_path('/uploads'), $imageName);
         return $imageName;
+    }
+
+    private function getCustomMessages()
+    {
+        return [
+            'event.date.after' => 'O campo Data do evento deve ser uma data igual ou posterior a hoje.'
+        ];
     }
 
     private function getcustomAttributes()
@@ -146,8 +161,8 @@ class EventsController extends Controller
             'event.method' => 'Método do evento',
             'event.certification.title' => 'Título da certificação',
             'event.certification.content' => 'Conteúdo da certificação',
-            'event.image' => 'Imagem do evento',
-            'certification.image' => 'Imagem da certificação'
+            'eventimage' => 'Imagem do evento',
+            'certificationimage' => 'Imagem da certificação'
         ];
     }
 
@@ -155,7 +170,7 @@ class EventsController extends Controller
     {
         return [
             'event.name' => 'required|max:255',
-            'event.date' => 'required|date_format:d/m/Y',
+            'event.date' => 'required|date_format:d/m/Y|after:yesterday',
             'event.start_time' => 'required|date_format:H:i',
             'event.end_time' => 'required|after:event.start_time|date_format:H:i',
             'event.speaker_name' => 'required|max:255',
@@ -172,8 +187,8 @@ class EventsController extends Controller
             'event.method' => 'required|max:1',
             'event.certification.title' => 'required|max:255',
             'event.certification.content' => 'required|max:500',
-            'eventimage' => !$updating ? 'required|' : '' . 'image|mimes:jpeg,png,jpg,gif|max:2048',
-            'certificationimage' => !$updating ? 'required|' : '' .  'image|mimes:jpeg,png,jpg,gif|max:2048'
+            'eventimage' => (!$updating ? 'required|' : '') . 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'certificationimage' => (!$updating ? 'required|' : '') .  'image|mimes:jpeg,png,jpg,gif|max:2048'
         ];
     }
 }

@@ -167,5 +167,9 @@
     "HeadOffice Description": "Descrição da Sede",
     "Edit HeadOffice": "Editar Sede",
     "Please confirm below if you want to delete this headoffice.": "Confirme abaixo se deseja excluir esta sede.",
-    "Create HeadOffice": "Cadastrar Sede"
+    "Create HeadOffice": "Cadastrar Sede",
+    "Participant": "Participante",
+    "Event": "Evento",
+    "Presence List": "Lista de Presença",
+    "Save Presence List": "Salvar a Lista de Presença"
 }
