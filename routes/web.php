@@ -29,6 +29,7 @@ Route::prefix('/eventos')->middleware('role:admin')->group(function () {
     Route::get('/{id}', [EventsController::class, 'edit'])->name('events.update');
     Route::post('/{id}', [EventsController::class, 'update'])->name('events.update');
     Route::get('/{id}/deletar', [EventsController::class, 'delete'])->name('events.delete');
+    Route::get('/{id}/presenca', [EventsController::class, 'attendance'])->name('events.attendance');
 });
 
 Route::prefix('/cargo')->middleware('role:admin')->group(function () {
@@ -45,7 +46,6 @@ Route::prefix('/sede')->middleware('role:admin')->group(function () {
     Route::get('/novo', [HeadOfficeController::class, 'new'])->name('headOffice.store');
     Route::post('/novo', [HeadOfficeController::class, 'add'])->name('headOffice.store');
     Route::get('/{id}', [HeadOfficeController::class, 'edit'])->name('headOffice.update');
-    Route::post('/{id}', [HeadOfficeController::class, 'update'])->name('headOffice.update');
     Route::get('/{id}/deletar', [HeadOfficeController::class, 'delete'])->name('headOffice.delete');
 });
 

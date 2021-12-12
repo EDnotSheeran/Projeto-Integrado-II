@@ -1,10 +1,10 @@
 @extends('layouts.admin')
 
-@section('title', __('Events') . ' - ')
+@section('title', __('Presence List') . ' - ')
 
 @section('content')
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">{{ __('Events') }}</h1>
+    <h1 class="h3 mb-2 text-gray-800">{{ __('Event') }}: {{ $event->name }}</h1>
     <p class="mb-4"></p>
 
     @if (session()->has('success'))
@@ -18,54 +18,40 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <a class="btn btn-primary btn-icon" href="{{ route('events.store') }}" role="button">
+            <a class="btn btn-primary btn-icon" href="#" role="button">
                 <i class="fas fa-plus-circle"></i>
-                {{ __('New Event') }}
+                {{ __('Save Presence List') }}
             </a>
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-striped" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th class="text-center">ID</th>
-                            <th>{{ __('Event Name') }}</th>
-                            <th>{{ __('Date') }}</th>
-                            <th>{{ __('Hour') }}</th>
-                            <th class="text-center">{{ __('Actions') }}</th>
+                            <th class="text-center">
+                                <input class="checkAll" class="form-check-input" type="checkbox"
+                                    style="transform: translateX(70%);" onclick=" checkAll(this)">
+                            </th>
+                            <th>{{ __('Participant') }}</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
-                            <th class="text-center">ID</th>
-                            <th>{{ __('Event Name') }}</th>
-                            <th>{{ __('Date') }}</th>
-                            <th>{{ __('Hour') }}</th>
-                            <th class="text-center">{{ __('Actions') }}</th>
+                            <th class="text-center">
+                                <input class="checkAll" class="form-check-input" type="checkbox"
+                                    onclick="checkAll(this)">
+                            </th>
+                            <th>{{ __('Participant') }}</th>
                         </tr>
                     </tfoot>
                     <tbody>
-                        {{-- Eventos --}}
-                        @foreach ($events as $event)
+                        @foreach ($participants as $participant)
                             <tr>
-                                <td class="text-center">{{ $event->id }}</td>
-                                <td>{{ $event->name }}</td>
-                                <td>{{ date('d/m/Y', strtotime($event->date)) }}</td>
-                                <td>{{ date('h:i', strtotime($event->start_time)) }}</td>
                                 <td class="text-center">
-                                    <a class="mr-2"
-                                        href="{{ route('events.attendance', ['id' => $event->id]) }}">
-                                        <i class="fas fa-clipboard-list"></i>
-                                    </a>
-                                    <a class="mr-2" href="{{ route('events.update', ['id' => $event->id]) }}">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                    <a href="{{ route('events.delete', ['id' => $event->id]) }}" data-toggle="modal"
-                                        data-target="#deleteModal"
-                                        onclick="document.querySelector('#deleteButton').href = this.href">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
+                                    <input onclick="handleSelect(this)" class="form-check-input" type="checkbox"
+                                        style="transform: translateX(100%);" value="{{ $participant->id }}">
                                 </td>
+                                <td>{{ $participant->user->name }}</td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -104,5 +90,22 @@
         $(document).ready(function() {
             $('#dataTable').DataTable();
         });
+    </script>
+    <script>
+        function checkAll(e) {
+            var checkboxes = document.querySelectorAll('input[type=checkbox]');
+            for (var i = 0; i < checkboxes.length; i++) {
+                checkboxes[i].checked = e.checked;
+            }
+        }
+
+        function handleSelect(e) {
+            if (e.checked) {
+                var checkboxes = document.querySelectorAll('input[type=checkbox].checkAll');
+                for (var i = 0; i < checkboxes.length; i++) {
+                    checkboxes[i].checked = false;
+                }
+            }
+        }
     </script>
 @endpush
