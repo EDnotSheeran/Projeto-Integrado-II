@@ -29,8 +29,14 @@
                     <thead>
                         <tr>
                             <th class="text-center">
-                                <input class="checkAll" class="form-check-input" type="checkbox"
-                                    style="transform: translateX(70%);" onclick=" checkAll(this)">
+                                <div class="custom-control custom-checkbox small checkAll">
+                                    <input class="custom-control-input" type="checkbox" name="kind" id="kind"
+                                        {{ old('kind') ?? isset($user->job_id) ? 'checked' : '' }}
+                                        onclick="checkAll(this)">
+
+                                    <label class="custom-control-label" for="kind" style="line-height: 26px;">
+                                    </label>
+                                </div>
                             </th>
                             <th>{{ __('Participant') }}</th>
                         </tr>
@@ -38,8 +44,14 @@
                     <tfoot>
                         <tr>
                             <th class="text-center">
-                                <input class="checkAll" class="form-check-input" type="checkbox"
-                                    onclick="checkAll(this)">
+                                <div class="custom-control custom-checkbox small checkAll">
+                                    <input class="custom-control-input" type="checkbox" name="kind" id="kind"
+                                        {{ old('kind') ?? isset($user->job_id) ? 'checked' : '' }}
+                                        onclick="checkAll(this)">
+
+                                    <label class="custom-control-label" for="kind" style="line-height: 26px;">
+                                    </label>
+                                </div>
                             </th>
                             <th>{{ __('Participant') }}</th>
                         </tr>
@@ -48,8 +60,14 @@
                         @foreach ($participants as $participant)
                             <tr>
                                 <td class="text-center">
-                                    <input onclick="handleSelect(this)" class="form-check-input" type="checkbox"
-                                        style="transform: translateX(100%);" value="{{ $participant->id }}">
+                                    <div class="custom-control custom-checkbox small">
+                                        <input class="custom-control-input" type="checkbox" name="kind" id="kind"
+                                            {{ old('kind') ?? isset($user->job_id) ? 'checked' : '' }}
+                                            onclick="handleSelect(this)" value="{{ $participant->id }}">
+
+                                        <label class="custom-control-label" for="kind" style="line-height: 26px;">
+                                        </label>
+                                    </div>
                                 </td>
                                 <td>{{ $participant->user->name }}</td>
                             </tr>

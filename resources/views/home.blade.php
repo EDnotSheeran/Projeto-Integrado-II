@@ -82,7 +82,9 @@
                                     </a>
                                 @else
                                     @if($event->isUserParticipating)
-                                        <a href={{ route('user.agenda') }} class="btn btn-secondary btn-user btn-block p-2">
+                                        <a href={{ route('events.unsubscribe', $event->id) }} data-toggle="modal"
+                                            onclick="unsubscribe(&quot;{{ $event->id }}&quot;, &quot;{{{ $event->name }}}&quot;)"
+                                            data-target="#unsubscribeModal" class="btn btn-secondary btn-user btn-block p-2">
                                             <h3 style="margin: 0">{{ __('Registered') }}</h3>
                                         </a>
                                     @else
@@ -153,16 +155,39 @@
                 </div>
             </div>
         </div>
+        {{-- Modal DesIscrever --}}
+        <div class="modal" id="unsubscribeModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">{{ __('Confirmation') }}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="unsubscribeForm" action="{{ route('events.unsubscribe', 'id') }}"></form>
+                        <p>
+                            Você quer cancelar sua inscricao no evento <strong id="event-name2">EVENTO 01</strong>?
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('Cancel') }}</button>
+                        <button type="button" onclick="document.querySelector('#unsubscribeForm').submit()"
+                            class="btn btn-primary">{{ __('Confirm') }}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
 
 @push('scripts')
     <script>
         function participate(id, name, date, time, address, local) {
-            console.log(id, name, date, time, address, local);
             document.querySelector('#participateForm').action = document.querySelector('#participateForm').action.replace(
                 /eventos\/.+\/participar/, `eventos/${id}/participar`);
-            document.querySelector('#event-name').innerHTML = name;
+            document.querySelector('#participateForm #event-name').innerHTML = name;
             document.querySelector('#event-date').innerHTML = date;
             document.querySelector('#event-time').innerHTML = time;
             document.querySelector('#event-adress').innerHTML = address;
@@ -171,6 +196,12 @@
             } else {
                 document.querySelector('#event-local-all').style.display = 'none';
             }
+        }
+
+        function unsubscribe(id, name) {
+            document.querySelector('#unsubscribeForm').action = document.querySelector('#unsubscribeForm').action.replace(
+                /eventos\/.+\/desinscrever/, `eventos/${id}/desinscrever`);
+            document.querySelector('#event-name2').innerHTML = name;
         }
     </script>
 @endpush

@@ -53,10 +53,12 @@
                                 <td>{{ date('d/m/Y', strtotime($event->date)) }}</td>
                                 <td>{{ date('h:i', strtotime($event->start_time)) }}</td>
                                 <td class="text-center">
-                                    <a class="mr-2"
-                                        href="{{ route('events.attendance', ['id' => $event->id]) }}">
-                                        <i class="fas fa-clipboard-list"></i>
-                                    </a>
+                                    @if ($event->eventParticipantsCount > 0)
+                                        <a class="mr-2"
+                                            href="{{ route('events.attendance', ['id' => $event->id]) }}">
+                                            <i class="fas fa-clipboard-list"></i>
+                                        </a>
+                                    @endif
                                     <a class="mr-2" href="{{ route('events.update', ['id' => $event->id]) }}">
                                         <i class="fas fa-edit"></i>
                                     </a>

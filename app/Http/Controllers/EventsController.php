@@ -118,6 +118,16 @@ class EventsController extends Controller
         return redirect()->route('home')->with('success', 'Você está participando do evento!');
     }
 
+    public function unsubscribe($id)
+    {
+        $eventParticipant = EventParticipants::where('event_id', $id)->where('user_id', auth()->user()->id)->first();
+        if (!$eventParticipant) {
+            return redirect()->route('home')->with('warning', 'Você não está participando deste evento!');
+        }
+        $eventParticipant->delete();
+        return redirect()->route('home')->with('success', 'Você não está mais participando do evento!');
+    }
+
     function attendance(Request $request, $id)
     {
         $participants = EventParticipants::where('event_id', $id)->get();

@@ -20,6 +20,7 @@ Route::get('/profile', [UsersController::class, 'profile'])->name('profile');
 Route::post('/profile', [UsersController::class, 'updateProfile'])->name('profile');
 Route::get('/profile/deletar', [UsersController::class, 'deleteProfile'])->name('profile.delete');
 Route::get('/eventos/{id}/participar', [EventsController::class, 'participate'])->name('events.participate');
+Route::get('/eventos/{id}/desinscrever', [EventsController::class, 'unsubscribe'])->name('events.unsubscribe');
 Route::get('/agenda', [UsersController::class, 'agenda'])->name('user.agenda');
 
 Route::prefix('/eventos')->middleware('role:admin')->group(function () {
