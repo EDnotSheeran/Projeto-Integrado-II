@@ -1,38 +1,40 @@
 {
-  "name": "projeto-integrado-ii",
-  "version": "1.0.0",
-  "description": "projeto integrado ii",
-  "private": true,
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "docker-compose up -d --build app",
-    "build": "docker-compose up -d --build app",
-    "stop": "docker-compose down",
-    "clean": "docker system prune -af",
-    "clean-volumes": "docker system prune -f",
-    "scan": "docker scan",
-    "create": "docker-compose run --rm --user=${PHPUSER}  composer create-project laravel/laravel .",
-    "artisan": "docker-compose run --rm --user=${PHPUSER}  artisan",
-    "composer": "docker-compose run --rm --user=${PHPUSER}  composer",
-    "npm": "docker-compose run --rm --user=${PHPUSER}  npm",
-    "controller": "docker-compose run --rm --user=${PHPUSER}  artisan make:controller",
-    "model": "docker-compose run --rm --user=${PHPUSER}  artisan make:model",
-    "migration": "docker-compose run --rm --user=${PHPUSER}  artisan make:migration",
-    "request": "docker-compose run --rm --user=${PHPUSER}  artisan make:request",
-    "migrate": "docker-compose run --rm --user=${PHPUSER}  artisan migrate",
-    "refresh": "docker-compose run --rm --user=${PHPUSER}  artisan migrate:refresh",
-    "watch": "docker-compose run --rm --user=${PHPUSER}  --service-ports npm run watch",
-    "seed": "docker-compose run --rm --user=${PHPUSER}  artisan db:seed"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/EDnotSheeran/Boilerplate-Laravel.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/EDnotSheeran/Boilerplate-Laravel/issues"
-  },
-  "homepage": "https://github.com/EDnotSheeran/Boilerplate-Laravel#readme"
+    "private": true,
+    "scripts": {
+        "dev": "npm run development",
+        "development": "mix",
+        "watch": "mix watch",
+        "watch-poll": "mix watch -- --watch-options-poll=1000",
+        "hot": "mix watch --hot",
+        "prod": "npm run production",
+        "production": "mix --production",
+        "controller": "php artisan make:controller",
+        "model": "php artisan make:model",
+        "migration": "php artisan make:migration",
+        "request": "php artisan make:request",
+        "migrate": "php artisan migrate",
+        "refresh": "php artisan migrate:refresh"
+    },
+    "devDependencies": {
+        "axios": "^0.21",
+        "bootstrap": "^4.6.0",
+        "browser-sync": "^2.27.7",
+        "browser-sync-webpack-plugin": "^2.3.0",
+        "jquery": "^3.6",
+        "laravel-mix": "^6.0.6",
+        "lodash": "^4.17.19",
+        "popper.js": "^1.16.1",
+        "postcss": "^8.1.14",
+        "resolve-url-loader": "^3.1.2",
+        "sass": "^1.32.11",
+        "sass-loader": "^11.0.1",
+        "vue": "^2.6.12",
+        "vue-loader": "^15.9.7",
+        "vue-template-compiler": "^2.6.12"
+    },
+    "dependencies": {
+        "datatables": "^1.10.18",
+        "datatables.net-bs4": "^1.11.3",
+        "jquery-mask-plugin": "^1.14.16"
+    }
 }
