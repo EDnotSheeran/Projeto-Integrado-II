@@ -18,9 +18,9 @@
         </div>
     @endif
 
-    @if ($errors->any())
+    {{-- @if ($errors->any())
         {{ implode('', $errors->all('<div>:message</div>')) }}
-    @endif
+    @endif --}}
     <div class="container-fluid">
         <div class="ml-4 mb-4">
         </div>
@@ -60,7 +60,15 @@
                                     <p style="font-size: 18px">
                                         <span class="m-0 mr-2 text-uppercase">{{ __('Date and Time') }}: </span>
                                         <span class="m-0">
-                                            {{ $event->date . ' às ' . $event->start_time }}
+                                            {{ $event->date . ' às ' . $event->time }}
+                                        </span>
+                                    </p>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <p style="font-size: 18px">
+                                        <span class="m-0 mr-2 text-uppercase">{{ __('Duration') }}: </span>
+                                        <span class="m-0">
+                                            {{ $event->duration }}
                                         </span>
                                     </p>
                                 </div>
@@ -187,7 +195,7 @@
         function participate(id, name, date, time, address, local) {
             document.querySelector('#participateForm').action = document.querySelector('#participateForm').action.replace(
                 /eventos\/.+\/participar/, `eventos/${id}/participar`);
-            document.querySelector('#participateForm #event-name').innerHTML = name;
+            document.querySelector('#event-name').innerHTML = name;
             document.querySelector('#event-date').innerHTML = date;
             document.querySelector('#event-time').innerHTML = time;
             document.querySelector('#event-adress').innerHTML = address;

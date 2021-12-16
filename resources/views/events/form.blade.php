@@ -4,6 +4,9 @@
 
 @section('content')
 
+    @if ($errors->any())
+        {{ implode('', $errors->all('<div>:message</div>')) }}
+    @endif
     <div class="container ">
         @if (session()->has('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -91,11 +94,11 @@
                                                 </div>
                                                 <div class="col-sm-12 col-lg-6" tooltip="{{ __('Event Start Time') }}">
                                                     <input type="text"
-                                                        class="form-control form-control-user @error('event.start_time') is-invalid @enderror"
-                                                        name="event[start_time]" mask="time"
-                                                        value="{{ old('event.start_time') ?? ($event->start_time ?? '') }}"
+                                                        class="form-control form-control-user @error('event.time') is-invalid @enderror"
+                                                        name="event[time]" mask="time"
+                                                        value="{{ old('event.time') ?? ($event->time ?? '') }}"
                                                         placeholder="{{ __('Event Start Time') }}">
-                                                    @error('event.start_time')
+                                                    @error('event.time')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
@@ -128,13 +131,13 @@
                                                         </span>
                                                     @enderror
                                                 </div>
-                                                <div class="col-sm-6 mb-3" tooltip="{{ __('Event End Time') }}">
+                                                <div class="col-sm-6 mb-3" tooltip="{{ __('Duration') }}">
                                                     <input type="text"
-                                                        class="form-control form-control-user @error('event.end_time') is-invalid @enderror"
-                                                        name="event[end_time]" mask="time"
-                                                        value="{{ old('event.end_time') ?? ($event->end_time ?? '') }}"
-                                                        placeholder="{{ __('Event End Time') }}">
-                                                    @error('event.end_time')
+                                                        class="form-control form-control-user @error('event.duration') is-invalid @enderror"
+                                                        name="event[duration]" mask="time"
+                                                        value="{{ old('event.duration') ?? ($event->duration ?? '') }}"
+                                                        placeholder="{{ __('Duration') }}">
+                                                    @error('event.duration')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>

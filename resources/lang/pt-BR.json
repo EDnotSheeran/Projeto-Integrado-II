@@ -144,7 +144,6 @@
     "Confirmation": "Confirmação",
     "Situation": "Situação",
     "Registered": "Inscrito",
-    "Registered (Not checked in yet)": "Inscrito (Ainda não realizou o check-in)",
     "Checked-in": "Check-in realizado",
     "See more...": "Ver mais...",
     "Participating": "Participando",
@@ -171,5 +170,12 @@
     "Participant": "Participante",
     "Event": "Evento",
     "Presence List": "Lista de Presença",
-    "Save Presence List": "Salvar a Lista de Presença"
+    "Save Presence List": "Salvar a Lista de Presença",
+    "Duration": "Duração",
+    "Print": "Imprimir",
+    "Back": "Voltar",
+    "Certificates": "Certificados",
+    "My Certificates": "Meus Certificados",
+    "Certificate": "Certificado",
+    "Concluido": "Concluido"
 }

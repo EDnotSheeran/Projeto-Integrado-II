@@ -51,7 +51,7 @@
                                 <td class="text-center">{{ $event->id }}</td>
                                 <td>{{ $event->name }}</td>
                                 <td>{{ date('d/m/Y', strtotime($event->date)) }}</td>
-                                <td>{{ date('h:i', strtotime($event->start_time)) }}</td>
+                                <td>{{ date('h:i', strtotime($event->time)) }}</td>
                                 <td class="text-center">
                                     @if ($event->eventParticipantsCount > 0)
                                         <a class="mr-2"

@@ -31,10 +31,9 @@
                         <h5 class="card-title">{{ $item->event->name }}</h5>
                         <p class="card-text">{{ __('Situation') }}:
                             @if (!$item->checked_in_at)
-                                <span class="badge badge-warning">{{ __('Registered (Not checked in yet)') }}</span>
+                                <span class="badge badge-warning">{{ __('Registered') }}</span>
                             @else
-                                <span class="badge badge-danger">{{ __('Checked') }}</span>
-                                {{ __('(Checked in at') }} {{ $item->checked_in_at }} {{ __(')') }}
+                                <span class="badge badge-success">{{ __('Concluido') }}</span>
                             @endif
                         </p>
                         <div class="collapse" id="collapseItem-{{ $item->id }}">

@@ -43,6 +43,7 @@ class EventsController extends Controller
         $Certification = Certification::create($validated['event']['certification']);
         $validated['event']['address_id'] = $Address->id;
         $validated['event']['certification_id'] = $Certification->id;
+        // dd($validated);
         Event::create($validated['event']);
 
         // Redireciona para a lista de eventos
@@ -136,6 +137,37 @@ class EventsController extends Controller
         return view('events.attendance', compact('participants', 'event'));
     }
 
+    function presenceList(Request $request, $id)
+    {
+        $ids = $request->get('ids');
+        $event = Event::with(['participants'])->findOrFail($id);
+
+        if (!$ids) {
+            $ids = [];
+        }
+
+        foreach ($event->participants as $participant) {
+            $participant->checked_in_at = null;
+            $participant->save();
+        }
+
+        foreach ($event->participants as $participant) {
+            if (array_search($participant->id, $ids) !== false) {
+                $participant->checked_in_at = date('Y-m-d H:i:s');
+                $participant->save();
+            }
+        }
+
+        return $event->participants;
+    }
+
+    function participants(Request $request, $id)
+    {
+        $participants = EventParticipants::with(['user'])->where('event_id', $id)->get();
+
+        return $participants;
+    }
+
     private function uploadImage($image)
     {
         $imageName = 'uploads/' . md5(strtotime('now') . rand()) . '-' . $image->getClientOriginalName();
@@ -155,8 +187,8 @@ class EventsController extends Controller
         return [
             'event.name' => 'Nome do evento',
             'event.date' => 'Data do evento',
-            'event.start_time' => 'Hora de início do evento',
-            'event.end_time' => 'Hora de término do evento',
+            'event.time' => 'Hora de início do evento',
+            'event.duration' => 'Duração do evento',
             'event.speaker_name' => 'Nome do palestrante',
             'event.avaliable_vacancies' => 'Quantidade de vagas disponíveis',
             'event.description' => 'Descrição do evento',
@@ -181,8 +213,8 @@ class EventsController extends Controller
         return [
             'event.name' => 'required|max:255',
             'event.date' => 'required|date_format:d/m/Y|after:yesterday',
-            'event.start_time' => 'required|date_format:H:i',
-            'event.end_time' => 'required|after:event.start_time|date_format:H:i',
+            'event.time' => 'required|date_format:H:i',
+            'event.duration' => 'required|date_format:H:i',
             'event.speaker_name' => 'required|max:255',
             'event.available_vacancies' => 'required|numeric',
             'event.description' => 'required|max:500',

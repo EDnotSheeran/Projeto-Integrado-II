@@ -77,8 +77,14 @@
 
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('user.agenda') }}">
-                        <i class="fas fa-scroll"></i>
+                        <i class="fas fa-calendar"></i>
                         <span>{{ __('My Agenda') }}</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('certificate') }}">
+                        <i class="fas fa-scroll"></i>
+                        <span>{{ __('My Certificates') }}</span>
                     </a>
                 </li>
                 <li class="nav-item">

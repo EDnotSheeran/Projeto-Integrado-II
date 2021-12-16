@@ -17,8 +17,10 @@ class CreateEventTable extends Migration
             $table->id();
             $table->string('name');
             $table->date('date');
-            $table->time('start_time');
-            $table->time('end_time');
+            $table->time('time');
+            $table->string('start_datetime');
+            $table->string('end_datetime');
+            $table->time('duration');
             $table->string('speaker_name');
             $table->integer('available_vacancies')->unsigned();
             $table->text('description');

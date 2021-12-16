@@ -8,7 +8,8 @@ use App\Http\Controllers\{
     EventsController,
     UsersController,
     JobsController,
-    HeadOfficeController
+    HeadOfficeController,
+    CertificateController
 };
 
 Auth::routes();
@@ -31,6 +32,8 @@ Route::prefix('/eventos')->middleware('role:admin')->group(function () {
     Route::post('/{id}', [EventsController::class, 'update'])->name('events.update');
     Route::get('/{id}/deletar', [EventsController::class, 'delete'])->name('events.delete');
     Route::get('/{id}/presenca', [EventsController::class, 'attendance'])->name('events.attendance');
+    Route::post('/{id}/presenca', [EventsController::class, 'presenceList'])->name('events.presenceList');
+    Route::get('/{id}/participants', [EventsController::class, 'participants'])->name('events.participants');
 });
 
 Route::prefix('/cargo')->middleware('role:admin')->group(function () {
@@ -57,4 +60,8 @@ Route::prefix('/usuarios')->middleware('role:admin')->group(function () {
     Route::get('/{id}', [UsersController::class, 'edit'])->name('user.update');
     Route::post('/{id}', [UsersController::class, 'update'])->name('user.update');
     Route::get('/{id}/deletar', [UsersController::class, 'delete'])->name('user.delete');
+});
+
+Route::prefix('/certificados')->middleware('auth')->group(function () {
+    Route::get('/', [CertificateController::class, 'index'])->name('certificate');
 });

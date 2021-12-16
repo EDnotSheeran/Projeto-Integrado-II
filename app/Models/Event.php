@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\EventParticipants;
+use Illuminate\Support\Carbon;
 
 class Event extends Model
 {
@@ -14,9 +15,11 @@ class Event extends Model
 
     protected $fillable = [
         'name',
+        'time',
         'date',
-        'start_time',
-        'end_time',
+        'duration',
+        'start_datetime',
+        'end_datetime',
         'speaker_name',
         'available_vacancies',
         'description',
@@ -38,23 +41,25 @@ class Event extends Model
         return $this->belongsTo(Certification::class, 'certification_id', 'id');
     }
 
+    public function getDateAttribute($value)
+    {
+
+        return date('d/m/Y', strtotime($value));
+    }
+
+    public function getTimeAttribute($value)
+    {
+        return date('H:i', strtotime($value));
+    }
+
     public function address()
     {
         return $this->belongsTo(Address::class, 'address_id', 'id');
     }
 
-    public function getDateAttribute($value)
-    {
-        return date('d/m/Y', strtotime($value));
-    }
-
-    public function getStartTimeAttribute($value)
-    {
-        return date('H:i', strtotime($value));
-    }
-
     public function setDateAttribute($value)
     {
+
         if (is_string($value)) {
             $y = substr($value, 6);
             $m = substr($value, 3, -5);
@@ -65,7 +70,24 @@ class Event extends Model
         }
     }
 
+    public function setTimeAttribute($value)
+    {
+        if (is_string($this->attributes['date'])) {
+            $this->attributes['start_datetime'] = date('Y-m-d H:i:s', strtotime($this->attributes['date'] . ' ' . $value));
+            $this->attributes['end_datetime'] = Carbon::parse(date('Y-m-d H:i:s', strtotime($this->attributes['date'] . ' ' . $value)))->addHours($this->attributes['duration']);
+        } else {
+            $this->attributes['start_datetime'] = date('Y-m-d H:i:s', strtotime($this->attributes['date']->format('Y-m-d') . ' ' . $value));
+            Carbon::parse($this->attributes['end_datetime'] = date('Y-m-d H:i:s', strtotime($this->attributes['date']->format('Y-m-d') . ' ' . $value)))->addHours($this->attributes['duration']);
+        }
+        $this->attributes['time'] = $value;
+    }
+
     public function getEventParticipants()
+    {
+        return $this->hasMany(EventParticipants::class, 'event_id', 'id');
+    }
+
+    function participants()
     {
         return $this->hasMany(EventParticipants::class, 'event_id', 'id');
     }
